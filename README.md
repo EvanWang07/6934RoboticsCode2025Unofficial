@@ -3,9 +3,9 @@
 **CHANGELOG**:  <br> 
 &ensp;&ensp;1. Updated the teleoperated swerve code for FRC 2025  <br> 
 &ensp;&ensp;2. Updated the code to account for a shift in location of the robot's "front"  <br> 
-&ensp;&ensp;3. N/A  <br>   
+&ensp;&ensp;3. Fixed (hopefully) autonomous swerve by updating PathPlannerLib  <br>   
 **ISSUES & POTENTIAL ERRORS**:  <br> 
-&ensp;&ensp;1. Autonomous swerve is janky  <br> 
+&ensp;&ensp;1. Swerve start-up algorithm continues to fail for Module 0 (FL)  <br> 
 &ensp;&ensp;2. New slow-mode toggle may cause issues with limelight autoalign  <br> 
 &ensp;&ensp;3. Limelight sometimes loses detection  <br>   
 **TODO LIST**:  <br> 
@@ -28,9 +28,9 @@
 &ensp;&ensp;5. CANivore Name: "Canivor<3"  <br>  
 
 **KRAKEN SWERVE DRIVE CONFIGURATION**:  <br> 
-&ensp;&ensp;1. Swerve Module 0 Offset: 79.101 degrees  <br> 
+&ensp;&ensp;1. Swerve Module 0 Offset: 79.101 - 30 degrees  <br> 
 &ensp;&ensp;2. Swerve Module 1 Offset: 26.718 degrees  <br> 
-&ensp;&ensp;3. Swerve Module 2 Offset: 97.490 + 180 degrees  <br> 
+&ensp;&ensp;3. Swerve Module 2 Offset: 97.490 + 180 - 10 degrees  <br> 
 &ensp;&ensp;4. Swerve Module 3 Offset: 103.281 + 180 degrees  <br> 
 &ensp;&ensp;5. CANivore Name: "Second Canivor<3"  <br>  
 
@@ -44,4 +44,4 @@
 &ensp;&ensp;&ensp;&ensp;* Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 &ensp;&ensp;&ensp;&ensp;* Auto-Align: *HOLD* A-Button  <br>   
 
-**LAST UPDATED**: 1/12/25
+**LAST UPDATED**: 1/13/25
