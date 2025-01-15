@@ -17,10 +17,10 @@
 &ensp;&ensp;1. **ALL** code *ABSOLUTELY* needs to be peer-reviewed **AND** tested!!!  <br>   
 **CREDITS**:  <br> 
 &ensp;&ensp;1. Source of Original Code: https://github.com/dirtbikerxz/BaseTalonFXSwerve  <br> 
-&ensp;&ensp;2. Modified Code Created By: Evan Wang (and soon, others!)  <br> 
+&ensp;&ensp;2. Modified Code Created By: Evan Wang, Lukas Evans  <br> 
 &ensp;&ensp;3. Robot Created By: FRC Robotics Team 6934 (ACHS Scorpions)  <br>  
 
-**FALCON SWERVE DRIVE CONFIGURATION**:  <br> 
+**FALCON SWERVE DRIVE CONFIGURATION** (**OUT OF ORDER!!!**):  <br> 
 &ensp;&ensp;1. Swerve Module 0 Offset: -108.45 degrees  <br> 
 &ensp;&ensp;2. Swerve Module 1 Offset: 11.865 + 180 degrees  <br> 
 &ensp;&ensp;3. Swerve Module 2 Offset: -31.7268 degrees  <br> 
@@ -44,4 +44,4 @@
 &ensp;&ensp;&ensp;&ensp;* Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 &ensp;&ensp;&ensp;&ensp;* Auto-Align: *HOLD* A-Button  <br>   
 
-**LAST UPDATED**: 1/13/25
+**LAST UPDATED**: 1/14/25
