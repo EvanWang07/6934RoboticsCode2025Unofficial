@@ -42,18 +42,6 @@ public class Swerve extends SubsystemBase {
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
-        /* 
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000);
-                swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
-            } catch (Exception e) {
-                
-            }
-        }).start();
-        */
-        // To help resolve an issue with setting the swerve odometry too quickly
-        // NOTE: Check if there also needs to be a delay for zero-ing the heading
 
         Timer.delay(1);
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
