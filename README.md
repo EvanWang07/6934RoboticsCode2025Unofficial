@@ -2,14 +2,14 @@
 
 **CHANGELOG**:  <br> 
 &ensp;&ensp;1. Updated the teleoperated swerve code for FRC 2025  <br> 
-&ensp;&ensp;2. Updated the code to account for a shift in location of the robot's "front"  <br> 
-&ensp;&ensp;3. Fixed (hopefully) autonomous swerve by updating PathPlannerLib  <br>   
+&ensp;&ensp;2. Updated the swerve offsets (hopefully, for the final time)  <br> 
+&ensp;&ensp;3. N/A  <br>   
 **ISSUES & POTENTIAL ERRORS**:  <br> 
-&ensp;&ensp;1. Swerve start-up algorithm continues to fail for Module 0 (FL)  <br> 
+&ensp;&ensp;1. N/A  <br> 
 &ensp;&ensp;2. New slow-mode toggle may cause issues with limelight autoalign  <br> 
-&ensp;&ensp;3. Limelight sometimes loses detection  <br>   
+&ensp;&ensp;3. Limelight is unable to detect its targets  <br>   
 **TODO LIST**:  <br> 
-&ensp;&ensp;1. Fix autonomous swerve / Update autonomous swerve for 2025  <br> 
+&ensp;&ensp;1. Fix limelight and start on robot pose  <br> 
 &ensp;&ensp;2. Further adapt the code to the new slow-mode toggle  <br>   
 **UNUSED CODE**:  <br> 
 &ensp;&ensp;1. None for now!  <br>   
