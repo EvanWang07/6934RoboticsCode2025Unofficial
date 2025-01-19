@@ -54,6 +54,7 @@ public class TeleopSwerve extends Command {
                 rotationVal = Vision.targetSearchOutput;
                 isFieldCentric = false;
             }
+            System.out.println("TX: " + VisionInfo.getTX(false) + ", TY: " + VisionInfo.getTY(false) + ", TV: " + VisionInfo.willTarget());
         }
 
         VisionInfo.updateSummaryValues();

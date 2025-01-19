@@ -17,7 +17,7 @@
 &ensp;&ensp;1. **ALL** code *ABSOLUTELY* needs to be peer-reviewed **AND** tested!!!  <br>   
 **CREDITS**:  <br> 
 &ensp;&ensp;1. Source of Original Code: https://github.com/dirtbikerxz/BaseTalonFXSwerve  <br> 
-&ensp;&ensp;2. Modified Code Created By: Evan Wang, Lukas Evans  <br> 
+&ensp;&ensp;2. Modified Code Created By: Evan Wang, Lukas Evans, Derek Chang  <br> 
 &ensp;&ensp;3. Robot Created By: FRC Robotics Team 6934 (ACHS Scorpions)  <br>  
 
 **FALCON SWERVE DRIVE CONFIGURATION** (**OUT OF ORDER!!!**):  <br> 
@@ -28,10 +28,10 @@
 &ensp;&ensp;5. CANivore Name: "Canivor<3"  <br>  
 
 **KRAKEN SWERVE DRIVE CONFIGURATION**:  <br> 
-&ensp;&ensp;1. Swerve Module 0 Offset: 79.101 - 30 degrees  <br> 
-&ensp;&ensp;2. Swerve Module 1 Offset: 26.718 degrees  <br> 
-&ensp;&ensp;3. Swerve Module 2 Offset: 97.490 + 180 - 10 degrees  <br> 
-&ensp;&ensp;4. Swerve Module 3 Offset: 103.281 + 180 degrees  <br> 
+&ensp;&ensp;1. Swerve Module 0 Offset: -47.37312 + 180 degrees  <br> 
+&ensp;&ensp;2. Swerve Module 1 Offset: -39.63852 degrees  <br> 
+&ensp;&ensp;3. Swerve Module 2 Offset: -128.320 + 180 degrees  <br> 
+&ensp;&ensp;4. Swerve Module 3 Offset: 108.54504 degrees  <br> 
 &ensp;&ensp;5. CANivore Name: "Second Canivor<3"  <br>  
 
 **DRIVER'S GUIDE**:  <br> 
@@ -44,4 +44,4 @@
 &ensp;&ensp;&ensp;&ensp;* Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 &ensp;&ensp;&ensp;&ensp;* Auto-Align: *HOLD* A-Button  <br>   
 
-**LAST UPDATED**: 1/14/25
+**LAST UPDATED**: 1/18/25
