@@ -3,7 +3,6 @@ package frc.robot;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.BasicOperations;
 import frc.robot.Constants.Vision;
 
 public final class VisionInfo {
