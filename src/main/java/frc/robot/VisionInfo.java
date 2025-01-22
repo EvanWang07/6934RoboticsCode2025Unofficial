@@ -85,4 +85,16 @@ public final class VisionInfo {
             return correctionOutput;
         }
     }
+
+    public static double getPoseX() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
+    }
+
+    public static double getPoseY() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getY();
+    }
+
+    public static double getPoseTheta() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getRotation().getDegrees();
+    }
 }
