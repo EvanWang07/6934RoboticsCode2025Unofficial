@@ -4,9 +4,16 @@
 The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Changelog:  
-- Updated the teleoperated swerve code for FRC 2025  
-- Updated the Kraken swerve offsets ~~(hopefully, for the final time)~~
-- Reformatted the README file.
+- Updated the teleoperated swerve code for FRC 2025 <sup>1/19/24</sup>
+- Updated the Kraken swerve offsets ~~(hopefully, for the final time)~~ <sup>1/19/24</sup>
+- Updated project from WIPlib version 2025.1.1 to 2025.2.1. <sup>1/22/24</sup>
+- Reformatted the README file. <sup>1/22/24</sup>
+- Attempted to add video footage to the UI for Elastic. <sup>1/22/24</sup>
+- Pruned/commented unused code. <sup>1/22/24</sup>
+- Added experimental pose component estimation methods. <sup>1/22/24</sup>
+- Added temporary debugging print statements. <sup>1/22/24</sup>
+- Added REVLib. <sup>1/23/24</sup>
+- New LimelightHelpers file. <sup>1/23/24</sup>
 
 ## Issues and Potential Errors:  
 - New slow-mode toggle may cause issues with Limelight autoalign functionality.  
@@ -60,4 +67,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 - Auto-Align: *HOLD* A-Button  <br>   
 
-[^1]: Last updated 1/22/25 by Derek Chang.
+[^1]: Last updated 1/23/25 by Evan Wang.
