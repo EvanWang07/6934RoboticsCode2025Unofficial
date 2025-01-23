@@ -43,17 +43,18 @@ public class TeleopSwerve extends Command {
 
         /* Vision (if active) */
         if (activateVision) {
-            if (VisionInfo.willTarget()) {
-                translationVal = VisionInfo.getTranslationalCorrectionOutput();
+            if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
+                translationVal = VisionInfo.getTranslationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 strafeVal = 0;
-                rotationVal = -VisionInfo.getRotationalCorrectionOutput();
+                rotationVal = -VisionInfo.getRotationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false; // Limelight needs to use robot-centric swerve
             } else {
                 translationVal = 0;
                 strafeVal = 0;
-                rotationVal = Vision.targetSearchOutput;
+                rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false;
             }
+            
             // System.out.println("TX: " + VisionInfo.getTX(false) + ", TY: " + VisionInfo.getTY(false) + ", TV: " + VisionInfo.willTarget());
             System.out.println("PoseX: " + VisionInfo.getPoseX() + ", PoseY: " + VisionInfo.getPoseY() + ", PoseTheta: " + VisionInfo.getPoseTheta());
         }

@@ -101,6 +101,10 @@ public class Swerve extends SubsystemBase {
         speedMultiplier = newSpeed;
     }
 
+    public double getSpeedMultiplier() {
+        return speedMultiplier;
+    }
+
     public void driveRobotRelative(ChassisSpeeds speeds) { // For PathPlanner
         this.drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond, false, false);
     }
