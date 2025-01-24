@@ -4,25 +4,20 @@
 The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Changelog:  
-- Updated the teleoperated swerve code for FRC 2025 <sup>1/19/24</sup>
-- Updated the Kraken swerve offsets ~~(hopefully, for the final time)~~ <sup>1/19/24</sup>
-- Updated project from WIPlib version 2025.1.1 to 2025.2.1. <sup>1/22/24</sup>
-- Reformatted the README file. <sup>1/22/24</sup>
-- Attempted to add video footage to the UI for Elastic. <sup>1/22/24</sup>
-- Pruned/commented unused code. <sup>1/22/24</sup>
-- Added experimental pose component estimation methods. <sup>1/22/24</sup>
-- Added temporary debugging print statements. <sup>1/22/24</sup>
-- Added REVLib. <sup>1/23/24</sup>
-- New LimelightHelpers file. <sup>1/23/24</sup>
+- Updated the teleoperated swerve code for FRC 2025 <sup>1/19/25</sup>
+- Updated the Kraken swerve offsets ~~(hopefully, for the final time)~~ <sup>1/19/25</sup>
+- Updated project from WIPlib version 2025.1.1 to 2025.2.1 <sup>1/22/25</sup>
+- Reformatted the README file <sup>1/22/25</sup>
+- Added experimental pose component estimation methods <sup>1/22/25</sup>
+- Updated the LimelightHelpers file for FRC 2025 <sup>1/23/25</sup>
+- Vision now works and properly ignores slow mode drive <sup>1/23/25</sup>
 
-## Issues and Potential Errors:  
-- New slow-mode toggle may cause issues with Limelight autoalign functionality.  
-- Limelight is currently still unable to detect its targets.  
+## Issues and Potential Errors:   
+- None for now!
 
 ## To-Do List:  
-- [ ] Fix Limelight and start on robot pose.  
-- [ ] Further adapt the code to the new slow-mode toggle.
-- [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw)
+- [ ] Work on robot pose.  
+- [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
 - None for now. 
@@ -33,11 +28,12 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 ## Credits  
 - Source of Original Code: https://github.com/dirtbikerxz/BaseTalonFXSwerve  
 - Modified Code Created By: Evan Wang, Lukas Evans, Derek Chang  
+- Robot "IT" Person: Ethan Jiang
 - Robot Created By: FRC Robotics Team 6934 (ACHS Scorpions)  
 
 ## Falcon Swerve Chassis Configs  
 > [!WARNING]
-> The Falcon swerve chassis is currently out of order. Please do not change the below values until it is deemed functional again.
+> The Falcon swerve chassis is currently out of order. Please do not change the below values until it is deemed functional again. (Evan: Unlikely to happen in the near future)
 
 | Name/Component | Offset *(in degrees)* or Name |
 | :--- | :---: |
