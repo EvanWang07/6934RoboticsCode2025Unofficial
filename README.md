@@ -35,7 +35,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 > [!WARNING]
 > The Falcon swerve chassis is currently out of order. Please do not change the below values until it is deemed functional again. (Evan: Unlikely to happen in the near future)
 
-| Name/Component | Offset *(in degrees)* or Name |
+| Name/Component | Offset (Degrees) |
 | :--- | :---: |
 | Swerve Module 0 | -108.45 |
 | Swerve Module 1 | 11.865 + 180 |
@@ -45,7 +45,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Kraken Swerve Chassis Configs  
 
-| Name/Component | Offset *(in degrees)* or Name |
+| Name/Component | Offset (Degrees) |
 | :--- | :---: |
 | Swerve Module 0 | -47.37312 + 180 |
 | Swerve Module 1 | -39.63852 |
