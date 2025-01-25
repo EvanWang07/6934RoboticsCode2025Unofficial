@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.LimelightHelpers;
+// import frc.robot.LimelightHelpers;
 import frc.robot.VisionInfo;
 import frc.robot.Constants.*;
 import frc.robot.subsystems.Swerve;
@@ -43,8 +45,9 @@ public class TeleopSwerve extends Command {
 
         /* Vision (if active) */
         if (activateVision) {
+            // LimelightHelpers.SetRobotOrientation(Vision.limelightName, s_Swerve.getGyroYaw().getDegrees(), 0, 0, 0, 0, 0);
             if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
-                translationVal = VisionInfo.getTranslationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
+                translationVal = -VisionInfo.getTranslationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 strafeVal = 0;
                 rotationVal = -VisionInfo.getRotationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false; // Limelight needs to use robot-centric swerve
@@ -54,9 +57,10 @@ public class TeleopSwerve extends Command {
                 rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false;
             }
-            
+            double[] test = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
             // System.out.println("TX: " + VisionInfo.getTX(false) + ", TY: " + VisionInfo.getTY(false) + ", TV: " + VisionInfo.willTarget());
-            System.out.println("PoseX: " + VisionInfo.getPoseX() + ", PoseY: " + VisionInfo.getPoseY() + ", PoseTheta: " + VisionInfo.getPoseTheta());
+            // System.out.println("PoseX: " + VisionInfo.getPoseX() + ", PoseY: " + VisionInfo.getPoseY() + ", PoseTheta: " + VisionInfo.getPoseTheta());
+            System.out.println("X: " + test[0] + ", Y: " + test[1] + ", Theta: " + test[2]);
         }
 
         VisionInfo.updateSummaryValues();
