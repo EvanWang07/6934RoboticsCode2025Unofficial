@@ -58,6 +58,16 @@ public final class VisionInfo {
         return distance;
     }
 
+    public static double getDistanceX(double targetHeight) {
+        double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
+        return (getDistance(targetHeight) * Math.cos(angleFromHorizontal));
+    }
+
+    public static double getDistanceY(double targetHeight) {
+        double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
+        return (getDistance(targetHeight) * Math.sin(angleFromHorizontal));
+    }
+
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
         boolean aligned = Math.abs(getTX(false)) < Vision.TXTolerance;
         return aligned;
@@ -86,15 +96,27 @@ public final class VisionInfo {
         }
     }
 
-    public static double getPoseX() {
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
+    public static double getPoseTheta() { // Gets the yaw of the limelight relative to the robot
+        double[] robotPose = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
+        return robotPose[4];
     }
 
-    public static double getPoseY() {
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getY();
+    /*
+    public static double getTranslation(double targetHeight) { // Gets the distance of the robot to the limelight target; less limited than getDistance()
+        double robotToWallDistance = getDistance(targetHeight) / Math.cos(getPoseTheta() * (Math.PI / 180));
+        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
+        double translation = robotToWallDistance * (Math.sin(Math.PI - getTX(false) * (Math.PI / 180) - angleFromHorizontal) / Math.sin(angleFromHorizontal));
+        return translation;
     }
 
-    public static double getPoseTheta() {
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getRotation().getDegrees();
+    public static double getTranslationX(double targetHeight) {
+        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
+        return (getTranslation(targetHeight) * Math.cos(angleFromHorizontal));
     }
+
+    public static double getTranslationY(double targetHeight) {
+        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
+        return (getTranslation(targetHeight) * Math.sin(angleFromHorizontal));
+    }
+    */
 }
