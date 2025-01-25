@@ -31,7 +31,7 @@ public final class Constants {
 
         /* Targetting Threshold */
         public static final int targetDetectionListSize = 10; // Amount of trials the list holds
-        public static final double averageTVThreshold = 0.8; // Required targetting success rate for automatic alignment
+        public static final double averageTVThreshold = 0.7; // Required targetting success rate for automatic alignment
 
         /* Alignment Error Tolerances */
         public static final double TXTolerance = 1; // Degrees
@@ -39,11 +39,11 @@ public final class Constants {
         public static final double TATolerance = 0; // Percent (NOT USED)
 
         /* Finding Targets & Target Horizontal Alignment */
-        public static final double targetSearchOutput = 0.1;
-        public static final double visionAngleKP = 0.05;
+        public static final double targetSearchOutput = 0.2;
+        public static final double visionAngleKP = 0.1;
 
         /* Target Vertical Alignment */
-        public static final double visionTranslationKP = 0.05;
+        public static final double visionTranslationKP = 0.2;
 
         /* Heights of each target above the ground (in) */
         public static final double targetAHeight = 30.875;
