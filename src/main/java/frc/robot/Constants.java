@@ -46,7 +46,7 @@ public final class Constants {
         public static final double visionTranslationKP = 0.2;
 
         /* Heights of each target above the ground (in) */
-        public static final double targetAHeight = 30.875;
+        public static final double targetAHeight = 12;
         public static final double targetBHeight = 0;
         public static final double targetCHeight = 0;
     }
