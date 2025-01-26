@@ -57,10 +57,7 @@ public class TeleopSwerve extends Command {
                 rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false;
             }
-            double[] test = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
-            // System.out.println("TX: " + VisionInfo.getTX(false) + ", TY: " + VisionInfo.getTY(false) + ", TV: " + VisionInfo.willTarget());
-            // System.out.println("PoseX: " + VisionInfo.getPoseX() + ", PoseY: " + VisionInfo.getPoseY() + ", PoseTheta: " + VisionInfo.getPoseTheta());
-            System.out.println("X: " + test[0] + ", Y: " + test[1] + ", Theta: " + test[2]);
+            System.out.println("X: " + VisionInfo.getDistanceX(Vision.targetAHeight) + ", Y: " + VisionInfo.getDistanceY(Vision.targetAHeight));
         }
 
         VisionInfo.updateSummaryValues();
