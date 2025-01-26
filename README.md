@@ -11,12 +11,14 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added experimental pose component estimation methods <sup>1/22/25</sup>
 - Updated the LimelightHelpers file for FRC 2025 <sup>1/23/25</sup>
 - Vision now works and properly ignores slow mode drive <sup>1/23/25</sup>
+- Added an experimental vision auto positioning on-the-fly path generator <sup>1/26/25</sup>
 
 ## Issues and Potential Errors:   
 - None for now!
 
 ## To-Do List:  
-- [ ] Work on robot pose.  
+- [ ] Obtain correct x and y offsets 
+- [ ] Write the auto position path generator for vision
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
@@ -61,6 +63,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Reset Gyro (Field-Centric Driving ONLY): *PRESS* Y-Button  
 - Toggle Slow Mode OFF: *PRESS* Start-Button  <br> 
 - Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
-- Auto-Align: *HOLD* A-Button  <br>   
+- Auto-Align: *HOLD* A-Button  <br> 
+- Auto-Position: *PRESS* X-Button  <br>   
 
-[^1]: Last updated 1/23/25 by Evan Wang.
+[^1]: Last updated 1/26/25 by Evan Wang.
