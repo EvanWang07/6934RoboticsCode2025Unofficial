@@ -101,7 +101,7 @@ public final class VisionInfo {
         return robotPose[4];
     }
 
-    public static boolean isZeroPose() {
+    public static boolean isZeroPose() { // Not used for now
         boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
         return isZeroPose;
     }

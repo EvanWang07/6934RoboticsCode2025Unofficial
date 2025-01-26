@@ -36,7 +36,7 @@ public final class Constants {
         /* Alignment Error Tolerances */
         public static final double TXTolerance = 1; // Degrees
         public static final double TYTolerance = 1; // Degrees
-        public static final double poseTolerance = 1; // Degrees
+        public static final double poseTolerance = 1; // Degrees (NOT USED [FOR NOW])
         public static final double TATolerance = 0; // Percent (NOT USED)
 
         /* Finding Targets & Target Horizontal Alignment */
