@@ -101,6 +101,11 @@ public final class VisionInfo {
         return robotPose[4];
     }
 
+    public static boolean isZeroPose() {
+        boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
+        return isZeroPose;
+    }
+
     /*
     public static double getTranslation(double targetHeight) { // Gets the distance of the robot to the limelight target; less limited than getDistance()
         double robotToWallDistance = getDistance(targetHeight) / Math.cos(getPoseTheta() * (Math.PI / 180));

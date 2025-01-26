@@ -1,17 +1,28 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import com.pathplanner.lib.auto.NamedCommands;
+import java.util.List;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands; // Will be useful...later
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.QuickTuning;
+import frc.robot.Constants.Vision;
 
 public class RobotContainer {
     /* Controllers */
@@ -25,7 +36,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
-    // private final JoystickButton restartSwerve = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
@@ -60,7 +71,30 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
-        // restartSwerve.onTrue(new InstantCommand(() -> s_Swerve.resetModulesToAbsolute()));
+        useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> {
+            double targetPose = -VisionInfo.getPoseTheta();
+            double errorX = VisionInfo.getDistanceX(Vision.targetAHeight);
+            double errorY = VisionInfo.getDistanceY(Vision.targetAHeight);
+
+            List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
+                new Pose2d(errorX / 4, errorY / 4, Rotation2d.fromDegrees(0)),
+                new Pose2d(errorX / 2, errorY / 2, Rotation2d.fromDegrees(0)),
+                new Pose2d(errorX * (3 / 4), errorY * (3 / 4), Rotation2d.fromDegrees(0))
+            );
+
+            PathConstraints constraints = new PathConstraints(2.0, 2.0, Math.PI, 2 * Math.PI);
+
+            PathPlannerPath visionDrivePath = new PathPlannerPath(
+                waypoints,
+                constraints,
+                null, // Not relevant for on-the-fly paths.
+                new GoalEndState(0.0, Rotation2d.fromDegrees(targetPose)) // Use holonomic rotation here 
+            );
+
+            visionDrivePath.preventFlipping = true;
+
+            AutoBuilder.followPath(visionDrivePath).schedule();
+        })));
     }
 
     /* Autonomous Code */
