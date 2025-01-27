@@ -80,7 +80,8 @@ public class RobotContainer {
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
                 new Pose2d(targetX / 4, targetY / 4, Rotation2d.fromDegrees(0)),
                 new Pose2d(targetX / 2, targetY / 2, Rotation2d.fromDegrees(0)),
-                new Pose2d(targetX * (3 / 4), targetY * (3 / 4), Rotation2d.fromDegrees(0))
+                new Pose2d(targetX * (3 / 4), targetY * (3 / 4), Rotation2d.fromDegrees(0)),
+                new Pose2d(targetX, targetY, Rotation2d.fromDegrees(0))
             );
 
             PathConstraints constraints = new PathConstraints(2.0, 2.0, Math.PI, 2 * Math.PI);
