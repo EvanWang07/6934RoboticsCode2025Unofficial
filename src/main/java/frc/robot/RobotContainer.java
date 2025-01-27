@@ -22,7 +22,6 @@ import com.pathplanner.lib.path.Waypoint;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.QuickTuning;
-import frc.robot.Constants.Vision;
 
 public class RobotContainer {
     /* Controllers */
@@ -72,14 +71,16 @@ public class RobotContainer {
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
         useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> {
-            double targetPose = -VisionInfo.getPoseTheta();
-            double errorX = VisionInfo.getDistanceX(Vision.targetAHeight);
-            double errorY = VisionInfo.getDistanceY(Vision.targetAHeight);
+            double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
+            double errorX = VisionInfo.getDistanceXExperimental();
+            double errorY = VisionInfo.getDistanceYExperimental();
+            double targetX = s_Swerve.getPose().getX() + errorX;
+            double targetY = s_Swerve.getPose().getY() + errorY;
 
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
-                new Pose2d(errorX / 4, errorY / 4, Rotation2d.fromDegrees(0)),
-                new Pose2d(errorX / 2, errorY / 2, Rotation2d.fromDegrees(0)),
-                new Pose2d(errorX * (3 / 4), errorY * (3 / 4), Rotation2d.fromDegrees(0))
+                new Pose2d(targetX / 4, targetY / 4, Rotation2d.fromDegrees(0)),
+                new Pose2d(targetX / 2, targetY / 2, Rotation2d.fromDegrees(0)),
+                new Pose2d(targetX * (3 / 4), targetY * (3 / 4), Rotation2d.fromDegrees(0))
             );
 
             PathConstraints constraints = new PathConstraints(2.0, 2.0, Math.PI, 2 * Math.PI);
