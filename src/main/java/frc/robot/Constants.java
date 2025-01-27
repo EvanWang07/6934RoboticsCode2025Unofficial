@@ -53,7 +53,7 @@ public final class Constants {
         public static final double targetCHeight = 0;
 
         /* Important April Tag Locations */
-        public static final double reefTargetHeight = Units.inchesToMeters(12.13);
+        public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);
         public static final Pose2d redReefSix = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
         public static final Pose2d redReefSeven = new Pose2d(Units.inchesToMeters(546.87), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
         public static final Pose2d redReefEight = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));

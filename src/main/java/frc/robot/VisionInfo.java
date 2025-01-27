@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -7,6 +8,10 @@ import frc.robot.Constants.Vision;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
+
+    public static int getTargetID() {
+        return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
+    }
 
     public static double getTX(boolean asOutput) { // Gets the horizontal angle error
         if (asOutput) {
@@ -106,22 +111,42 @@ public final class VisionInfo {
         return isZeroPose;
     }
 
-    /*
-    public static double getTranslation(double targetHeight) { // Gets the distance of the robot to the limelight target; less limited than getDistance()
-        double robotToWallDistance = getDistance(targetHeight) / Math.cos(getPoseTheta() * (Math.PI / 180));
-        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
-        double translation = robotToWallDistance * (Math.sin(Math.PI - getTX(false) * (Math.PI / 180) - angleFromHorizontal) / Math.sin(angleFromHorizontal));
-        return translation;
+    public static double getRobotLocationX() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
     }
 
-    public static double getTranslationX(double targetHeight) {
-        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
-        return (getTranslation(targetHeight) * Math.cos(angleFromHorizontal));
+    public static double getRobotLocationY() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
     }
 
-    public static double getTranslationY(double targetHeight) {
-        double angleFromHorizontal = (90 - getPoseTheta() - getTX(false)) * (Math.PI / 180);
-        return (getTranslation(targetHeight) * Math.sin(angleFromHorizontal));
+    public static Pose2d getAprilTagFieldLocation(int targetID) {
+        if (targetID == 6) {
+            return Vision.redReefSix;
+        } else if (targetID == 7) {
+            return Vision.redReefSeven;
+        } else if (targetID == 8) {
+            return Vision.redReefEight;
+        } else if (targetID == 9) {
+            return Vision.redReefNine;
+        } else if (targetID == 10) {
+            return Vision.redReefTen;
+        } else if (targetID == 11) {
+            return Vision.redReefEleven;
+        } else if (targetID == 17) {
+            return Vision.blueReefSeventeen;
+        } else if (targetID == 18) {
+            return Vision.blueReefEighteen;
+        } else if (targetID == 19) {
+            return Vision.blueReefNineteen;
+        } else if (targetID == 20) {
+            return Vision.blueReefTwenty;
+        } else if (targetID == 21) {
+            return Vision.blueReefTwentyone;
+        } else if (targetID == 22) {
+            return Vision.blueReefTwentytwo;
+        } else {
+            System.out.println("[WARNING] An invalid April Tag ID was given!");
+            return new Pose2d();
+        }
     }
-    */
 }
