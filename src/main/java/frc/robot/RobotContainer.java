@@ -70,7 +70,7 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
-        useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> {
+        useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
             double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
             double errorX = VisionInfo.getDistanceXExperimental();
             double errorY = VisionInfo.getDistanceYExperimental();
