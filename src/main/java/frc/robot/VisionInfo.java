@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -111,12 +112,16 @@ public final class VisionInfo {
         return isZeroPose;
     }
 
+    public static Pose2d getRobotPose() {
+        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName);
+    }
+
     public static double getRobotLocationX() { // Gets the x component of the robot's location relative to the field (blue origin)
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
+        return getRobotPose().getX();
     }
 
     public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin)
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
+        return getRobotPose().getY();
     }
 
     public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin)
@@ -148,5 +153,15 @@ public final class VisionInfo {
             System.out.println("[WARNING] An invalid April Tag ID was given!");
             return new Pose2d();
         }
+    }
+
+    public static double getDistanceXExperimental() {
+        Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
+        return translationDifference.getX();
+    }
+
+    public static double getDistanceYExperimental() {
+        Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
+        return translationDifference.getY();
     }
 }
