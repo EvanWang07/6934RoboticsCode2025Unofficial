@@ -9,7 +9,7 @@ import frc.robot.Constants.Vision;
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
 
-    public static int getTargetID() {
+    public static int getTargetID() { // Gets the target ID
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
     }
 
@@ -63,12 +63,12 @@ public final class VisionInfo {
         return distance;
     }
 
-    public static double getDistanceX(double targetHeight) {
+    public static double getDistanceX(double targetHeight) { // Not used for now
         double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
         return (getDistance(targetHeight) * Math.cos(angleFromHorizontal));
     }
 
-    public static double getDistanceY(double targetHeight) {
+    public static double getDistanceY(double targetHeight) { // Not used for now
         double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
         return (getDistance(targetHeight) * Math.sin(angleFromHorizontal));
     }
@@ -111,15 +111,15 @@ public final class VisionInfo {
         return isZeroPose;
     }
 
-    public static double getRobotLocationX() {
+    public static double getRobotLocationX() { // Gets the x component of the robot's location relative to the field (blue origin)
         return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
     }
 
-    public static double getRobotLocationY() {
+    public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin)
         return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName).getX();
     }
 
-    public static Pose2d getAprilTagFieldLocation(int targetID) {
+    public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin)
         if (targetID == 6) {
             return Vision.redReefSix;
         } else if (targetID == 7) {
