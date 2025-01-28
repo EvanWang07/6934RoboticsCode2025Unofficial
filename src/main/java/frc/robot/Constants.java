@@ -28,7 +28,7 @@ public final class Constants {
         /* Limelight Essentials */
         public static final String limelightName = "limelight-scorps";
         public static final double limelightAngle = 10; // Angle between the ground and the limelight's orientation
-        public static final double limelightHeight = 11.194; // Height the limelight is above the ground (in)
+        public static final double limelightHeight = Units.inchesToMeters(11.194); // Height the limelight is above the ground (in)
 
         /* Targetting Threshold */
         public static final int targetDetectionListSize = 10; // Amount of trials the list holds

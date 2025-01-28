@@ -35,7 +35,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
+    // private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
@@ -70,7 +70,9 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
+        /*
         useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
+            s_Swerve.setSpeedMultiplier(1);
             double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
             double errorX = VisionInfo.getDistanceXExperimental();
             double errorY = VisionInfo.getDistanceYExperimental();
@@ -97,6 +99,7 @@ public class RobotContainer {
 
             AutoBuilder.followPath(visionDrivePath).schedule();
         })));
+        */
     }
 
     /* Autonomous Code */
