@@ -35,7 +35,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
-    // private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
@@ -70,20 +70,20 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
-        /*
+        
         useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
             s_Swerve.setSpeedMultiplier(1);
             double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
             double errorX = VisionInfo.getDistanceXExperimental();
             double errorY = VisionInfo.getDistanceYExperimental();
-            double targetX = s_Swerve.getPose().getX() + errorX;
-            double targetY = s_Swerve.getPose().getY() + errorY;
+            double currentX = s_Swerve.getPose().getX() + errorX;
+            double currentY = s_Swerve.getPose().getY() + errorY;
 
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
-                new Pose2d(targetX / 4, targetY / 4, Rotation2d.fromDegrees(0)),
-                new Pose2d(targetX / 2, targetY / 2, Rotation2d.fromDegrees(0)),
-                new Pose2d(targetX * (3 / 4), targetY * (3 / 4), Rotation2d.fromDegrees(0)),
-                new Pose2d(targetX, targetY, Rotation2d.fromDegrees(0))
+                new Pose2d(currentX + errorX / 4, currentY + errorY / 4, new Rotation2d()),
+                new Pose2d(currentX + errorX / 2, currentX + errorX / 2, new Rotation2d()),
+                new Pose2d(currentX + errorX * (3 / 4), currentX + errorX * (3 / 4), new Rotation2d()),
+                new Pose2d(currentX + errorX, currentY + errorY, new Rotation2d())
             );
 
             PathConstraints constraints = new PathConstraints(2.0, 2.0, Math.PI, 2 * Math.PI);
@@ -99,7 +99,7 @@ public class RobotContainer {
 
             AutoBuilder.followPath(visionDrivePath).schedule();
         })));
-        */
+        
     }
 
     /* Autonomous Code */
