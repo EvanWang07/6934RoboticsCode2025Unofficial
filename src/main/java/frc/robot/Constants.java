@@ -68,6 +68,10 @@ public final class Constants {
         public static final Pose2d blueReefTwentytwo = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
     }
 
+    public static final class Elevator {
+        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive;
+    }
+
     public static final class Swerve {
         public static final int pigeonID = 1;
         public static final String canivoreName = "Second CANivor<3";
