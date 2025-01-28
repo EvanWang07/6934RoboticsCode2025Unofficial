@@ -76,8 +76,8 @@ public class RobotContainer {
             double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
             double errorX = VisionInfo.getDistanceXExperimental();
             double errorY = VisionInfo.getDistanceYExperimental();
-            double currentX = s_Swerve.getPose().getX() + errorX;
-            double currentY = s_Swerve.getPose().getY() + errorY;
+            double currentX = s_Swerve.getPose().getX();
+            double currentY = s_Swerve.getPose().getY();
 
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
                 new Pose2d(currentX + errorX / 4, currentY + errorY / 4, new Rotation2d()),
