@@ -61,6 +61,7 @@ public final class CTREConfigs {
 
         /* Elevator Motor Configuration */
         /* Motor Inverts and Neutral Mode */
-        elevatorConfig.MotorOutput.Inverted = 
+        elevatorConfig.MotorOutput.Inverted = Constants.Elevator.elevatorMotorInvert;
+        elevatorConfig.MotorOutput.NeutralMode = Constants.Elevator.elevatorMotorNeutralMode;
     }
 }
