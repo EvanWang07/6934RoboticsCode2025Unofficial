@@ -80,13 +80,13 @@ public class RobotContainer {
             double currentY = s_Swerve.getPose().getY();
 
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
-                new Pose2d(currentX + errorX / 4, currentY + errorY / 4, new Rotation2d()),
-                new Pose2d(currentX + errorX / 2, currentX + errorX / 2, new Rotation2d()),
-                new Pose2d(currentX + errorX * (3 / 4), currentX + errorX * (3 / 4), new Rotation2d()),
-                new Pose2d(currentX + errorX, currentY + errorY, new Rotation2d())
+                new Pose2d(currentX + errorX / 4, currentY + errorY / 4, Rotation2d.fromDegrees(targetPose)),
+                new Pose2d(currentX + errorX / 2, currentX + errorX / 2, Rotation2d.fromDegrees(targetPose)),
+                new Pose2d(currentX + errorX * (3 / 4), currentX + errorX * (3 / 4), Rotation2d.fromDegrees(targetPose)),
+                new Pose2d(currentX + errorX, currentY + errorY, Rotation2d.fromDegrees(targetPose))
             );
 
-            PathConstraints constraints = new PathConstraints(2.0, 2.0, Math.PI, 2 * Math.PI);
+            PathConstraints constraints = new PathConstraints(1.0, 1.0, Math.PI, 2 * Math.PI);
 
             PathPlannerPath visionDrivePath = new PathPlannerPath(
                 waypoints,

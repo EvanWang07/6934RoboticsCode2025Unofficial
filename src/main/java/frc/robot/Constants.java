@@ -41,11 +41,11 @@ public final class Constants {
         public static final double TATolerance = 0; // Percent (NOT USED)
 
         /* Finding Targets & Target Horizontal Alignment */
-        public static final double targetSearchOutput = 0.2;
-        public static final double visionAngleKP = 0.1;
+        public static final double targetSearchOutput = 0.25;
+        public static final double visionAngleKP = 0.15;
 
         /* Target Vertical Alignment */
-        public static final double visionTranslationKP = 0.2;
+        public static final double visionTranslationKP = 0.25;
 
         /* Heights of each target above the ground (in) */
         public static final double targetAHeight = 12;
