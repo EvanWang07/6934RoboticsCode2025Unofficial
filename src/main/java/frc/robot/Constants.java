@@ -207,4 +207,12 @@ public final class Constants {
             new PIDConstants(5.0, 0.0, 0.0)
         );
     }
+
+    public static final class ElevatorAndMailboxConstants {
+        public static final int MailboxMotorID = 100;
+        public static final int MailboxMotorMaxVoltage = 6;
+
+        public static final int CANrangeID = 101;
+        public static final int beamBreakerChannel = 102;
+    }
 }
