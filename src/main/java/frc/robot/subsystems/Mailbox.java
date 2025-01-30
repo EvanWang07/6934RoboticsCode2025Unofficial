@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.Constants.ElevatorAndMailboxConstants;
+import frc.robot.Constants.MailboxConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import edu.wpi.first.math.util.Units;
@@ -18,13 +18,13 @@ public class Mailbox extends SubsystemBase{
 
 
     public Mailbox(){
-        intakeNeoVortex = new SparkMax(ElevatorAndMailboxConstants.MailboxMotorID, MotorType.kBrushless);
+        intakeNeoVortex = new SparkMax(MailboxConstants.MailboxMotorID, MotorType.kBrushless);
 
 
     }
 
     public void setMailboxSpeed(){
-        intakeNeoVortex.setVoltage(ElevatorAndMailboxConstants.MailboxMotorMaxVoltage);
+        intakeNeoVortex.setVoltage(MailboxConstants.MailboxMotorMaxVoltage);
     }
 
     public void brakeMailbox(){
