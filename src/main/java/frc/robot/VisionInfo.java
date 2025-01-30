@@ -60,7 +60,7 @@ public final class VisionInfo {
 
     public static double getDistance(double targetHeight) { // Only works for a two-dimensional scenario with flat ground; gets the distance from the target
         double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
-        double distance = (targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians);
+        double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
         return distance;
     }
 

@@ -22,6 +22,7 @@ import com.pathplanner.lib.path.Waypoint;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.QuickTuning;
+import frc.robot.Constants.Vision;
 
 public class RobotContainer {
     /* Controllers */
@@ -70,23 +71,19 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
-        useAutoPosition.onTrue(new PoseAlign(s_Swerve).withTimeout(2));
-        /* 
-        useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
-            s_Swerve.setSpeedMultiplier(1);
-            double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
-            double errorX = VisionInfo.getDistanceXExperimental();
-            double errorY = VisionInfo.getDistanceYExperimental();
-            double currentX = s_Swerve.getPose().getX();
-            double currentY = s_Swerve.getPose().getY();
+        // useAutoPosition.onTrue(new PoseAlign(s_Swerve).withTimeout(2));
+        
+        useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(3).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
+            s_Swerve.setSpeedMultiplier(0.35);
+            s_Swerve.setPose(new Pose2d());
+            double targetPose = VisionInfo.getPoseTheta();
+            double targetLocation = VisionInfo.getDistance(Vision.reefAprilTagHeights);
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
-                new Pose2d(currentX + errorX / 4, currentY + errorY / 4, Rotation2d.fromDegrees(targetPose)),
-                new Pose2d(currentX + errorX / 2, currentX + errorX / 2, Rotation2d.fromDegrees(targetPose)),
-                new Pose2d(currentX + errorX * (3 / 4), currentX + errorX * (3 / 4), Rotation2d.fromDegrees(targetPose)),
-                new Pose2d(currentX + errorX, currentY + errorY, Rotation2d.fromDegrees(targetPose))
+                new Pose2d(targetLocation / 2, 0, new Rotation2d()),
+                new Pose2d(targetLocation, 0, new Rotation2d())
             );
 
-            PathConstraints constraints = new PathConstraints(1.0, 1.0, Math.PI, 2 * Math.PI);
+            PathConstraints constraints = new PathConstraints(1, 1, Math.PI * 0.5, Math.PI);
 
             PathPlannerPath visionDrivePath = new PathPlannerPath(
                 waypoints,
@@ -99,7 +96,7 @@ public class RobotContainer {
 
             AutoBuilder.followPath(visionDrivePath).schedule();
         })));
-        */
+        
         
     }
 
