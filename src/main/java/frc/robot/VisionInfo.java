@@ -102,6 +102,15 @@ public final class VisionInfo {
         }
     }
 
+    public static double getPoseCorrectionOutput() { // Gives a rotational output value to correct the robot pose
+        if (isZeroPose()) {
+            return 0;
+        } else {
+            double correctionOutput = getPoseTheta() * (1.0 / 20) * Vision.visionPoseKP;
+            return correctionOutput;
+        }
+    }
+
     public static double getPoseTheta() { // Gets the yaw of the limelight relative to the robot
         double[] robotPose = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
         return robotPose[4];

@@ -47,6 +47,9 @@ public final class Constants {
         /* Target Vertical Alignment */
         public static final double visionTranslationKP = 0.25;
 
+        /* Target Pose Alignment */
+        public static final double visionPoseKP = 0.15;
+
         /* Heights of each target above the ground (in) */
         public static final double targetAHeight = 12;
         public static final double targetBHeight = 0;

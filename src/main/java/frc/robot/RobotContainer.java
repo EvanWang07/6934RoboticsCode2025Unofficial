@@ -70,7 +70,8 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
-        
+        useAutoPosition.onTrue(new PoseAlign(s_Swerve).withTimeout(2));
+        /* 
         useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(5).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
             s_Swerve.setSpeedMultiplier(1);
             double targetPose = s_Swerve.getGyroYaw().getDegrees() - VisionInfo.getPoseTheta();
@@ -78,7 +79,6 @@ public class RobotContainer {
             double errorY = VisionInfo.getDistanceYExperimental();
             double currentX = s_Swerve.getPose().getX();
             double currentY = s_Swerve.getPose().getY();
-
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses( // Here, the poses are meant for direction, not holonomic rotation
                 new Pose2d(currentX + errorX / 4, currentY + errorY / 4, Rotation2d.fromDegrees(targetPose)),
                 new Pose2d(currentX + errorX / 2, currentX + errorX / 2, Rotation2d.fromDegrees(targetPose)),
@@ -99,6 +99,7 @@ public class RobotContainer {
 
             AutoBuilder.followPath(visionDrivePath).schedule();
         })));
+        */
         
     }
 
