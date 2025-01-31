@@ -52,20 +52,20 @@ public class Intake extends Command {
     public void initialize(){
         timer.reset();
         timer.start();
-        SmartDashboard.putBoolean("Mailbox sensor status (false = coral sensed)", beamBreaker.get());
+        SmartDashboard.putBoolean("Mailbox is sensed: ", !beamBreaker.get());
 
     }
 
     @Override
     public void execute(){
         m_mailboxSubsystem.setMailboxSpeed();
-        SmartDashboard.putBoolean("Mailbox sensor status (false = coral sensed)", beamBreaker.get());
+        SmartDashboard.putBoolean("Mailbox is sensed: ", !beamBreaker.get());
     }
 
     @Override
     public void end(boolean interrupted){
         m_mailboxSubsystem.brakeMailbox();
-        SmartDashboard.putBoolean("Mailbox sensor status (false = coral sensed)", beamBreaker.get());
+        SmartDashboard.putBoolean("Mailbox is sensed: ", !beamBreaker.get());
 
     }
 
