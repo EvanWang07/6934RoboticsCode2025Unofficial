@@ -11,14 +11,17 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added experimental pose component estimation methods <sup>1/22/25</sup>
 - Updated the LimelightHelpers file for FRC 2025 <sup>1/23/25</sup>
 - Vision now works and properly ignores slow mode drive <sup>1/23/25</sup>
-- Added an experimental vision auto positioning on-the-fly path generator <sup>1/26/25</sup>
+- Added an experimental vision auto positioning on-the-fly path generator (BUGGED) <sup>1/26/25</sup>
+- Added an experimental code for the mailbox/end-effector <sup>2/1/25</sup>
+- Added an experimental subsystem for the elevator <sup>2/1/25</sup>
 
 ## Issues and Potential Errors:   
-- None for now!
+- Robot auto-position function does not work as intended (bad velocity)
 
 ## To-Do List:  
-- [ ] Obtain correct x and y offsets 
-- [ ] Write the auto position path generator for vision
+- [ ] Write a *new* auto position path generator for vision
+- [ ] Write the command for the elevator; this includes the teleoperated elevator and the PID elevator
+- [ ] Add controller bindings for the elevator and mailbox commands
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
@@ -66,4 +69,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Auto-Align: *HOLD* A-Button  <br> 
 - Auto-Position: *PRESS* X-Button  <br>   
 
-[^1]: Last updated 1/26/25 by Evan Wang.
+[^1]: Last updated 2/1/25 by Evan Wang.
