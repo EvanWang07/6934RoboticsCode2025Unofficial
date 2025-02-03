@@ -20,4 +20,8 @@ public final class BasicOperations {
         }
         list[0] = newValue;
     }
+
+    public static double findAverage(double numOne, double numTwo) {
+        return (numOne + numTwo) / 2;
+    }
 }

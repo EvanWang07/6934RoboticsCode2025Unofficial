@@ -72,12 +72,14 @@ public final class Constants {
     }
 
     public static final class Elevator {
+        /* Elevator Mechanism Details */
+        public static final double elevatorGearRatio = 6;
 
         /* Elevator Motor Configs */
-        public static final int elevatorMotorOneID = 30;
-        public static final int elevatorMotorTwoID = 31;
-        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive;
-        public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
+        public static final int elevatorMotorOneID = 30; // Prone to change
+        public static final int elevatorMotorTwoID = 31; // Prone to change
+        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive; // Prone to change
+        public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake; // Prone to change
 
         /* Elevator Bounds */
         public static final double elevatorLowerBound = 10; // in degrees - how many degrees of spin away from the lower bound should the motor brake at?
