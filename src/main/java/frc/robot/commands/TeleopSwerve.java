@@ -76,7 +76,7 @@ public class TeleopSwerve extends Command {
             }
         }
 
-        VisionInfo.updateSummaryValues();
+        VisionInfo.updateSummaryValues(); // Puts relevant vision values into SmartDashboard
 
         /* Drive */
         s_Swerve.drive(

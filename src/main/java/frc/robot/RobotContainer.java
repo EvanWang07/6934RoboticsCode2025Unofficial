@@ -73,7 +73,7 @@ public class RobotContainer {
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
         // useAutoPosition.onTrue(new PoseAlign(s_Swerve).withTimeout(2));
-        /*
+        /* (Not used for now)
         useAutoPosition.onTrue(new VisionAlign(s_Swerve).withTimeout(3).andThen(Commands.runOnce(() -> { // VisionAlign might not be needed
             s_Swerve.setSpeedMultiplier(0.35);
             s_Swerve.setPose(new Pose2d());

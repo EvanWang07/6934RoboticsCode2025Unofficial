@@ -137,11 +137,11 @@ public final class VisionInfo {
         return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName);
     }
 
-    public static double getRobotLocationX() { // Gets the x component of the robot's location relative to the field (blue origin)
+    public static double getRobotLocationX() { // Gets the x component of the robot's location relative to the field (blue origin) (UNUSED)
         return getRobotPose().getX();
     }
 
-    public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin)
+    public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin) (UNUSED)
         return getRobotPose().getY();
     }
     */
