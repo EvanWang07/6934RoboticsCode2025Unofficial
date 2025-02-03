@@ -30,13 +30,9 @@ public final class VisionInfo {
         }
     }
 
-    public static boolean hasValidTargets() { // Determines if there is a valid limelight target at the given time
-        return LimelightHelpers.getTV(Vision.limelightName);
-    }
-
-    public static boolean willTarget() { // Determines (by averaging TV values) if the robot will seek a target
-        BasicOperations.insertBooleanToConfinedList(targetValidResults, hasValidTargets());
-        return (BasicOperations.getSuccessRate(targetValidResults) >= Vision.averageTVThreshold);
+    public static double getPoseTheta() { // Gets the yaw of the limelight relative to the robot
+        double[] robotPose = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
+        return robotPose[4];
     }
 
     public static double getTA(boolean asOutput) { // Gets the % of the camera frame the target takes up (NOT USED)
@@ -47,32 +43,43 @@ public final class VisionInfo {
         }
     }
 
+    public static boolean hasValidTargets() { // Determines if there is a valid limelight target at the given time
+        return LimelightHelpers.getTV(Vision.limelightName);
+    }
+
+    public static boolean willTarget() { // Determines (by averaging TV values) if the robot will seek a target
+        BasicOperations.insertBooleanToConfinedList(targetValidResults, hasValidTargets());
+        return (BasicOperations.getSuccessRate(targetValidResults) >= Vision.averageTVThreshold);
+    }
+
     public static void updateSummaryValues() { // Sends limelight values to SmartDashboard
-        SmartDashboard.putBoolean("Can Auto-Align: ", willTarget());
-        SmartDashboard.putNumber("TA: ", getTA(false));
+        SmartDashboard.putBoolean("Targetable Detected: ", willTarget());
         SmartDashboard.putNumber("TX: ", getTX(false));
         SmartDashboard.putNumber("TY: ", getTY(false));
+        SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
     } // Note: Possibly put a more descriptive label
 
-    public static void switchPipeline(int newPipeline) { // Swaps the camera "mode" (used if there are multiple targets) (NOT USED)
-        LimelightHelpers.setPipelineIndex(Vision.limelightName, newPipeline);
+    public static double getDistance(double targetHeight) { // Gets the distance from the target
+        if (isHorizontallyAligned()) {
+            double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
+            double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
+            return distance;
+        } else { // Only works for a two-dimensional scenario with flat ground
+            return 0;
+        }
     }
 
-    public static double getDistance(double targetHeight) { // Only works for a two-dimensional scenario with flat ground; gets the distance from the target
-        double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
-        double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
-        return distance;
-    }
-
-    public static double getDistanceX(double targetHeight) { // Not used for now
+    /*
+    public static double getDistanceX(double targetHeight) { // UNUSED
         double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
         return (getDistance(targetHeight) * Math.cos(angleFromHorizontal));
     }
 
-    public static double getDistanceY(double targetHeight) { // Not used for now
+    public static double getDistanceY(double targetHeight) { // UNUSED
         double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
         return (getDistance(targetHeight) * Math.sin(angleFromHorizontal));
     }
+    */
 
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
         boolean aligned = Math.abs(getTX(false)) < Vision.TXTolerance;
@@ -84,6 +91,11 @@ public final class VisionInfo {
         return aligned;
     }
 
+    public static boolean isZeroPose() { // Checks robot alignment with the target regarding yaw
+        boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
+        return isZeroPose;
+    }
+
     public static double getRotationalCorrectionOutput() { // Gives an rotational output value to correct tx
         if (isHorizontallyAligned()) {
             return 0.0;
@@ -93,7 +105,16 @@ public final class VisionInfo {
         }
     }
 
-    public static double getTranslationalCorrectionOutput() { // Gives a translational output value to correct ty
+    public static double getHorizontalCorrectionOutput() { // Gives a translational (left/right) output value to correct tx
+        if (isHorizontallyAligned()) {
+            return 0;
+        } else {
+            double correctionOutput = getTX(true) * Vision.visionTranslationKP;
+            return correctionOutput;
+        }
+    }
+
+    public static double getForwardCorrectionOutput() { // Gives a translational (forward/backward) output value to correct ty
         if (isVerticallyAligned()) {
             return 0;
         } else {
@@ -102,7 +123,7 @@ public final class VisionInfo {
         }
     }
 
-    public static double getPoseCorrectionOutput() { // Gives a rotational output value to correct the robot pose
+    public static double getPoseCorrectionOutput() { // Gives a rotational output value to correct the robot's yaw relative to the target
         if (isZeroPose()) {
             return 0;
         } else {
@@ -111,16 +132,7 @@ public final class VisionInfo {
         }
     }
 
-    public static double getPoseTheta() { // Gets the yaw of the limelight relative to the robot
-        double[] robotPose = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
-        return robotPose[4];
-    }
-
-    public static boolean isZeroPose() { // Not used for now
-        boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
-        return isZeroPose;
-    }
-
+    /*
     public static Pose2d getRobotPose() {
         return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName);
     }
@@ -132,8 +144,9 @@ public final class VisionInfo {
     public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin)
         return getRobotPose().getY();
     }
+    */
 
-    public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin)
+    public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)
         if (targetID == 6) {
             return Vision.redReefSix;
         } else if (targetID == 7) {
@@ -164,6 +177,7 @@ public final class VisionInfo {
         }
     }
 
+    /*
     public static double getDistanceXExperimental() {
         Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
         return translationDifference.getX();
@@ -173,4 +187,5 @@ public final class VisionInfo {
         Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
         return translationDifference.getY();
     }
+    */
 }

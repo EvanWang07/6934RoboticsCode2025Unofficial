@@ -20,16 +20,18 @@ public class TeleopSwerve extends Command {
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
     private BooleanSupplier visionSup;
+    private BooleanSupplier autoPositionSup;
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier visionSup) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier visionSup, BooleanSupplier autoPositionSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
-        this.translationSup = translationSup;
-        this.strafeSup = strafeSup;
+        this.translationSup = translationSup; // Y
+        this.strafeSup = strafeSup; // X
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
         this.visionSup = visionSup;
+        this.autoPositionSup = autoPositionSup;
     }
 
     @Override
@@ -39,13 +41,15 @@ public class TeleopSwerve extends Command {
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), QuickTuning.driveStickDeadband);
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), QuickTuning.driveStickDeadband);
         boolean isFieldCentric = !robotCentricSup.getAsBoolean();
-        boolean activateVision = visionSup.getAsBoolean();
+        boolean activateAutoPosition = autoPositionSup.getAsBoolean();
+        boolean seekTarget = activateAutoPosition ? false : visionSup.getAsBoolean(); // Auto Position should override Seek Target
+        
 
-        /* Vision (if active) */
-        if (activateVision) {
+        /* Vision Target Seeking (If Active) */
+        if (seekTarget) {
             // LimelightHelpers.SetRobotOrientation(Vision.limelightName, s_Swerve.getGyroYaw().getDegrees(), 0, 0, 0, 0, 0);
             if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
-                translationVal = -VisionInfo.getTranslationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
+                translationVal = -VisionInfo.getForwardCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 strafeVal = 0;
                 rotationVal = -VisionInfo.getRotationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false; // Limelight needs to use robot-centric swerve
@@ -55,7 +59,21 @@ public class TeleopSwerve extends Command {
                 rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false;
             }
-            System.out.println("X: " + VisionInfo.getDistanceXExperimental() + ", Y: " + VisionInfo.getDistanceYExperimental() + ", Pose: " + VisionInfo.getPoseTheta());
+        }
+
+        /* Vision Auto Position (If Active) */
+        if (activateAutoPosition) {
+            if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
+                translationVal = -VisionInfo.getForwardCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
+                strafeVal = VisionInfo.getHorizontalCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
+                rotationVal = VisionInfo.getPoseCorrectionOutput() / s_Swerve.getSpeedMultiplier();
+                isFieldCentric = false;
+            } else {
+                translationVal = 0;
+                strafeVal = 0;
+                rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
+                isFieldCentric = false;
+            }
         }
 
         VisionInfo.updateSummaryValues();
