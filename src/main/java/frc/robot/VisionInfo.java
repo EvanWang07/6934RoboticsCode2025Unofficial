@@ -9,6 +9,9 @@ import frc.robot.Constants.Vision;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
+    private static double[] txEstimates = new double[2];
+    private static double[] tyEstimates = new double[2];
+    private static double[] poseEstimates = new double[2];
 
     public static int getTargetID() { // Gets the target ID
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
@@ -65,6 +68,7 @@ public final class VisionInfo {
             double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
             return distance;
         } else { // Only works for a two-dimensional scenario with flat ground
+            System.out.println("[WARNING] Conditions were not met to get the target's distance!");
             return 0;
         }
     }

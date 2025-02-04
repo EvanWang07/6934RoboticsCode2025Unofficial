@@ -65,13 +65,8 @@ public class TeleopSwerve extends Command {
         if (activateAutoPosition) {
             if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
                 translationVal = -VisionInfo.getForwardCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
-                strafeVal = VisionInfo.getHorizontalCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
+                strafeVal = -VisionInfo.getHorizontalCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
                 rotationVal = VisionInfo.getPoseCorrectionOutput() / s_Swerve.getSpeedMultiplier();
-                isFieldCentric = false;
-            } else {
-                translationVal = 0;
-                strafeVal = 0;
-                rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
                 isFieldCentric = false;
             }
         }

@@ -211,7 +211,7 @@ public final class Constants {
     }
 
     public static final class MailboxConstants {
-        public static final int MailboxMotorID = 100;
+        public static final int MailboxMotorID = 1;
         public static final int MailboxMotorMaxVoltage = 6;
 
         public static final int CANrangeID = 101;
