@@ -20,7 +20,11 @@ public final class Constants {
     public static final class QuickTuning {
         /* Controller Constants */
         public static final int driveControllerID = 0;
+        public static final int weaponControllerID = 1;
+
         public static final double driveStickDeadband = 0.1;
+        public static final double weaponStickDeadband = 0.1;
+
         public static final double driveSlowModeMultiplier = 0.1;
     }
 
@@ -76,14 +80,18 @@ public final class Constants {
         public static final double elevatorGearRatio = 6;
 
         /* Elevator Motor Configs */
-        public static final int elevatorMotorOneID = 30; // Prone to change
-        public static final int elevatorMotorTwoID = 31; // Prone to change
-        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive; // Prone to change
-        public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake; // Prone to change
+        public static final int elevatorMotorOneID = 30;
+        public static final int elevatorMotorTwoID = 31;
+        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive;
+        public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
 
         /* Elevator Bounds */
-        public static final double elevatorLowerBound = 10; // in degrees - how many degrees of spin away from the lower bound should the motor brake at?
-        public static final double elevatorUpperBound = 10; // in degrees - ditto, but upper bound
+        public static final double elevatorLowerBound = Units.rotationsToDegrees(0.1 * elevatorGearRatio);; // in degrees - how many degrees of spin away from the lower bound should the motor brake at?
+        public static final double elevatorUpperBound = Units.rotationsToDegrees(3.445 * elevatorGearRatio); // in degrees - ditto, but upper bound
+
+        // approx travel in rotations - 0 -> 3.545
+
+        // 1.757 in Elevator gear diameter
     }
 
     public static final class Swerve {

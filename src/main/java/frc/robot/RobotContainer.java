@@ -27,11 +27,15 @@ import frc.robot.Constants.Vision;
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(QuickTuning.driveControllerID);
+    private final Joystick weapons = new Joystick(QuickTuning.weaponControllerID);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value; // Translation = Y
     private final int strafeAxis = XboxController.Axis.kLeftX.value; // Strafe = X
     private final int rotationAxis = XboxController.Axis.kRightX.value;
+
+    /* Weapon Controls */
+    private final int elevatorAxis = XboxController.Axis.kLeftY.value;
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -43,6 +47,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
+    private final Elevator e_Elevator = new Elevator();
 
     /* Robot Container */
     public RobotContainer() {
@@ -58,6 +63,13 @@ public class RobotContainer {
                 () -> robotCentric.getAsBoolean(), 
                 () -> useVision.getAsBoolean(),
                 () -> useAutoPosition.getAsBoolean()
+            )
+        );
+
+        e_Elevator.setDefaultCommand(
+            new TeleopElevator(
+                e_Elevator,
+                () -> -weapons.getRawAxis(elevatorAxis)
             )
         );
 
