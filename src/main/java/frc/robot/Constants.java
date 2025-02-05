@@ -80,8 +80,8 @@ public final class Constants {
         public static final double elevatorGearRatio = 6;
 
         /* Elevator Motor Configs */
-        public static final int elevatorMotorOneID = 30;
-        public static final int elevatorMotorTwoID = 31;
+        public static final int elevatorMotorOneID = 9;
+        public static final int elevatorMotorTwoID = 10;
         public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive;
         public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
 
@@ -92,6 +92,15 @@ public final class Constants {
         // approx travel in rotations - 0 -> 3.545
 
         // 1.757 in Elevator gear diameter
+    }
+
+    public static final class MailboxConstants {
+        /* Elevator Motor Configs */
+        public static final int MailboxMotorID = 62;
+        public static final int MailboxMotorMaxVoltage = 6;
+
+        /* Beam Sensor Configs */
+        public static final int beamBreakerChannel = 102; // Placeholder
     }
 
     public static final class Swerve {
@@ -216,13 +225,5 @@ public final class Constants {
             new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
             new PIDConstants(5.0, 0.0, 0.0)
         );
-    }
-
-    public static final class MailboxConstants {
-        public static final int MailboxMotorID = 1;
-        public static final int MailboxMotorMaxVoltage = 6;
-
-        public static final int CANrangeID = 101;
-        public static final int beamBreakerChannel = 102;
     }
 }

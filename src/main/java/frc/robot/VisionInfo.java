@@ -73,18 +73,6 @@ public final class VisionInfo {
         }
     }
 
-    /*
-    public static double getDistanceX(double targetHeight) { // UNUSED
-        double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
-        return (getDistance(targetHeight) * Math.cos(angleFromHorizontal));
-    }
-
-    public static double getDistanceY(double targetHeight) { // UNUSED
-        double angleFromHorizontal = Units.degreesToRadians(90 - getPoseTheta());
-        return (getDistance(targetHeight) * Math.sin(angleFromHorizontal));
-    }
-    */
-
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
         boolean aligned = Math.abs(getTX(false)) < Vision.TXTolerance;
         return aligned;
