@@ -67,6 +67,8 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Toggle Slow Mode OFF: *PRESS* Start-Button  <br> 
 - Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 - Auto-Align: *HOLD* A-Button  <br> 
-- Auto-Position: *PRESS* X-Button  <br>   
+- Auto-Position: *PRESS* X-Button  <br>
+### Weapons Controller (**PORT 1**):
+- Lift/Lower Elevator: *MOVE* Left Joystick (y)
 
-[^1]: Last updated 2/1/25 by Evan Wang.
+[^1]: Last updated 2/6/25 by Derek Chang.
