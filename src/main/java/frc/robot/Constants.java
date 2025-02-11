@@ -126,13 +126,18 @@ public final class Constants {
     }
 
     public static final class MailboxConstants {
-        /* Elevator Motor Configs */
+        /* Mailbox Motor Configs */
         public static final int MailboxMotorID = 62;
-        public static final int MailboxMotorMaxVoltage = 6;
-
-        /* Beam Sensor Configs */
-        public static final int beamBreakerChannel = 102; // Placeholder
-    }
+    
+        /* Intake & Scoring */
+        public static final double intakeVoltage = 3;
+        public static final double scoringVoltage = 2;
+    
+        public static final double scoringLeewayTime = 1; // In seconds
+    
+        /* Beam Breaker Configs */
+        public static final int beamBreakerChannel = 0;
+      }
 
     public static final class Swerve {
         public static final int pigeonID = 1;
