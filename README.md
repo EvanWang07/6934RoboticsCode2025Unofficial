@@ -11,17 +11,19 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added experimental pose component estimation methods <sup>1/22/25</sup>
 - Updated the LimelightHelpers file for FRC 2025 <sup>1/23/25</sup>
 - Vision now works and properly ignores slow mode drive <sup>1/23/25</sup>
-- Added an experimental vision auto positioning on-the-fly path generator (BUGGED) <sup>1/26/25</sup>
+- ~~Added an experimental vision auto positioning on-the-fly path generator (BUGGED) <sup>1/26/25</sup>~~
 - Added an experimental code for the mailbox/end-effector <sup>2/1/25</sup>
 - Added an experimental subsystem for the elevator <sup>2/1/25</sup>
+- First successful vision auto position code created <sup>2/5/25</sup>
+- Added an experimental manual and automatic command for the elevator <sup>2/10/25</sup>
 
 ## Issues and Potential Errors:   
-- Robot auto-position function does not work as intended (bad velocity)
+- Robot auto-position function is slow and somewhat jittery
 
 ## To-Do List:  
-- [ ] Write a *new* auto position path generator for vision
-- [ ] Write the command for the elevator; this includes the teleoperated elevator and the PID elevator
-- [ ] Add controller bindings for the elevator and mailbox commands
+- [ ] Optimize the vision auto position pathing and increase path travel speed
+- [ ] Tune the Profiled PID (auto) elevator command
+- [ ] Clean up the elevator constants and overuse of unit conversions
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
@@ -69,6 +71,12 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Auto-Align: *HOLD* A-Button  <br> 
 - Auto-Position: *PRESS* X-Button  <br>
 ### Weapons Controller (**PORT 1**):
-- Lift/Lower Elevator: *MOVE* Left Joystick (y)
+- Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
+- Automatically Lift/Lower Elevator to Bottom: *HOLD* A-Button
+- Automatically Lift/Lower Elevator to Reef Level 1: *HOLD* B-Button
+- Automatically Lift/Lower Elevator to Reef Level 2: *HOLD* X-Button
+- Automatically Lift/Lower Elevator to Reef Level 3: *HOLD* Y-Button
+- Intake Coral: *HOLD* Left Bumper
+- Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 2/6/25 by Derek Chang.
+[^1]: Last updated 2/10/25 by Evan Wang.

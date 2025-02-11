@@ -36,6 +36,9 @@ public class RobotContainer {
     private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
 
     /* Weapon Buttons */
+    private final JoystickButton intakeCoral = new JoystickButton(weapons, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton scoreCoral = new JoystickButton(weapons, XboxController.Button.kRightBumper.value);
+
     private final JoystickButton sendElevatorBottom = new JoystickButton(weapons, XboxController.Button.kA.value);
     private final JoystickButton sendElevatorLevelOne = new JoystickButton(weapons, XboxController.Button.kB.value);
     private final JoystickButton sendElevatorLevelTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
@@ -44,6 +47,7 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final Elevator e_Elevator = new Elevator();
+    private final Mailbox m_Mailbox = new Mailbox();
 
     /* Robot Container */
     public RobotContainer() {
@@ -81,6 +85,9 @@ public class RobotContainer {
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
         
         /* Weapons Buttons */
+        intakeCoral.whileTrue(new Intake(m_Mailbox, true));
+        scoreCoral.whileTrue(new Intake(m_Mailbox, false)); // Could possibly use intakeCoral and have directionIsIntake be true
+
         sendElevatorBottom.whileTrue(new AutoElevator(e_Elevator, Units.degreesToRotations(Constants.Elevator.elevatorLowerBound / Constants.Elevator.elevatorGearRatio)));
         sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations));
         sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations));
