@@ -78,20 +78,51 @@ public final class Constants {
     public static final class Elevator {
         /* Elevator Mechanism Details */
         public static final double elevatorGearRatio = 6;
+        public static final double cascadeElevatorRotationToDistanceMultiplier = 2; // Cascading elevators innately travel more distance per rotation than simply r(theta) by a constant factor
+        public static final double elevatorGearRadius = Units.inchesToMeters(1.757 / 2);
+        public static final double elevatorStartingHeightInRotations = 0; // Do NOT consider gear ratio here
+        public static final double minimumElevatorHeightInRotations = 0; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double maxElevatorHeightInRotations = 3.545; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+
+        public static final double elevatorMetersToRotations = Units.radiansToRotations(1 / (elevatorGearRadius * cascadeElevatorRotationToDistanceMultiplier)); // Meters-to-rotations conversion ratio for the cascading elevator
 
         /* Elevator Motor Configs */
         public static final int elevatorMotorOneID = 9;
         public static final int elevatorMotorTwoID = 10;
-        public static final InvertedValue elevatorMotorInvert = InvertedValue.Clockwise_Positive;
+        public static final InvertedValue elevatorMotorInvert = InvertedValue.CounterClockwise_Positive;
         public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
 
-        /* Elevator Bounds */
-        public static final double elevatorLowerBound = Units.rotationsToDegrees(0.1 * elevatorGearRatio);; // in degrees - how many degrees of spin away from the lower bound should the motor brake at?
-        public static final double elevatorUpperBound = Units.rotationsToDegrees(3.445 * elevatorGearRatio); // in degrees - ditto, but upper bound
+        /* Elevator Bounds and Tolerance */
+        public static final double elevatorMotorBoundsToleranceInRotations = 0.05; // Do NOT consider gear ratio here
+        public static final double elevatorLowerBound = Units.rotationsToDegrees((minimumElevatorHeightInRotations + elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the lower bound of elevator downward movement
+        public static final double elevatorUpperBound = Units.rotationsToDegrees((maxElevatorHeightInRotations - elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the upper bound of elevator upper movement
 
-        // approx travel in rotations - 0 -> 3.545
+        /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
+        public static final double levelOneHeight = Units.inchesToMeters(11); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelTwoHeight = Units.inchesToMeters(28); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelThreeHeight = Units.inchesToMeters(43); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
-        // 1.757 in Elevator gear diameter
+        public static final double levelOneHeightInRotations = levelOneHeight * elevatorMetersToRotations;
+        public static final double levelTwoHeightInRotations = levelTwoHeight * elevatorMetersToRotations;
+        public static final double levelThreeHeightInRotations = levelThreeHeight * elevatorMetersToRotations;
+
+        /* Elevator Feedforward & PID Tuning Constants */
+        public static final double gravitationalOffsetVoltage = 0.15; // Offset feedforward voltage for gravity (currently a placeholder value)
+        public static final double kS = 0; // Offset feedforward constant for static friction (currently a placeholder value)
+        public static final double kV = 0; // Offset feedforward constant for kinetic friction (currently a placeholder value)
+        public static final double kP = 0.2; // Proportional feedback constant (currently a placeholder value)
+        public static final double kI = 0; // Integral feedback constant (currently a placeholder value)
+        public static final double kD = 0; // Derivative feedback constant (currently a placeholder value)
+
+        public static final double PIDMaxSpeed = 0.4; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
+        public static final double PIDMaxAcceleration = 0.4; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
+
+        public static final double PIDMaxSpeedInRotations = PIDMaxSpeed * elevatorMetersToRotations;
+        public static final double PIDMaxAccelerationInRotations = PIDMaxAcceleration * elevatorMetersToRotations;
+
+        /* Auto Elevator Tolerances */
+        public static final double PIDTolerance = Units.inchesToMeters(0.5);
+        public static final double PIDToleranceInRotations = PIDTolerance * elevatorMetersToRotations;
     }
 
     public static final class MailboxConstants {

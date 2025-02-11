@@ -4,6 +4,7 @@ import frc.robot.subsystems.Elevator;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopElevator extends Command {
@@ -18,7 +19,8 @@ public class TeleopElevator extends Command {
     }
 
     public void execute() {
-        e_Elevator.setElevatorMotorSpeed(speedSup.getAsDouble());
+        double elevatorSpeed = MathUtil.applyDeadband(speedSup.getAsDouble(), 0.1);
+        e_Elevator.setElevatorMotorSpeed(elevatorSpeed);
     }
 
     public boolean isFinished() {
