@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Top Blue Barge to Top Right Reef"
+                  "pathName": "A; Top Blue Barge to Top Right Reef"
                 }
               }
             ]
@@ -24,7 +24,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Top Right Reef to Bottom Coral Station"
+                  "pathName": "B; Top Right Reef to Bottom Coral Station"
                 }
               }
             ]
