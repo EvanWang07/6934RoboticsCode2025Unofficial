@@ -17,7 +17,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "A; Bottom Blue Barge to Top Right Reef"
+                  "pathName": "A; BBBtTRR"
                 }
               }
             ]
@@ -36,7 +36,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "B; Top Right Reef to Bottom Coral Station"
+                  "pathName": "B; TRRtBCS"
                 }
               }
             ]
@@ -55,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "C; Bottom Coral Station to Bottom Left Reef"
+                  "pathName": "C; BCStBLR"
                 }
               }
             ]
@@ -74,7 +74,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "D; Bottom Left Reef to Bottom Coral Station"
+                  "pathName": "D; BLRtBCS"
                 }
               }
             ]
@@ -93,7 +93,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "C; Bottom Coral Station to Bottom Left Reef"
+                  "pathName": "C; BCStBLR"
                 }
               }
             ]
