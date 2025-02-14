@@ -2,8 +2,12 @@
   "robotWidth": 0.863,
   "robotLength": 0.863,
   "holonomicMode": true,
-  "pathFolders": [],
-  "autoFolders": [],
+  "pathFolders": [
+    "Ethan's Better Version"
+  ],
+  "autoFolders": [
+    "Ethan's Better Version"
+  ],
   "defaultMaxVel": 2.5,
   "defaultMaxAccel": 4.0,
   "defaultMaxAngVel": 540.0,

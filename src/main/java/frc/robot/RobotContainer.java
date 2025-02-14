@@ -88,10 +88,10 @@ public class RobotContainer {
         intakeCoral.whileTrue(new Intake(m_Mailbox, true));
         scoreCoral.whileTrue(new Intake(m_Mailbox, false)); // Could possibly use intakeCoral and have directionIsIntake be true
 
-        sendElevatorBottom.whileTrue(new AutoElevator(e_Elevator, Units.degreesToRotations(Constants.Elevator.elevatorLowerBound / Constants.Elevator.elevatorGearRatio)));
-        sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations));
-        sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations));
-        sendElevatorLevelThree.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations));
+        sendElevatorBottom.whileTrue(new AutoElevator(e_Elevator, 0.2));
+        sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, 1.5));
+        sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, 2.4));
+        sendElevatorLevelThree.whileTrue(new AutoElevator(e_Elevator, 3.55));
         
     }
 

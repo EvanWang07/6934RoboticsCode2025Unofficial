@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-
 public class Elevator extends SubsystemBase {
-    private TalonFX elevatorMotorOne = new TalonFX(Constants.Elevator.elevatorMotorOneID);
-    private TalonFX elevatorMotorTwo = new TalonFX(Constants.Elevator.elevatorMotorTwoID); 
+    private TalonFX elevatorMotorOne = new TalonFX(Constants.Elevator.elevatorMotorOneID, Constants.Swerve.canivoreName);
+    private TalonFX elevatorMotorTwo = new TalonFX(Constants.Elevator.elevatorMotorTwoID, Constants.Swerve.canivoreName); 
 
     public Elevator() {
         elevatorMotorOne.getConfigurator().apply(Robot.ctreConfigs.elevatorConfig);
@@ -20,8 +19,8 @@ public class Elevator extends SubsystemBase {
 
     public void setElevatorMotorSpeed(double newSpeed) {
         if (checkElevatorMovement(newSpeed)) {
-            elevatorMotorOne.setVoltage(2 * newSpeed + Constants.Elevator.gravitationalOffsetVoltage);
-            elevatorMotorTwo.setVoltage(2 * newSpeed + Constants.Elevator.gravitationalOffsetVoltage);
+            elevatorMotorOne.setVoltage(2.5 * newSpeed + Constants.Elevator.gravitationalOffsetVoltage);
+            elevatorMotorTwo.setVoltage(2.5 * newSpeed + Constants.Elevator.gravitationalOffsetVoltage);
         } else {
             brakeElevator();
         }
@@ -34,6 +33,10 @@ public class Elevator extends SubsystemBase {
 
     public void setElevatorPosition(double newPosition) { // newPosition is in degrees
         elevatorMotorOne.getConfigurator().setPosition(Units.degreesToRotations(newPosition));
+    }
+
+    public void setElevatorPositionInRotations(double newPosition){
+        elevatorMotorOne.getConfigurator().setPosition(newPosition);
     }
 
     public double getElevatorPosition(boolean physicalPosition) { // Return value in degrees

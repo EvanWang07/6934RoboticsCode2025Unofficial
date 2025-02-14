@@ -16,6 +16,8 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added an experimental subsystem for the elevator <sup>2/1/25</sup>
 - First successful vision auto position code created <sup>2/5/25</sup>
 - Added an experimental manual and automatic command for the elevator <sup>2/10/25</sup>
+- Final candidate code #1 for mailbox/end-effector <sup>2/10/25</sup>
+- First successful automatic command for the elevator <sup>2/13/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position function is slow and somewhat jittery
@@ -79,4 +81,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 2/10/25 by Evan Wang.
+[^1]: Last updated 2/14/25 by Evan Wang.
