@@ -82,7 +82,7 @@ public final class Constants {
         public static final double elevatorGearRadius = Units.inchesToMeters(1.757 / 2);
         public static final double elevatorStartingHeightInRotations = 0; // Do NOT consider gear ratio here
         public static final double minimumElevatorHeightInRotations = 0; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double maxElevatorHeightInRotations = 3.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double maxElevatorHeightInRotations = 3.625; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
         public static final double elevatorMetersToRotations = Units.radiansToRotations(1 / (elevatorGearRadius * cascadeElevatorRotationToDistanceMultiplier)); // Meters-to-rotations conversion ratio for the cascading elevator
 
@@ -93,31 +93,26 @@ public final class Constants {
         public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
 
         /* Elevator Bounds and Tolerance */
-        public static final double elevatorMotorBoundsToleranceInRotations = 0.05; // Do NOT consider gear ratio here
+        public static final double elevatorMotorBoundsToleranceInRotations = 0.025; // Do NOT consider gear ratio here
         public static final double elevatorLowerBound = Units.rotationsToDegrees((minimumElevatorHeightInRotations + elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the lower bound of elevator downward movement
         public static final double elevatorUpperBound = Units.rotationsToDegrees((maxElevatorHeightInRotations - elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the upper bound of elevator upper movement
 
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
-        public static final double levelOneHeight = Units.inchesToMeters(11); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelTwoHeight = Units.inchesToMeters(28); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelThreeHeight = Units.inchesToMeters(43); // DOES NOT CONSIDER CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-
-        public static final double levelOneHeightInRotations = levelOneHeight * elevatorMetersToRotations; 
-        public static final double levelTwoHeightInRotations = levelTwoHeight * elevatorMetersToRotations; //we said this was 2.2
-        public static final double levelThreeHeightInRotations = levelThreeHeight * elevatorMetersToRotations; //we said this was the top bound of the elevator
-        public static final double intakeHeightInRotations = .175; // added by lukas feel free to delete
-        public static final double L1HeightRotations = 2.2; // added by lukas feel free to delete
+        public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelOneHeightInRotations = 1.75; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelTwoHeightInRotations = 2.5; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelThreeHeightInRotations = 3.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
         /* Elevator Feedforward & PID Tuning Constants */
-        public static final double gravitationalOffsetVoltage = 0.25; // Offset feedforward voltage for gravity (currently a placeholder value)
+        public static final double gravitationalOffsetVoltage = 0.27; // Offset feedforward voltage for gravity (currently a placeholder value)
         public static final double kS = 0; // Offset feedforward constant for static friction (currently a placeholder value)
         public static final double kV = 0; // Offset feedforward constant for kinetic friction (currently a placeholder value)
-        public static final double kP = 0.4; // Proportional feedback constant (currently a placeholder value)
+        public static final double kP = 1.75; // Proportional feedback constant (currently a placeholder value)
         public static final double kI = 0; // Integral feedback constant (currently a placeholder value)
         public static final double kD = 0; // Derivative feedback constant (currently a placeholder value)
 
-        public static final double PIDMaxSpeed = 0.5; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
-        public static final double PIDMaxAcceleration = 0.5; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
+        public static final double PIDMaxSpeed = 0.8; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
+        public static final double PIDMaxAcceleration = 0.8; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
 
         public static final double PIDMaxSpeedInRotations = PIDMaxSpeed * elevatorMetersToRotations;
         public static final double PIDMaxAccelerationInRotations = PIDMaxAcceleration * elevatorMetersToRotations;

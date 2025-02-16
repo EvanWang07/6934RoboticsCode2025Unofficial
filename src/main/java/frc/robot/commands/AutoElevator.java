@@ -34,10 +34,8 @@ public class AutoElevator extends Command {
 
     @Override
     public void execute() {
-        double distanceFromTarget = Units.degreesToRotations(e_Elevator.getElevatorPosition(true)) - angleSetPoint;
         e_Elevator.setElevatorMotorSpeed(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint));
-        System.out.println(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint) + " " + distanceFromTarget + " " + elevatorPIDController.getPositionError());
-        // PID Controller returns [-1, 1] output while FeedForward Controller returns a voltage
+        System.out.println(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint) + " " + elevatorPIDController.getPositionError());
     }
 
     @Override
