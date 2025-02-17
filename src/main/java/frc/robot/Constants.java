@@ -130,7 +130,7 @@ public final class Constants {
         public static final double intakeVoltage = 3;
         public static final double scoringVoltage = 2;
     
-        public static final double scoringLeewayTime = 1; // In seconds
+        public static final double scoringLeewayTime = 0.75; // In seconds
     
         /* Beam Breaker Configs */
         public static final int beamBreakerChannel = 9;

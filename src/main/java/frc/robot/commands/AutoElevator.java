@@ -35,7 +35,7 @@ public class AutoElevator extends Command {
     @Override
     public void execute() {
         e_Elevator.setElevatorMotorSpeed(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint));
-        System.out.println(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint) + " " + elevatorPIDController.getPositionError());
+        // System.out.println(elevatorPIDController.calculate(Units.degreesToRotations(e_Elevator.getElevatorPosition(true)), angleSetPoint) + " " + elevatorPIDController.getPositionError());
     }
 
     @Override

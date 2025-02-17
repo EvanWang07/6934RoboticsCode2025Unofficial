@@ -3,10 +3,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import com.pathplanner.lib.auto.NamedCommands; // Will be useful...later
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import frc.robot.commands.*;
@@ -39,9 +41,9 @@ public class RobotContainer {
     private final JoystickButton scoreCoral = new JoystickButton(weapons, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton sendElevatorIntake = new JoystickButton(weapons, XboxController.Button.kA.value);
-    private final JoystickButton sendElevatorLevelOne = new JoystickButton(weapons, XboxController.Button.kB.value);
-    private final JoystickButton sendElevatorLevelTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
-    private final JoystickButton sendElevatorLevelThree = new JoystickButton(weapons, XboxController.Button.kY.value);
+    private final JoystickButton scoreLevelOne = new JoystickButton(weapons, XboxController.Button.kB.value);
+    private final JoystickButton scoreLevelTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
+    private final JoystickButton scoreLevelThree = new JoystickButton(weapons, XboxController.Button.kY.value);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -51,8 +53,16 @@ public class RobotContainer {
     /* Robot Container */
     public RobotContainer() {
 
-        // NamedCommands.registerCommand("Intake Note", new Command(Parameters).withTimeout(Seconds));
+        /* PathPlanner Registered Commands */
+        NamedCommands.registerCommand("Intake Coral", new Intake(m_Mailbox, true).withTimeout(2));
+        NamedCommands.registerCommand("Score Coral", new Intake(m_Mailbox, false).withTimeout(2));
+        NamedCommands.registerCommand("Hold Elevator Steady", new HoldElevatorSteady(e_Elevator).withTimeout(2));
+        NamedCommands.registerCommand("Elevator to Intake", new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3));
+        NamedCommands.registerCommand("Elevator to L1", new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations).withTimeout(3));
+        NamedCommands.registerCommand("Elevator to L2", new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations).withTimeout(3));
+        NamedCommands.registerCommand("Elevator to L3", new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations).withTimeout(3));
 
+        /* Teleop Swerve Drive */
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -65,6 +75,7 @@ public class RobotContainer {
             )
         );
 
+        /* Teleop Elevator */
         e_Elevator.setDefaultCommand(
             new TeleopElevator(
                 e_Elevator,
@@ -87,15 +98,44 @@ public class RobotContainer {
         intakeCoral.whileTrue(new Intake(m_Mailbox, true));
         scoreCoral.whileTrue(new Intake(m_Mailbox, false));
 
-        sendElevatorIntake.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations));
-        sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations));
-        sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations));
-        sendElevatorLevelThree.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations));
+        // sendElevatorIntake.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations));
+        // sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations));
+        // sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations));
+        // sendElevatorLevelThree.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations));
+
+        sendElevatorIntake.onTrue(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3));
+        scoreLevelOne.onTrue(Commands.runOnce(() -> {
+            if (m_Mailbox.coralIsDetected()) {
+                new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations)
+                .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
+                                               new Intake(m_Mailbox, false).withTimeout(2)))
+                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
+                .schedule();
+            }
+        }, m_Mailbox, e_Elevator));
+        scoreLevelTwo.onTrue(Commands.runOnce(() -> {
+            if (m_Mailbox.coralIsDetected()) {
+                new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations)
+                .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
+                                               new Intake(m_Mailbox, false).withTimeout(2)))
+                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
+                .schedule();
+            }
+        }, m_Mailbox, e_Elevator));
+        scoreLevelThree.onTrue(Commands.runOnce(() -> {
+            if (m_Mailbox.coralIsDetected()) {
+                new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations)
+                .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
+                                               new Intake(m_Mailbox, false).withTimeout(2)))
+                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
+                .schedule();
+            }
+        }, m_Mailbox, e_Elevator));
     }
 
     /* Autonomous Code */
     public Command getAutonomousCommand() {
         s_Swerve.setSpeedMultiplier(1);
-        return new PathPlannerAuto("Basic Autonomous");
+        return new PathPlannerAuto("Test Elevator Auto");
     }
 }
