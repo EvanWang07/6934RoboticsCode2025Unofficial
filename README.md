@@ -18,13 +18,14 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added an experimental manual and automatic command for the elevator <sup>2/10/25</sup>
 - Final candidate code #1 for mailbox/end-effector <sup>2/10/25</sup>
 - First successful automatic command for the elevator <sup>2/13/25</sup>
+- Updated controller mapping to include automatic scoring buttons <sup>2/16/25</sup>
+- Added a test autonomous code for the elevator and end-effector <sup>2/16/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position function is slow and somewhat jittery
 
 ## To-Do List:  
 - [ ] Optimize the vision auto position pathing and increase path travel speed
-- [ ] Tune the Profiled PID (auto) elevator command
 - [ ] Clean up the elevator constants and overuse of unit conversions
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
@@ -74,11 +75,11 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Auto-Position: *PRESS* X-Button  <br>
 ### Weapons Controller (**PORT 1**):
 - Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
-- Automatically Lift/Lower Elevator to Bottom: *HOLD* A-Button
-- Automatically Lift/Lower Elevator to Reef Level 1: *HOLD* B-Button
-- Automatically Lift/Lower Elevator to Reef Level 2: *HOLD* X-Button
-- Automatically Lift/Lower Elevator to Reef Level 3: *HOLD* Y-Button
+- Automatically Lift/Lower Elevator to Bottom: *PRESS* A-Button
+- Automatically Lift/Lower Elevator and Score at Reef Level 1: *PRESS* B-Button (*REQUIRES* Coral)
+- Automatically Lift/Lower Elevator and Score at Reef Level 2: *PRESS* X-Button (*REQUIRES* Coral)
+- Automatically Lift/Lower Elevator and Score at Reef Level 3: *PRESS* Y-Button (*REQUIRES* Coral)
 - Intake Coral: *HOLD* Left Bumper
 - Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 2/14/25 by Evan Wang.
+[^1]: Last updated 2/16/25 by Evan Wang.
