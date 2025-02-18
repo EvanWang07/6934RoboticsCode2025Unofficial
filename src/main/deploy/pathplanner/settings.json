@@ -3,10 +3,14 @@
   "robotLength": 0.863,
   "holonomicMode": true,
   "pathFolders": [
-    "Ethan's Better Version"
+    "Barge to Reef Paths",
+    "Coral Station to Reef Paths",
+    "Ethan's Better Version",
+    "Test Paths",
+    "Reef to Coral Station Paths"
   ],
   "autoFolders": [
-    "Ethan's Better Version"
+    "Test Autos"
   ],
   "defaultMaxVel": 2.5,
   "defaultMaxAccel": 4.0,
@@ -32,5 +36,10 @@
   "brModuleY": -0.287,
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
-  "robotFeatures": []
+  "robotFeatures": [
+    "{\"name\":\"End-Effector (VERY Rough Estimate)\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.0,\"y\":0.2},\"size\":{\"width\":0.2,\"length\":0.4},\"borderRadius\":0.05,\"strokeWidth\":0.01,\"filled\":true}}",
+    "{\"name\":\"Directional Arrow (Stem)\",\"type\":\"line\",\"data\":{\"start\":{\"x\":0.0,\"y\":0.0},\"end\":{\"x\":0.35,\"y\":0.0},\"strokeWidth\":0.02}}",
+    "{\"name\":\"Directional Arrox (Left Head)\",\"type\":\"line\",\"data\":{\"start\":{\"x\":0.35,\"y\":0.0},\"end\":{\"x\":0.2,\"y\":0.1},\"strokeWidth\":0.02}}",
+    "{\"name\":\"Directional Arrow (Right Head)\",\"type\":\"line\",\"data\":{\"start\":{\"x\":0.35,\"y\":0.0},\"end\":{\"x\":0.2,\"y\":-0.1},\"strokeWidth\":0.02}}"
+  ]
 }

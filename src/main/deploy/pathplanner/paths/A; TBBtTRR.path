@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 5.2,
-        "y": 5.2
+        "x": 5.148824809,
+        "y": 5.163161782
       },
       "prevControl": {
-        "x": 5.001761511893199,
-        "y": 5.001761511893199
+        "x": 4.950586320893199,
+        "y": 4.964923293893199
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Barge to Reef Paths",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
