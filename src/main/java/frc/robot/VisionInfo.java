@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -9,9 +8,6 @@ import frc.robot.Constants.Vision;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
-    private static double[] txEstimates = new double[2];
-    private static double[] tyEstimates = new double[2];
-    private static double[] poseEstimates = new double[2];
 
     public static int getTargetID() { // Gets the target ID
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
@@ -55,12 +51,12 @@ public final class VisionInfo {
         return (BasicOperations.getSuccessRate(targetValidResults) >= Vision.averageTVThreshold);
     }
 
-    public static void updateSummaryValues() { // Sends limelight values to SmartDashboard
+    public static void updateDashboardValues() { // Sends limelight values to SmartDashboard
         SmartDashboard.putBoolean("Targetable Detected: ", willTarget());
         SmartDashboard.putNumber("TX: ", getTX(false));
         SmartDashboard.putNumber("TY: ", getTY(false));
         SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
-    } // Note: Possibly put a more descriptive label
+    }
 
     public static double getDistance(double targetHeight) { // Gets the distance from the target
         if (isHorizontallyAligned()) {
@@ -92,7 +88,7 @@ public final class VisionInfo {
         if (isHorizontallyAligned()) {
             return 0.0;
         } else {
-            double correctionOutput = getTX(true) * Vision.visionAngleKP;
+            double correctionOutput = getTX(true) * Vision.TXkP;
             return correctionOutput;
         }
     }
@@ -101,7 +97,7 @@ public final class VisionInfo {
         if (isHorizontallyAligned()) {
             return 0;
         } else {
-            double correctionOutput = getTX(true) * Vision.visionTranslationKP;
+            double correctionOutput = getTX(true) * Vision.TYkP;
             return correctionOutput;
         }
     }
@@ -110,7 +106,7 @@ public final class VisionInfo {
         if (isVerticallyAligned()) {
             return 0;
         } else {
-            double correctionOutput = getTY(true) * Vision.visionTranslationKP;
+            double correctionOutput = getTY(true) * Vision.TYkP;
             return correctionOutput;
         }
     }
@@ -119,10 +115,22 @@ public final class VisionInfo {
         if (isZeroPose()) {
             return 0;
         } else {
-            double correctionOutput = getPoseTheta() * (1.0 / 20) * Vision.visionPoseKP;
+            double correctionOutput = getPoseTheta() * (1.0 / 20) * Vision.posekP;
             return correctionOutput;
         }
     }
+
+    /*
+    public static double getRobotPositionX() { // Returns the robot's x coordinate relative to the field (blue origin)
+        double[] robotPose = LimelightHelpers.getBotPose_wpiBlue(Vision.limelightName);
+        return robotPose[0];
+    }
+
+    public static double getRobotPositionY() { // Returns the robot's x coordinate relative to the field (blue origin)
+        double[] robotPose = LimelightHelpers.getBotPose_wpiBlue(Vision.limelightName);
+        return robotPose[1];
+    }
+    */
 
     /*
     public static Pose2d getRobotPose() {
@@ -171,13 +179,13 @@ public final class VisionInfo {
 
     /*
     public static double getDistanceXExperimental() {
-        Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
-        return translationDifference.getX();
+        double translationDifference = getRobotPositionX() - getAprilTagFieldLocation(getTargetID()).getX();
+        return translationDifference;
     }
 
     public static double getDistanceYExperimental() {
-        Translation2d translationDifference = getRobotPose().getTranslation().minus(getAprilTagFieldLocation(getTargetID()).getTranslation());
-        return translationDifference.getY();
+        double translationDifference = getRobotPositionY() - getAprilTagFieldLocation(getTargetID()).getY();
+        return translationDifference;
     }
     */
 }

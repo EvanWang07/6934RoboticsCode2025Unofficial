@@ -17,7 +17,7 @@ public class HoldElevatorSteady extends Command {
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isFinished() { // A timeout should be implemented when this command is used
         return false;
     }
 

@@ -20,9 +20,8 @@ public class TeleopSwerve extends Command {
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
     private BooleanSupplier visionSup;
-    private BooleanSupplier autoPositionSup;
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier visionSup, BooleanSupplier autoPositionSup) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier visionSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -31,7 +30,6 @@ public class TeleopSwerve extends Command {
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
         this.visionSup = visionSup;
-        this.autoPositionSup = autoPositionSup;
     }
 
     @Override
@@ -41,9 +39,7 @@ public class TeleopSwerve extends Command {
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), QuickTuning.driveStickDeadband);
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), QuickTuning.driveStickDeadband);
         boolean isFieldCentric = !robotCentricSup.getAsBoolean();
-        boolean activateAutoPosition = autoPositionSup.getAsBoolean();
-        boolean seekTarget = activateAutoPosition ? false : visionSup.getAsBoolean(); // Auto Position should override Seek Target
-        
+        boolean seekTarget = visionSup.getAsBoolean(); // Auto Position should override Seek Target
 
         /* Vision Target Seeking (If Active) */
         if (seekTarget) {
@@ -61,17 +57,7 @@ public class TeleopSwerve extends Command {
             }
         }
 
-        /* Vision Auto Position (If Active) */
-        if (activateAutoPosition) {
-            if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
-                translationVal = -VisionInfo.getForwardCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
-                strafeVal = -VisionInfo.getHorizontalCorrectionOutput() / s_Swerve.getSpeedMultiplier(); 
-                rotationVal = VisionInfo.getPoseCorrectionOutput() / s_Swerve.getSpeedMultiplier();
-                isFieldCentric = false;
-            }
-        }
-
-        VisionInfo.updateSummaryValues(); // Puts relevant vision values into SmartDashboard
+        VisionInfo.updateDashboardValues(); // Puts relevant vision values into SmartDashboard
 
         /* Drive */
         s_Swerve.drive(

@@ -14,19 +14,20 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - ~~Added an experimental vision auto positioning on-the-fly path generator (BUGGED) <sup>1/26/25</sup>~~
 - Added an experimental code for the mailbox/end-effector <sup>2/1/25</sup>
 - Added an experimental subsystem for the elevator <sup>2/1/25</sup>
-- First successful vision auto position code created <sup>2/5/25</sup>
+- First successful vision auto-position code created <sup>2/5/25</sup>
 - Added an experimental manual and automatic command for the elevator <sup>2/10/25</sup>
 - Final candidate code #1 for mailbox/end-effector <sup>2/10/25</sup>
 - First successful automatic command for the elevator <sup>2/13/25</sup>
 - Updated controller mapping to include automatic scoring buttons <sup>2/16/25</sup>
 - Added a test autonomous code for the elevator and end-effector <sup>2/16/25</sup>
+- Moved the auto-position code to a dedicated command file <sup>2/24/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position function is slow and somewhat jittery
 
 ## To-Do List:  
 - [ ] Optimize the vision auto position pathing and increase path travel speed
-- [ ] Clean up the elevator constants and overuse of unit conversions
+- [ ] Clean up the overuse of unit conversions in the elevator PID code
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
@@ -72,7 +73,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Toggle Slow Mode OFF: *PRESS* Start-Button  <br> 
 - Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
 - Auto-Align: *HOLD* A-Button  <br> 
-- Auto-Position: *PRESS* X-Button  <br>
+- Auto-Position: *HOLD* X-Button  <br>
 ### Weapons Controller (**PORT 1**):
 - Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
 - Automatically Lift/Lower Elevator to Bottom: *PRESS* A-Button
@@ -82,4 +83,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 2/16/25 by Evan Wang.
+[^1]: Last updated 2/24/25 by Evan Wang.

@@ -70,8 +70,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(), 
-                () -> useVision.getAsBoolean(),
-                () -> useAutoPosition.getAsBoolean()
+                () -> useVision.getAsBoolean()
             )
         );
 
@@ -93,15 +92,12 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
+
+        useAutoPosition.whileTrue(new AutoPosition(s_Swerve));
         
         /* Weapons Buttons */
         intakeCoral.whileTrue(new Intake(m_Mailbox, true));
         scoreCoral.whileTrue(new Intake(m_Mailbox, false));
-
-        // sendElevatorIntake.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations));
-        // sendElevatorLevelOne.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations));
-        // sendElevatorLevelTwo.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations));
-        // sendElevatorLevelThree.whileTrue(new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations));
 
         sendElevatorIntake.onTrue(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3));
         scoreLevelOne.onTrue(Commands.runOnce(() -> {
@@ -136,6 +132,6 @@ public class RobotContainer {
     /* Autonomous Code */
     public Command getAutonomousCommand() {
         s_Swerve.setSpeedMultiplier(1);
-        return new PathPlannerAuto("Test Elevator Auto");
+        return new PathPlannerAuto("Basic Autonomous");
     }
 }

@@ -29,7 +29,7 @@ public final class Constants {
     }
 
     public static final class Vision {
-        /* Limelight Essentials */
+        /* Limelight Configs & Location */
         public static final String limelightName = "limelight-scorps";
         public static final double limelightAngle = 10; // Angle between the ground and the limelight's orientation
         public static final double limelightHeight = Units.inchesToMeters(11.194); // Height the limelight is above the ground (in)
@@ -38,26 +38,32 @@ public final class Constants {
         public static final int targetDetectionListSize = 10; // Amount of trials the list holds
         public static final double averageTVThreshold = 0.7; // Required targetting success rate for automatic alignment
 
+        /* Finding Targets */
+        public static final double targetSearchOutput = 0.25;
+
+        /* Vision Alignment PID Constants */
+        public static final double TXkP = 0.15;
+        public static final double TXkI = 0.0;
+        public static final double TXkD = 0.0;
+        public static final double TXMaxSpeed = 1.0;
+        public static final double TXMaxAcceleration = 0.5;
+
+        public static final double TYkP = 0.25;
+        public static final double TYkI = 0.0;
+        public static final double TYkD = 0.0;
+        public static final double TYMaxSpeed = 1.0;
+        public static final double TYMaxAcceleration = 0.5;
+
+        public static final double posekP = 0.15;
+        public static final double posekI = 0.0;
+        public static final double posekD = 0.0;
+        public static final double poseMaxSpeed = 0.5;
+        public static final double poseMaxAcceleration = 0.5;
+
         /* Alignment Error Tolerances */
         public static final double TXTolerance = 1; // Degrees
         public static final double TYTolerance = 1; // Degrees
-        public static final double poseTolerance = 1; // Degrees (NOT USED [FOR NOW])
-        public static final double TATolerance = 0; // Percent (NOT USED)
-
-        /* Finding Targets & Target Horizontal Alignment */
-        public static final double targetSearchOutput = 0.25;
-        public static final double visionAngleKP = 0.15;
-
-        /* Target Vertical Alignment */
-        public static final double visionTranslationKP = 0.25;
-
-        /* Target Pose Alignment */
-        public static final double visionPoseKP = 0.15;
-
-        /* Heights of each target above the ground (in) */
-        public static final double targetAHeight = 12;
-        public static final double targetBHeight = 0;
-        public static final double targetCHeight = 0;
+        public static final double poseTolerance = 1; // Degrees
 
         /* Important April Tag Locations */
         public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);
@@ -80,22 +86,23 @@ public final class Constants {
         public static final double elevatorGearRatio = 6;
         public static final double cascadeElevatorRotationToDistanceMultiplier = 2; // Cascading elevators innately travel more distance per rotation than simply r(theta) by a constant factor
         public static final double elevatorGearRadius = Units.inchesToMeters(1.757 / 2);
+        public static final double elevatorMetersToRotations = Units.radiansToRotations(1 / (elevatorGearRadius * cascadeElevatorRotationToDistanceMultiplier)); // Meters-to-rotations conversion ratio for the cascading elevator
+
+        /* Elevator Bounds, Starting Position, & Bounds Tolerance */
         public static final double elevatorStartingHeightInRotations = 0; // Do NOT consider gear ratio here
         public static final double minimumElevatorHeightInRotations = 0; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double maxElevatorHeightInRotations = 3.625; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double elevatorMotorBoundsToleranceInRotations = 0.025; // Do NOT consider gear ratio here
 
-        public static final double elevatorMetersToRotations = Units.radiansToRotations(1 / (elevatorGearRadius * cascadeElevatorRotationToDistanceMultiplier)); // Meters-to-rotations conversion ratio for the cascading elevator
+        public static final double elevatorLowerBound = Units.rotationsToDegrees((minimumElevatorHeightInRotations + elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the lower bound of elevator downward movement
+        public static final double elevatorUpperBound = Units.rotationsToDegrees((maxElevatorHeightInRotations - elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the upper bound of elevator upper movement
 
         /* Elevator Motor Configs */
         public static final int elevatorMotorOneID = 9;
         public static final int elevatorMotorTwoID = 10;
+
         public static final InvertedValue elevatorMotorInvert = InvertedValue.CounterClockwise_Positive;
         public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
-
-        /* Elevator Bounds and Tolerance */
-        public static final double elevatorMotorBoundsToleranceInRotations = 0.025; // Do NOT consider gear ratio here
-        public static final double elevatorLowerBound = Units.rotationsToDegrees((minimumElevatorHeightInRotations + elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the lower bound of elevator downward movement
-        public static final double elevatorUpperBound = Units.rotationsToDegrees((maxElevatorHeightInRotations - elevatorMotorBoundsToleranceInRotations) * elevatorGearRatio); // Angular position of the upper bound of elevator upper movement
 
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
         public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
@@ -117,8 +124,8 @@ public final class Constants {
         public static final double PIDMaxSpeedInRotations = PIDMaxSpeed * elevatorMetersToRotations;
         public static final double PIDMaxAccelerationInRotations = PIDMaxAcceleration * elevatorMetersToRotations;
 
-        /* Auto Elevator Tolerances */
-        public static final double PIDTolerance = Units.inchesToMeters(0.5);
+        public static final double PIDTolerance = Units.inchesToMeters(0.5); // Error tolerance for PID elevator (in)
+
         public static final double PIDToleranceInRotations = PIDTolerance * elevatorMetersToRotations;
     }
 
