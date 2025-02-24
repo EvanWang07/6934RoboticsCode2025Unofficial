@@ -15,7 +15,7 @@ import frc.lib.util.SwerveModuleConstants;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
-public final class Constants {
+public final class Constants { //
 
     public static final class QuickTuning {
         /* Controller Constants */
