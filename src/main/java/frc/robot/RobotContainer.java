@@ -1,5 +1,9 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -8,8 +12,15 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import java.util.List;
+
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -29,12 +40,16 @@ public class RobotContainer {
     private final int elevatorAxis = XboxController.Axis.kLeftY.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
+
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+    private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+
+    private final JoystickButton moveToRightBranch = new JoystickButton(driver, XboxController.Button.kB.value);
 
     /* Weapon Buttons */
     private final JoystickButton intakeCoral = new JoystickButton(weapons, XboxController.Button.kLeftBumper.value);
@@ -94,6 +109,30 @@ public class RobotContainer {
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
 
         useAutoPosition.whileTrue(new AutoPosition(s_Swerve));
+
+        moveToRightBranch.onTrue(Commands.runOnce(() -> {
+            s_Swerve.setSpeedMultiplier(1);
+
+            Pose2d currentPose = s_Swerve.getPose();
+            Pose2d startPose = new Pose2d(currentPose.getTranslation(), new Rotation2d());
+            Pose2d endPose = new Pose2d(currentPose.getTranslation().plus(new Translation2d(0.06, -0.4)), new Rotation2d());
+
+            List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
+
+            PathPlannerPath pathToRightBranch = new PathPlannerPath(
+                waypoints, 
+                new PathConstraints(
+                2.5, 4.0, 
+                Units.degreesToRadians(540), Units.degreesToRadians(720)
+                ),
+                null, // Ideal starting state can be null for on-the-fly paths
+                new GoalEndState(0.0, currentPose.getRotation())
+            );
+
+            pathToRightBranch.preventFlipping = true;
+
+            AutoBuilder.followPath(pathToRightBranch).schedule();
+        }));
         
         /* Weapons Buttons */
         intakeCoral.whileTrue(new Intake(m_Mailbox, true));

@@ -15,7 +15,7 @@ import frc.lib.util.SwerveModuleConstants;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
-public final class Constants { //
+public final class Constants {
 
     public static final class QuickTuning {
         /* Controller Constants */
@@ -106,9 +106,9 @@ public final class Constants { //
 
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
         public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelOneHeightInRotations = 1.75; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelTwoHeightInRotations = 2.5; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelThreeHeightInRotations = 3.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelOneHeightInRotations = 1.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelTwoHeightInRotations = 2.35; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelThreeHeightInRotations = 3.45; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
         /* Elevator Feedforward & PID Tuning Constants */
         public static final double gravitationalOffsetVoltage = 0.27; // Offset feedforward voltage for gravity (currently a placeholder value)
@@ -135,7 +135,7 @@ public final class Constants { //
     
         /* Intake & Scoring */
         public static final double intakeVoltage = 3;
-        public static final double scoringVoltage = 2;
+        public static final double scoringVoltage = 2.5;
     
         public static final double scoringLeewayTime = 0.65; // In seconds
     
