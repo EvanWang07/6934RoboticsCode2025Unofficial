@@ -122,7 +122,7 @@ public class RobotContainer {
             PathPlannerPath pathToRightBranch = new PathPlannerPath(
                 waypoints, 
                 new PathConstraints(
-                2.5, 4.0, 
+                3, 4.0, 
                 Units.degreesToRadians(540), Units.degreesToRadians(720)
                 ),
                 null, // Ideal starting state can be null for on-the-fly paths
@@ -171,6 +171,6 @@ public class RobotContainer {
     /* Autonomous Code */
     public Command getAutonomousCommand() {
         s_Swerve.setSpeedMultiplier(1);
-        return new PathPlannerAuto("LWalltItLCStJ");
+        return new PathPlannerAuto("Basic Autonomous");
     }
 }
