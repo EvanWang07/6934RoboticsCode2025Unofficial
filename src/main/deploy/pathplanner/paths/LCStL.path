@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.796871381,
-        "y": 5.366362188
+        "x": 3.169457315,
+        "y": 3.614427229
       },
       "prevControl": {
-        "x": 4.646761363636363,
-        "y": 5.994389204545453
+        "x": 2.169457315,
+        "y": 3.614427229
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": "LCS to Reef",

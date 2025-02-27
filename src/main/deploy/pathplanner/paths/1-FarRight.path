@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.5,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -45,7 +45,7 @@
     "rotation": -60.57254359681015
   },
   "reversed": false,
-  "folder": "Ethan's Better Version",
+  "folder": "(Old)Ethan's Better Version",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0
