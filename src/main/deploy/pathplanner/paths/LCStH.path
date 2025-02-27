@@ -8,20 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1482430939999997,
-        "y": 7.019353183
+        "x": 1.9978398725107023,
+        "y": 6.776015916702552
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.796871381,
-        "y": 5.366362188
+        "x": 5.947732696897375,
+        "y": 6.370584725536991
       },
       "prevControl": {
-        "x": 4.646761363636363,
-        "y": 5.994389204545453
+        "x": 5.486393027578307,
+        "y": 6.9557097550280735
+      },
+      "nextControl": {
+        "x": 6.4040493412860275,
+        "y": 5.791830484872462
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.809206642,
+        "y": 4.427228854
+      },
+      "prevControl": {
+        "x": 6.680727923627685,
+        "y": 4.276312649164677
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +58,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "LCS to Reef",
