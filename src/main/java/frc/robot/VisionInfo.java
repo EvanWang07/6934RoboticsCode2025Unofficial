@@ -58,15 +58,16 @@ public final class VisionInfo {
         SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
     }
 
-    public static double getDistance(double targetHeight) { // Gets the distance from the target
-        if (isHorizontallyAligned()) {
-            double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
-            double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
-            return distance;
-        } else { // Only works for a two-dimensional scenario with flat ground
-            System.out.println("[WARNING] Conditions were not met to get the target's distance!");
-            return 0;
-        }
+    public static double getDistanceCameraToTarget(double targetHeight) { // Gets the distance from the target to the physical limelight
+        double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
+        double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
+        return distance;
+    }
+
+    public static double getDistanceCrosshairToTarget(double targetHeight) { // Gets the distance from the target to the limelight's crosshair
+        double angleInRadians = Units.degreesToRadians(getTX(false));
+        double distance = getDistanceCameraToTarget(targetHeight) * Math.tan(angleInRadians);
+        return distance;
     }
 
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
