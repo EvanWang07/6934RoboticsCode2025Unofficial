@@ -152,6 +152,9 @@ public final class Constants {
 
         public static final COTSTalonFXSwerveConstants chosenModule = COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
 
+        /* Robot Starting Poses (Pose Estimation) */
+        public static final Pose2d leftWallPose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180)); // EXPERIMENTAL
+
         /* Drivetrain Constants */
         public static final double robotSideLength = Units.inchesToMeters(28);
         public static final double trackWidth = Units.inchesToMeters(22.75); 
