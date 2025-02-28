@@ -264,7 +264,7 @@ public class COTSTalonFXSwerveConstants {
         public static final class MK4i{
             /** Swerve Drive Specialties - MK4i Module (Falcon 500)*/
             public static final COTSTalonFXSwerveConstants Falcon500(double driveGearRatio){
-                double wheelDiameter = Units.inchesToMeters(3.85);
+                double wheelDiameter = Units.inchesToMeters(3.8);
         
                 /** (150 / 7) : 1 */
                 double angleGearRatio = ((150.0 / 7.0) / 1.0);
@@ -281,7 +281,7 @@ public class COTSTalonFXSwerveConstants {
 
             /** Swerve Drive Specialties - MK4i Module (Kraken X60)*/
             public static final COTSTalonFXSwerveConstants KrakenX60(double driveGearRatio){
-                double wheelDiameter = Units.inchesToMeters(3.85);
+                double wheelDiameter = Units.inchesToMeters(3.8);
         
                 /** (150 / 7) : 1 */
                 double angleGearRatio = ((150.0 / 7.0) / 1.0);
