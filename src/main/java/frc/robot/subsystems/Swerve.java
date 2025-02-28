@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
+import frc.robot.VisionInfo;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -181,17 +182,22 @@ public class Swerve extends SubsystemBase {
     public void updateSwervePoseEstimator() { // EXPERIMENTAL
         swervePoseEstimator.update(getGyroYaw(), getModulePositions());
         LimelightHelpers.SetRobotOrientation(Constants.Vision.limelightName, swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-        LimelightHelpers.PoseEstimate megaTag2Estimation = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
-        if ((megaTag2Estimation.tagCount != 0) && (gyro.getAngularVelocityZWorld().getValueAsDouble() < 540)) { // Ensures the robot is not spinning too quickly and that a target is detected
-            swervePoseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+        LimelightHelpers.PoseEstimate megaTag2Estimation = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.limelightName);
+        if (VisionInfo.hasValidTargets() && (gyro.getAngularVelocityZWorld().getValueAsDouble() < 540) && (megaTag2Estimation.pose != null)) { // Ensures the robot is not spinning too quickly, that a target is detected, and that the pose estimation is not null
+            swervePoseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(0.7,0.7,9999999));
             swervePoseEstimator.addVisionMeasurement(megaTag2Estimation.pose, megaTag2Estimation.timestampSeconds);
         }
+    }
+
+    public Pose2d getSwervePoseEstimation() {
+        return swervePoseEstimator.getEstimatedPosition();
     }
 
     @Override
     public void periodic() {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         updateSwervePoseEstimator(); // EXPERIMENTAL
+        System.out.println(swervePoseEstimator.getEstimatedPosition().getX() + " " + swervePoseEstimator.getEstimatedPosition().getY() + " " + swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
