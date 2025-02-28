@@ -38,6 +38,9 @@ public final class Constants {
         public static final int targetDetectionListSize = 10; // Amount of trials the list holds
         public static final double averageTVThreshold = 0.7; // Required targetting success rate for automatic alignment
 
+        /* Storing Distance */
+        public static final int distanceListSize = 10; // Among of distance values the list holds
+
         /* Finding Targets */
         public static final double targetSearchOutput = 0.25;
 

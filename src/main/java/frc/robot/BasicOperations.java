@@ -31,4 +31,13 @@ public final class BasicOperations {
     public static double findAverage(double numOne, double numTwo) {
         return (numOne + numTwo) / 2;
     }
+
+    public static double findAverageArray(double[] numList) {
+        double total = 0;
+        for (int i = 0; i < numList.length; i++) {
+            total += numList[i];
+        }
+        double average = total / numList.length;
+        return average;
+    }
 }

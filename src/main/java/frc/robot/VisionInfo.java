@@ -8,6 +8,7 @@ import frc.robot.Constants.Vision;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
+    private static double[] cameraToTargetDistances = new double[Vision.distanceListSize];
 
     public static int getTargetID() { // Gets the target ID
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
@@ -56,12 +57,18 @@ public final class VisionInfo {
         SmartDashboard.putNumber("TX: ", getTX(false));
         SmartDashboard.putNumber("TY: ", getTY(false));
         SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
+        SmartDashboard.putNumber("Camera Distance to Target: ", getDistanceCameraToTarget(Vision.reefAprilTagHeights));
     }
 
     public static double getDistanceCameraToTarget(double targetHeight) { // Gets the distance from the target to the physical limelight
         double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
         double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
+        BasicOperations.insertDoubleToConfinedList(cameraToTargetDistances, distance);
         return distance;
+    }
+
+    public static double getAverageDistanceCameraToTarget(double targetHeight) { // Averages the distance from the target to the physical limelight over several trials
+        return BasicOperations.findAverageArray(cameraToTargetDistances);
     }
 
     public static double getDistanceCrosshairToTarget(double targetHeight) { // Gets the distance from the target to the limelight's crosshair

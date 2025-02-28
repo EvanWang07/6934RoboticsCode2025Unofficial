@@ -171,6 +171,6 @@ public class RobotContainer {
     /* Autonomous Code */
     public Command getAutonomousCommand() {
         s_Swerve.setSpeedMultiplier(1);
-        return new PathPlannerAuto("Basic Autonomous");
+        return new PathPlannerAuto("LWalltItLCStJ");
     }
 }

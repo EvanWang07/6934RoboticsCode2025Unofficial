@@ -45,6 +45,7 @@ public class Swerve extends SubsystemBase {
 
         Timer.delay(1);
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+        System.out.println("Swerve subsystem loaded!");
     
         try {
             RobotConfig config = RobotConfig.fromGUISettings();

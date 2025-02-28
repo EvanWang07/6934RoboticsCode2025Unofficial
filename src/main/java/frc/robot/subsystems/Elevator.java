@@ -15,6 +15,7 @@ public class Elevator extends SubsystemBase {
         elevatorMotorOne.getConfigurator().apply(Robot.ctreConfigs.elevatorConfig);
         elevatorMotorTwo.getConfigurator().apply(Robot.ctreConfigs.elevatorConfig);
         setElevatorPosition(Units.rotationsToDegrees(Constants.Elevator.elevatorStartingHeightInRotations));
+        System.out.println("Elevator subsystem loaded!");
     }
 
     public void setElevatorMotorSpeed(double newSpeed) {
