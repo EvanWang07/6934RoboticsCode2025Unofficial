@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.9542499999999996,
-        "y": 6.94025
+        "x": 8.0,
+        "y": 7.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.95425,
-        "y": 6.94025
+        "x": 8.868325667452858,
+        "y": 7.659440193976469
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.064500000000001,
-        "y": 5.789750000000001
+        "x": 2.8482100238663492,
+        "y": 5.721360381861575
       },
       "prevControl": {
-        "x": 5.064500000000001,
-        "y": 5.789750000000001
+        "x": 3.1851696227870328,
+        "y": 6.3364710086175275
+      },
+      "nextControl": {
+        "x": 2.5300925937314958,
+        "y": 5.1406456241902765
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.169457315,
+        "y": 3.614427229
+      },
+      "prevControl": {
+        "x": 2.345584725536993,
+        "y": 3.5642601431980894
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +49,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 2.5,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -45,10 +61,10 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "LWall to Reef",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
