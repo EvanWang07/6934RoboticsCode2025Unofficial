@@ -7,10 +7,12 @@
     "(Old)Coral Station to Reef Paths",
     "(Old)Ethan's Better Version",
     "(Old)Reef to Coral Station Paths",
-    "LWall to Reef",
     "LCS to Reef",
+    "LWall to Reef",
+    "RCS to Reef",
     "Reef to LCS",
-    "Test Paths"
+    "Reef to RCS",
+    "Test Paths(StraightandCircle)"
   ],
   "autoFolders": [
     "(Old)Autos",

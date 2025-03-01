@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.2,
-        "y": 5.2
+        "x": 1.130609536,
+        "y": 0.9987943923
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.656215002016527,
-        "y": 5.053404669992215
+        "x": 2.262,
+        "y": 1.2267499999999996
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.4,
-        "y": 6.2
+        "x": 6.864000000000001,
+        "y": 2.16275
       },
       "prevControl": {
-        "x": 3.143345141295206,
-        "y": 6.173564253448426
+        "x": 6.201850723500001,
+        "y": 1.3945415623249997
       },
       "nextControl": {
-        "x": 3.6486843049759297,
-        "y": 6.225614770321803
+        "x": 7.5261492765,
+        "y": 2.930958437675
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.6,
-        "y": 0.8
+        "x": 5.779206642,
+        "y": 4.071628143
       },
       "prevControl": {
-        "x": 1.6320120462960301,
-        "y": 1.140693476933853
+        "x": 6.591,
+        "y": 4.015249999999999
       },
       "nextControl": null,
       "isLocked": false,
@@ -58,13 +58,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 55.0
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "RCS to Reef",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 54.0
   },
   "useDefaultConstraints": true
 }
