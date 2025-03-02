@@ -135,15 +135,22 @@ public final class Constants {
         /* Robot Space Offset (General) */
         public static final double robotOffsetMeters = 0.863 / 2; // Half the robot side length WITH bumpers
         public static final double additionalOffsetMeters = 0.025; // Additional distance from the wall
+
+        public static final double leftBranchOffsetMeters = Units.inchesToMeters(2.5); // Direction: RIGHT (Robot-Perspective)
+        public static final double rightBranchOffsetMeters = Units.inchesToMeters(15.5); // Direction: RIGHT (Robot-Perspective)
+
+        public static final double leftStationOffsetMeters = Units.inchesToMeters(24); // Direction: LEFT (Robot-Perspective)
+        public static final double rightStationOffsetMeters = Units.inchesToMeters(24); // Direction: RIGHT (Robot-Perspective)
         
         public static final double totalRobotOffsetMeters = robotOffsetMeters + additionalOffsetMeters; // TOTAL offset from the wall
 
         /* Robot Angle Offset (Reef) */
-        public static final double leftMovementFieldAngle = -90; // Robot angular direction of movement from forward when moving left (FACING THE REEF) (Degrees)
-        public static final double rightMovementFieldAngle = 90; // Robot angular direction of movement from forward when moving right (FACING THE REEF) (Degrees)
+        public static final double leftMovementFieldAngle = Units.degreesToRadians(-90); // Robot angular direction of movement from forward when moving left (FACING THE REEF)
+        public static final double rightMovementFieldAngle = Units.degreesToRadians(90); // Robot angular direction of movement from forward when moving right (FACING THE REEF)
 
         /* April Tag Locations (Reef) */
         public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);
+
         public static final Pose2d redReefTagSix = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
         public static final Pose2d redReefTagSeven = new Pose2d(Units.inchesToMeters(546.87), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
         public static final Pose2d redReefTagEight = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));
@@ -157,18 +164,73 @@ public final class Constants {
         public static final Pose2d blueReefTagTwentyone = new Pose2d(Units.inchesToMeters(209.49), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
         public static final Pose2d blueReefTagTwentytwo = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
 
-        /* Goal Robot Locations (Reef) */
-        public static final Pose2d redReefRobotCenterSix = BasicOperations.findTranslatedPoseCenter(redReefTagSix, totalRobotOffsetMeters);
-        public static final Pose2d redReefRobotCenterSeven = BasicOperations.findTranslatedPoseCenter(redReefTagSeven, totalRobotOffsetMeters);
-        public static final Pose2d redReefRobotCenterEight = BasicOperations.findTranslatedPoseCenter(redReefTagEight, totalRobotOffsetMeters);
-        public static final Pose2d redReefRobotCenterNine = BasicOperations.findTranslatedPoseCenter(redReefTagNine, totalRobotOffsetMeters);
-        public static final Pose2d redReefRobotCenterTen = BasicOperations.findTranslatedPoseCenter(redReefTagTen, totalRobotOffsetMeters);
-        public static final Pose2d redReefRobotCenterEleven = BasicOperations.findTranslatedPoseCenter(redReefTagEleven, totalRobotOffsetMeters);
-        public static final Pose2d blueReefRobotCenterSeventeen = BasicOperations.findTranslatedPoseCenter(blueReefTagSeventeen, totalRobotOffsetMeters);
-        public static final Pose2d blueReefRobotCenterEighteen = BasicOperations.findTranslatedPoseCenter(blueReefTagEighteen, totalRobotOffsetMeters);
-        public static final Pose2d blueReefRobotCenterNineteen = BasicOperations.findTranslatedPoseCenter(blueReefTagNineteen, totalRobotOffsetMeters);
-        public static final Pose2d blueReefRobotCenterTwenty = BasicOperations.findTranslatedPoseCenter(blueReefTagTwenty, totalRobotOffsetMeters);
-        public static final Pose2d blueReefRobotCenterTwentyone = BasicOperations.findTranslatedPoseCenter(blueReefTagTwentyone, totalRobotOffsetMeters);
+        /* Goal Robot Locations (CENTER Reef) */
+        public static final Pose2d redReefRobotCenterSix = BasicOperations.findTranslatedPoseCenter(redReefTagSix, totalRobotOffsetMeters, 180);
+        public static final Pose2d redReefRobotCenterSeven = BasicOperations.findTranslatedPoseCenter(redReefTagSeven, totalRobotOffsetMeters, 180);
+        public static final Pose2d redReefRobotCenterEight = BasicOperations.findTranslatedPoseCenter(redReefTagEight, totalRobotOffsetMeters, 180);
+        public static final Pose2d redReefRobotCenterNine = BasicOperations.findTranslatedPoseCenter(redReefTagNine, totalRobotOffsetMeters, 180);
+        public static final Pose2d redReefRobotCenterTen = BasicOperations.findTranslatedPoseCenter(redReefTagTen, totalRobotOffsetMeters, 180);
+        public static final Pose2d redReefRobotCenterEleven = BasicOperations.findTranslatedPoseCenter(redReefTagEleven, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterSeventeen = BasicOperations.findTranslatedPoseCenter(blueReefTagSeventeen, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterEighteen = BasicOperations.findTranslatedPoseCenter(blueReefTagEighteen, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterNineteen = BasicOperations.findTranslatedPoseCenter(blueReefTagNineteen, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterTwenty = BasicOperations.findTranslatedPoseCenter(blueReefTagTwenty, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterTwentyone = BasicOperations.findTranslatedPoseCenter(blueReefTagTwentyone, totalRobotOffsetMeters, 180);
+        public static final Pose2d blueReefRobotCenterTwentytwo = BasicOperations.findTranslatedPoseCenter(blueReefTagTwentytwo, totalRobotOffsetMeters, 180);
+
+        /* Goal Robot Locations (LEFT Reef Branches) */
+        public static final Pose2d redReefRobotLeftSix = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSix, leftBranchOffsetMeters);
+        public static final Pose2d redReefRobotLeftSeven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSeven, leftBranchOffsetMeters);
+        public static final Pose2d redReefRobotLeftEight = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEight, leftBranchOffsetMeters);
+        public static final Pose2d redReefRobotLeftNine = BasicOperations.findTranslatedPoseRight(redReefRobotCenterNine, leftBranchOffsetMeters);
+        public static final Pose2d redReefRobotLeftTen = BasicOperations.findTranslatedPoseRight(redReefRobotCenterTen, leftBranchOffsetMeters);
+        public static final Pose2d redReefRobotLeftEleven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEleven, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftSeventeen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterSeventeen, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftEighteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterEighteen, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftNineteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterNineteen, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftTwenty = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwenty, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftTwentyone = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentyone, leftBranchOffsetMeters);
+        public static final Pose2d blueReefRobotLeftTwentytwo = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentytwo, leftBranchOffsetMeters);
+
+        /* Goal Robot Locations (RIGHT Reef Branches) */
+        public static final Pose2d redReefRobotRightSix = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSix, rightBranchOffsetMeters);
+        public static final Pose2d redReefRobotRightSeven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSeven, rightBranchOffsetMeters);
+        public static final Pose2d redReefRobotRightEight = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEight, rightBranchOffsetMeters);
+        public static final Pose2d redReefRobotRightNine = BasicOperations.findTranslatedPoseRight(redReefRobotCenterNine, rightBranchOffsetMeters);
+        public static final Pose2d redReefRobotRightTen = BasicOperations.findTranslatedPoseRight(redReefRobotCenterTen, rightBranchOffsetMeters);
+        public static final Pose2d redReefRobotRightEleven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEleven, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightSeventeen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterSeventeen, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightEighteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterEighteen, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightNineteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterNineteen, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightTwenty = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwenty, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightTwentyone = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentyone, rightBranchOffsetMeters);
+        public static final Pose2d blueReefRobotRightTwentytwo = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentytwo, rightBranchOffsetMeters);
+
+        /* April Tag Locations (Coral Station) */
+        public static final double stationAprilTagHeights = Units.inchesToMeters(58.5);
+
+        public static final Pose2d redStationTagOne = new Pose2d(Units.inchesToMeters(657.37), Units.inchesToMeters(25.80), new Rotation2d(Units.degreesToRadians(126)));
+        public static final Pose2d redStationTagTwo = new Pose2d(Units.inchesToMeters(657.37), Units.inchesToMeters(291.20), new Rotation2d(Units.degreesToRadians(234)));
+        public static final Pose2d blueStationTagTwelve = new Pose2d(Units.inchesToMeters(33.51), Units.inchesToMeters(25.80), new Rotation2d(Units.degreesToRadians(54)));
+        public static final Pose2d blueStationTagThirteen = new Pose2d(Units.inchesToMeters(33.51), Units.inchesToMeters(291.20), new Rotation2d(Units.degreesToRadians(306)));
+
+        /* Goal Robot Locations (CENTER Coral Station) */
+        public static final Pose2d redStationRobotCenterOne = BasicOperations.findTranslatedPoseCenter(redStationTagOne, totalRobotOffsetMeters, 0);
+        public static final Pose2d redStationRobotCenterTwo = BasicOperations.findTranslatedPoseCenter(redStationTagTwo, totalRobotOffsetMeters, 0);
+        public static final Pose2d blueStationRobotCenterTwelve = BasicOperations.findTranslatedPoseCenter(blueStationTagTwelve, totalRobotOffsetMeters, 0);
+        public static final Pose2d blueStationRobotCenterThirteen = BasicOperations.findTranslatedPoseCenter(blueStationTagThirteen, totalRobotOffsetMeters, 0);
+
+        /* Goal Robot Locations (LEFT Coral Station) */
+        public static final Pose2d redStationRobotLeftOne = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterOne, leftStationOffsetMeters);
+        public static final Pose2d redStationRobotLeftTwo = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterTwo, leftStationOffsetMeters);
+        public static final Pose2d blueStationRobotLeftTwelve = BasicOperations.findTranslatedPoseLeft(blueStationRobotCenterTwelve, leftStationOffsetMeters);
+        public static final Pose2d blueStationRobotLeftThirteen = BasicOperations.findTranslatedPoseLeft(blueStationRobotCenterThirteen, leftStationOffsetMeters);
+
+        /* Goal Robot Locations (RIGHT Coral Station) */
+        public static final Pose2d redStationRobotRightOne = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterOne, rightStationOffsetMeters);
+        public static final Pose2d redStationRobotRightTwo = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterTwo, rightStationOffsetMeters);
+        public static final Pose2d blueStationRobotRightTwelve = BasicOperations.findTranslatedPoseLeft(blueStationRobotCenterTwelve, rightStationOffsetMeters);
+        public static final Pose2d blueStationRobotRightThirteen = BasicOperations.findTranslatedPoseLeft(blueStationRobotCenterThirteen, rightStationOffsetMeters);
     }
 
     public static final class Swerve {

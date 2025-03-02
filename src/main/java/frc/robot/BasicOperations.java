@@ -44,10 +44,22 @@ public final class BasicOperations {
         return average;
     }
 
-    public static Pose2d findTranslatedPoseCenter(Pose2d targetPose, double offset) { // For REEF ONLY
-        double resultX = targetPose.getX() + (offset * Math.cos(targetPose.getRotation().getRadians()));
-        double resultY = targetPose.getY() + (offset * Math.sin(targetPose.getRotation().getRadians()));
-        double resultAngle = targetPose.getRotation().getDegrees() + 180;
+    public static Pose2d findTranslatedPoseCenter(Pose2d targetPose, double robotOffset, double angularOffset) {
+        double resultX = targetPose.getX() + (robotOffset * Math.cos(targetPose.getRotation().getRadians()));
+        double resultY = targetPose.getY() + (robotOffset * Math.sin(targetPose.getRotation().getRadians()));
+        double resultAngle = targetPose.getRotation().getDegrees() + angularOffset;
         return new Pose2d(resultX, resultY, Rotation2d.fromDegrees(resultAngle));
+    }
+    
+    public static Pose2d findTranslatedPoseLeft(Pose2d translatedPoseCenter, double leftOffset) { // Use findTranslatedPoseCenter to find translatedPoseCenter
+        double resultX = translatedPoseCenter.getX() + (leftOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle));
+        double resultY = translatedPoseCenter.getY() + (leftOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle));
+        return new Pose2d(resultX, resultY, translatedPoseCenter.getRotation());
+    }
+
+    public static Pose2d findTranslatedPoseRight(Pose2d translatedPoseCenter, double rightOffset) { // Use findTranslatedPoseCenter to find translatedPoseCenter
+        double resultX = translatedPoseCenter.getX() + (rightOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
+        double resultY = translatedPoseCenter.getY() + (rightOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
+        return new Pose2d(resultX, resultY, translatedPoseCenter.getRotation());
     }
 }
