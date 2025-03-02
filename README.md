@@ -21,12 +21,19 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Updated controller mapping to include automatic scoring buttons <sup>2/16/25</sup>
 - Added a test autonomous code for the elevator and end-effector <sup>2/16/25</sup>
 - Moved the auto-position code to a dedicated command file <sup>2/24/25</sup>
+- Implemented MegaTag 2 for Limelight <sup>3/1/25</sup>
+- Revamped auto-position code to use on-the-fly path generation again <sup>3/1/25</sup>
 
 ## Issues and Potential Errors:   
-- Robot auto-position function is slow and somewhat jittery
+- Robot auto-position is still slightly off
+- Robot end-effector motor sometimes loses control
+- Robot autonomous is UNTESTED with the new pose estimation methods
+- Current commands for auto-position rely on a target ID value that may not be present at all times
 
 ## To-Do List:  
-- [ ] Optimize the vision auto position pathing and increase path travel speed
+- [ ] Implement auto-position into auto
+- [ ] Possibly use a tx-based PID to help make auto-position more accurate
+- [ ] Implement deep-climb
 - [ ] Clean up the overuse of unit conversions in the elevator PID code
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
@@ -38,7 +45,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Credits  
 - Source of Original Code: https://github.com/dirtbikerxz/BaseTalonFXSwerve  
-- Modified Code Created By: Evan Wang, Lukas Evans, Derek Chang  
+- Modified Code Created By: Evan Wang, Lukas Evans, Will Redekopp, Derek Chang
 - Robot "IT" Person: Ethan Jiang
 - Robot Created By: FRC Robotics Team 6934 (ACHS Scorpions)  
 
@@ -72,15 +79,16 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Reset Gyro (Field-Centric Driving ONLY): *PRESS* Y-Button  
 - Toggle Slow Mode OFF: *PRESS* Start-Button  <br> 
 - Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
-- Auto-Align: *HOLD* A-Button  <br> 
-- Auto-Position: *HOLD* X-Button  <br>
+- Auto-Position (LEFT): *PRESS* X-Button  <br>
+- Auto-Position (CENTER): *PRESS* A-Button  <br>
+- Auto-Position (RIGHT): *PRESS* B-Button  <br>
 ### Weapons Controller (**PORT 1**):
 - Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
 - Automatically Lift/Lower Elevator to Bottom: *PRESS* A-Button
-- Automatically Lift/Lower Elevator and Score at Reef Level 1: *PRESS* B-Button (*REQUIRES* Coral)
-- Automatically Lift/Lower Elevator and Score at Reef Level 2: *PRESS* X-Button (*REQUIRES* Coral)
-- Automatically Lift/Lower Elevator and Score at Reef Level 3: *PRESS* Y-Button (*REQUIRES* Coral)
+- Automatically Lift/Lower Elevator & Score at Reef Level 1: *PRESS* B-Button (*REQUIRES* Coral)
+- Automatically Lift/Lower Elevator & Score at Reef Level 2: *PRESS* X-Button (*REQUIRES* Coral)
+- Automatically Lift/Lower Elevator & Score at Reef Level 3: *PRESS* Y-Button (*REQUIRES* Coral)
 - Intake Coral: *HOLD* Left Bumper
 - Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 2/24/25 by Evan Wang.
+[^1]: Last updated 3/1/25 by Evan Wang.

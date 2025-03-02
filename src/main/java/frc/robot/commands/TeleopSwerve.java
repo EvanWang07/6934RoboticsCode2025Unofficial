@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.VisionInfo;
 import frc.robot.Constants.*;
 import frc.robot.subsystems.Swerve;
 
@@ -19,9 +18,8 @@ public class TeleopSwerve extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-    private BooleanSupplier visionSup;
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier visionSup) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -29,7 +27,6 @@ public class TeleopSwerve extends Command {
         this.strafeSup = strafeSup; // X
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
-        this.visionSup = visionSup;
     }
 
     @Override
@@ -39,25 +36,6 @@ public class TeleopSwerve extends Command {
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), QuickTuning.driveStickDeadband);
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), QuickTuning.driveStickDeadband);
         boolean isFieldCentric = !robotCentricSup.getAsBoolean();
-        boolean seekTarget = visionSup.getAsBoolean(); // Auto Position should override Seek Target
-
-        /* Vision Target Seeking (If Active) */
-        if (seekTarget) {
-            // LimelightHelpers.SetRobotOrientation(Vision.limelightName, s_Swerve.getGyroYaw().getDegrees(), 0, 0, 0, 0, 0);
-            if (VisionInfo.willTarget()) { // Divide by the speed multiplier to ensure consistent homing speeds no matter the speed setting
-                translationVal = -VisionInfo.getForwardCorrectionOutput() / s_Swerve.getSpeedMultiplier();
-                strafeVal = 0;
-                rotationVal = -VisionInfo.getRotationalCorrectionOutput() / s_Swerve.getSpeedMultiplier();
-                isFieldCentric = false; // Limelight needs to use robot-centric swerve
-            } else {
-                translationVal = 0;
-                strafeVal = 0;
-                rotationVal = Vision.targetSearchOutput / s_Swerve.getSpeedMultiplier();
-                isFieldCentric = false;
-            }
-        }
-
-        VisionInfo.updateDashboardValues(); // Puts relevant vision values into SmartDashboard
 
         /* Drive */
         s_Swerve.drive(

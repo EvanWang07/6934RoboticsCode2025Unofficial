@@ -131,41 +131,174 @@ public final class VisionInfo {
         }
     }
 
-    public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)
-        if (targetID == 6) {
-            return GameField.redReefTagSix;
-        } else if (targetID == 7) {
-            return GameField.redReefTagSeven;
-        } else if (targetID == 8) {
-            return GameField.redReefTagEight;
-        } else if (targetID == 9) {
-            return GameField.redReefTagNine;
-        } else if (targetID == 10) {
-            return GameField.redReefTagTen;
-        } else if (targetID == 11) {
-            return GameField.redReefTagEleven;
-        } else if (targetID == 17) {
-            return GameField.blueReefTagSeventeen;
-        } else if (targetID == 18) {
-            return GameField.blueReefTagEighteen;
-        } else if (targetID == 19) {
-            return GameField.blueReefTagNineteen;
-        } else if (targetID == 20) {
-            return GameField.blueReefTagTwenty;
-        } else if (targetID == 21) {
-            return GameField.blueReefTagTwentyone;
-        } else if (targetID == 22) {
-            return GameField.blueReefTagTwentytwo;
-        } else {
-            System.out.println("[WARNING] An invalid April Tag ID was given!");
-            return new Pose2d();
+    public static Pose2d getAprilTagLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)
+        switch (targetID) {
+            case 1:
+                return GameField.redStationTagOne;
+            case 2:
+                return GameField.redStationTagTwo;
+            case 6:
+                return GameField.redReefTagSix;
+            case 7:
+                return GameField.redReefTagSeven;
+            case 8:
+                return GameField.redReefTagEight;
+            case 9:
+                return GameField.redReefTagNine;
+            case 10:
+                return GameField.redReefTagTen;
+            case 11:
+                return GameField.redReefTagEleven;
+            case 12:
+                return GameField.blueStationTagTwelve;
+            case 13:
+                return GameField.blueStationRobotLeftThirteen;
+            case 17:
+                return GameField.blueReefTagSeventeen;
+            case 18:
+                return GameField.blueReefTagEighteen;
+            case 19:
+                return GameField.blueReefTagNineteen;
+            case 20:
+                return GameField.blueReefTagTwenty;
+            case 21:
+                return GameField.blueReefTagTwentyone;
+            case 22:
+                return GameField.blueReefTagTwentytwo;
+            default:
+                System.out.println("[WARNING] An invalid April Tag ID was given!");
+                return null;
         }
     }
 
     public static Pose2d robotPoseToTargetError(Pose2d robotPose) {
-        Pose2d aprilTagPose = getAprilTagFieldLocation(getTargetID());
-        Rotation2d resultRotation = aprilTagPose.getRotation().minus(robotPose.getRotation());
-        Translation2d resultTranslation = aprilTagPose.getTranslation().minus(robotPose.getTranslation());
-        return new Pose2d(resultTranslation, resultRotation);
+        Pose2d aprilTagPose = getAprilTagLocation(getTargetID());
+        if (aprilTagPose != null) {
+            Rotation2d resultRotation = aprilTagPose.getRotation().minus(robotPose.getRotation());
+            Translation2d resultTranslation = aprilTagPose.getTranslation().minus(robotPose.getTranslation());
+            return new Pose2d(resultTranslation, resultRotation);
+        } else {
+            return null;
+        }
+    }
+
+    public static Pose2d getRobotCenterGoal(int targetID) { // Gets the CENTER target robot pose of a valid april tag relative to the field (blue origin)
+        switch (targetID) {
+            case 1:
+                return GameField.redStationRobotCenterOne;
+            case 2:
+                return GameField.redStationRobotCenterTwo;
+            case 6:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 7:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 8:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 9:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 10:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 11:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 12:
+                return GameField.blueStationRobotCenterTwelve;
+            case 13:
+                return GameField.blueStationRobotCenterThirteen;
+            case 17:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 18:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 19:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 20:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 21:
+                return null; // PLACEHOLDER; ADD ALGAE
+            case 22:
+                return null; // PLACEHOLDER; ADD ALGAE
+            default:
+                System.out.println("[WARNING] An invalid April Tag ID was given!");
+                return null;
+        }
+    }
+
+    public static Pose2d getRobotLeftGoal(int targetID) { // Gets the LEFT target robot pose of a valid april tag relative to the field (blue origin)
+        switch (targetID) {
+            case 1:
+                return GameField.redStationRobotLeftOne;
+            case 2:
+                return GameField.redStationRobotLeftTwo;
+            case 6:
+                return GameField.redReefRobotLeftSix;
+            case 7:
+                return GameField.redReefRobotLeftSeven;
+            case 8:
+                return GameField.redReefRobotLeftEight;
+            case 9:
+                return GameField.redReefRobotLeftNine;
+            case 10:
+                return GameField.redReefRobotLeftTen;
+            case 11:
+                return GameField.redReefRobotLeftEleven;
+            case 12:
+                return GameField.blueStationRobotLeftTwelve;
+            case 13:
+                return GameField.blueStationRobotLeftThirteen;
+            case 17:
+                return GameField.blueReefRobotLeftSeventeen;
+            case 18:
+                return GameField.blueReefRobotLeftEighteen;
+            case 19:
+                return GameField.blueReefRobotLeftNineteen;
+            case 20:
+                return GameField.blueReefRobotLeftTwenty;
+            case 21:
+                return GameField.blueReefRobotLeftTwentyone;
+            case 22:
+                return GameField.blueReefRobotLeftTwentytwo;
+            default:
+                System.out.println("[WARNING] An invalid April Tag ID was given!");
+                return null;
+        }
+    }
+
+    public static Pose2d getRobotRightGoal(int targetID) { // Gets the RIGHT target robot pose of a valid april tag relative to the field (blue origin)
+        switch (targetID) {
+            case 1:
+                return GameField.redStationRobotRightOne;
+            case 2:
+                return GameField.redStationRobotRightTwo;
+            case 6:
+                return GameField.redReefRobotRightSix;
+            case 7:
+                return GameField.redReefRobotRightSeven;
+            case 8:
+                return GameField.redReefRobotRightEight;
+            case 9:
+                return GameField.redReefRobotRightNine;
+            case 10:
+                return GameField.redReefRobotRightTen;
+            case 11:
+                return GameField.redReefRobotRightEleven;
+            case 12:
+                return GameField.blueStationRobotRightTwelve;
+            case 13:
+                return GameField.blueStationRobotRightThirteen;
+            case 17:
+                return GameField.blueReefRobotRightSeventeen;
+            case 18:
+                return GameField.blueReefRobotRightEighteen;
+            case 19:
+                return GameField.blueReefRobotRightNineteen;
+            case 20:
+                return GameField.blueReefRobotRightTwenty;
+            case 21:
+                return GameField.blueReefRobotRightTwentyone;
+            case 22:
+                return GameField.blueReefRobotRightTwentytwo;
+            default:
+                System.out.println("[WARNING] An invalid April Tag ID was given!");
+                return null;
+        }
     }
 }

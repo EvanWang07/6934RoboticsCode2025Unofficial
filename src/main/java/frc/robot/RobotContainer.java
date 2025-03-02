@@ -1,8 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -24,7 +22,6 @@ import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.Constants.GameField;
 import frc.robot.Constants.QuickTuning;
 
 public class RobotContainer {
@@ -46,11 +43,10 @@ public class RobotContainer {
 
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
-    private final JoystickButton useVision = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton useAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton useCenterAutoPosition = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton useRightAutoPosition = new JoystickButton(driver, XboxController.Button.kB.value);
+    private final JoystickButton useLeftAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-
-    private final JoystickButton moveToRightBranch = new JoystickButton(driver, XboxController.Button.kB.value);
 
     /* Weapon Buttons */
     private final JoystickButton intakeCoral = new JoystickButton(weapons, XboxController.Button.kLeftBumper.value);
@@ -85,8 +81,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean(), 
-                () -> useVision.getAsBoolean()
+                () -> robotCentric.getAsBoolean()
             )
         );
 
@@ -109,30 +104,89 @@ public class RobotContainer {
         speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
         slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
 
-        useAutoPosition.whileTrue(new AutoPosition(s_Swerve));
+        useLeftAutoPosition.onTrue(Commands.runOnce(() -> {
+            if (VisionInfo.willTarget()) {
+                double originalSpeed = s_Swerve.getSpeedMultiplier();
+                s_Swerve.setSpeedMultiplier(1);
 
-        moveToRightBranch.onTrue(Commands.runOnce(() -> {
-            s_Swerve.setSpeedMultiplier(1);
+                int detectedTagID = VisionInfo.getTargetID();
 
-            Pose2d currentPose = s_Swerve.getSwervePoseEstimation();
-            Pose2d startPose = new Pose2d(currentPose.getTranslation(), currentPose.getRotation());
-            Pose2d endPose = GameField.redReefRobotCenterEight;
+                Pose2d currentPose = s_Swerve.getSwervePoseEstimation();
+                Pose2d startPose = new Pose2d(currentPose.getTranslation(), currentPose.getRotation());
+                Pose2d endPose = VisionInfo.getRobotLeftGoal(detectedTagID);
 
-            List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
+                List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
 
-            PathPlannerPath pathToRightBranch = new PathPlannerPath(
-                waypoints, 
-                new PathConstraints(
-                1.5, 1.25, 
-                Units.degreesToRadians(540), Units.degreesToRadians(720)
-                ),
-                null, // Ideal starting state can be null for on-the-fly paths
-                new GoalEndState(0.0, endPose.getRotation())
-            );
+                PathPlannerPath pathToRightBranch = new PathPlannerPath(
+                    waypoints, 
+                    new PathConstraints(
+                    1.5, 1.25, 
+                    Units.degreesToRadians(540), Units.degreesToRadians(720)
+                    ),
+                    null, // Ideal starting state can be null for on-the-fly paths
+                    new GoalEndState(0.0, endPose.getRotation())
+                );
 
-            pathToRightBranch.preventFlipping = true;
+                pathToRightBranch.preventFlipping = true;
 
-            AutoBuilder.followPath(pathToRightBranch).schedule();
+                AutoBuilder.followPath(pathToRightBranch).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+            }
+        }));
+        useCenterAutoPosition.onTrue(Commands.runOnce(() -> {
+            if (VisionInfo.willTarget()) {
+                double originalSpeed = s_Swerve.getSpeedMultiplier();
+                s_Swerve.setSpeedMultiplier(1);
+
+                int detectedTagID = VisionInfo.getTargetID();
+
+                Pose2d currentPose = s_Swerve.getSwervePoseEstimation();
+                Pose2d startPose = new Pose2d(currentPose.getTranslation(), currentPose.getRotation());
+                Pose2d endPose = VisionInfo.getRobotCenterGoal(detectedTagID);
+
+                List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
+
+                PathPlannerPath pathToRightBranch = new PathPlannerPath(
+                    waypoints, 
+                    new PathConstraints(
+                    1.5, 1.25, 
+                    Units.degreesToRadians(540), Units.degreesToRadians(720)
+                    ),
+                    null, // Ideal starting state can be null for on-the-fly paths
+                    new GoalEndState(0.0, endPose.getRotation())
+                );
+
+                pathToRightBranch.preventFlipping = true;
+
+                AutoBuilder.followPath(pathToRightBranch).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+            }
+        }));
+        useRightAutoPosition.onTrue(Commands.runOnce(() -> {
+            if (VisionInfo.willTarget()) {
+                double originalSpeed = s_Swerve.getSpeedMultiplier();
+                s_Swerve.setSpeedMultiplier(1);
+
+                int detectedTagID = VisionInfo.getTargetID();
+
+                Pose2d currentPose = s_Swerve.getSwervePoseEstimation();
+                Pose2d startPose = new Pose2d(currentPose.getTranslation(), currentPose.getRotation());
+                Pose2d endPose = VisionInfo.getRobotRightGoal(detectedTagID);
+
+                List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
+
+                PathPlannerPath pathToRightBranch = new PathPlannerPath(
+                    waypoints, 
+                    new PathConstraints(
+                    1.5, 1.25, 
+                    Units.degreesToRadians(540), Units.degreesToRadians(720)
+                    ),
+                    null, // Ideal starting state can be null for on-the-fly paths
+                    new GoalEndState(0.0, endPose.getRotation())
+                );
+
+                pathToRightBranch.preventFlipping = true;
+
+                AutoBuilder.followPath(pathToRightBranch).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+            }
         }));
         
         /* Weapons Buttons */

@@ -201,6 +201,8 @@ public class Swerve extends SubsystemBase {
     public void periodic() {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         updateSwervePoseEstimator(); // EXPERIMENTAL
+        
+        VisionInfo.updateDashboardValues(); // Puts relevant vision values into SmartDashboard
         // System.out.println(swervePoseEstimator.getEstimatedPosition().getX() + " " + swervePoseEstimator.getEstimatedPosition().getY() + " " + swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
 
         for(SwerveModule mod : mSwerveMods){
