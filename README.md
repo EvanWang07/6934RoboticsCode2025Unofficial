@@ -28,7 +28,6 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Robot auto-position is still slightly off
 - Robot end-effector motor sometimes loses control
 - Robot autonomous is UNTESTED with the new pose estimation methods
-- Current commands for auto-position rely on a target ID value that may not be present at all times
 
 ## To-Do List:  
 - [ ] Implement auto-position into auto
@@ -91,4 +90,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 3/1/25 by Evan Wang.
+[^1]: Last updated 3/2/25 by Evan Wang.

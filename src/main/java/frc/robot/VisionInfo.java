@@ -189,33 +189,33 @@ public final class VisionInfo {
             case 2:
                 return GameField.redStationRobotCenterTwo;
             case 6:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeSix;
             case 7:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeSeven;
             case 8:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeEight;
             case 9:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeNine;
             case 10:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeTen;
             case 11:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.redReefRobotAlgaeEleven;
             case 12:
                 return GameField.blueStationRobotCenterTwelve;
             case 13:
                 return GameField.blueStationRobotCenterThirteen;
             case 17:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeSeventeen;
             case 18:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeEighteen;
             case 19:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeNineteen;
             case 20:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeTwenty;
             case 21:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeTwentyone;
             case 22:
-                return null; // PLACEHOLDER; ADD ALGAE
+                return GameField.blueReefRobotAlgaeTwentytwo;
             default:
                 System.out.println("[WARNING] An invalid April Tag ID was given!");
                 return null;

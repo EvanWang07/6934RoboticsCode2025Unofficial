@@ -138,6 +138,7 @@ public final class Constants {
 
         public static final double leftBranchOffsetMeters = Units.inchesToMeters(2.5); // Direction: RIGHT (Robot-Perspective)
         public static final double rightBranchOffsetMeters = Units.inchesToMeters(15.5); // Direction: RIGHT (Robot-Perspective)
+        public static final double algaeOffsetMeters = Units.inchesToMeters(9); // Direction: RIGHT (Robot-Perspective)
 
         public static final double leftStationOffsetMeters = Units.inchesToMeters(24); // Direction: LEFT (Robot-Perspective)
         public static final double rightStationOffsetMeters = Units.inchesToMeters(24); // Direction: RIGHT (Robot-Perspective)
@@ -205,6 +206,20 @@ public final class Constants {
         public static final Pose2d blueReefRobotRightTwenty = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwenty, rightBranchOffsetMeters);
         public static final Pose2d blueReefRobotRightTwentyone = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentyone, rightBranchOffsetMeters);
         public static final Pose2d blueReefRobotRightTwentytwo = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentytwo, rightBranchOffsetMeters);
+
+        /* Goal Robot Locations (ALGAE) */
+        public static final Pose2d redReefRobotAlgaeSix = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSix, algaeOffsetMeters);
+        public static final Pose2d redReefRobotAlgaeSeven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterSeven, algaeOffsetMeters);
+        public static final Pose2d redReefRobotAlgaeEight = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEight, algaeOffsetMeters);
+        public static final Pose2d redReefRobotAlgaeNine = BasicOperations.findTranslatedPoseRight(redReefRobotCenterNine, algaeOffsetMeters);
+        public static final Pose2d redReefRobotAlgaeTen = BasicOperations.findTranslatedPoseRight(redReefRobotCenterTen, algaeOffsetMeters);
+        public static final Pose2d redReefRobotAlgaeEleven = BasicOperations.findTranslatedPoseRight(redReefRobotCenterEleven, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeSeventeen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterSeventeen, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeEighteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterEighteen, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeNineteen = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterNineteen, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeTwenty = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwenty, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeTwentyone = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentyone, algaeOffsetMeters);
+        public static final Pose2d blueReefRobotAlgaeTwentytwo = BasicOperations.findTranslatedPoseRight(blueReefRobotCenterTwentytwo, algaeOffsetMeters);
 
         /* April Tag Locations (Coral Station) */
         public static final double stationAprilTagHeights = Units.inchesToMeters(58.5);
