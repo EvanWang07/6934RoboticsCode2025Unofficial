@@ -123,7 +123,7 @@ public final class Constants {
     
         /* Intake & Scoring */
         public static final double intakeVoltage = 3;
-        public static final double scoringVoltage = 2.5;
+        public static final double scoringVoltage = 2.25;
     
         public static final double scoringLeewayTime = 0.65; // In seconds
     
