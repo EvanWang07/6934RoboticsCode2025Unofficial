@@ -58,9 +58,9 @@ public class Swerve extends SubsystemBase {
         try {
             RobotConfig config = RobotConfig.fromGUISettings();
             
-            AutoBuilder.configure(
-                this::getPose, // Robot pose supplier
-                this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
+            AutoBuilder.configure( // EXPERIMENTAL SWERVE POSE ESTIMATION METHODS ADDED!!!
+                this::getSwervePoseEstimation, // Robot pose supplier
+                this::setSwervePoseEstimate, // Method to reset odometry (will be called if your auto has a starting pose)
                 this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                 this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 Constants.AutoConstants.pathPlannerConfig,
@@ -179,6 +179,10 @@ public class Swerve extends SubsystemBase {
         }
     }
 
+    public void setSwervePoseEstimate(Pose2d pose) { // EXPERIMENTAL
+        swervePoseEstimator.resetPose(pose);
+    }
+
     public void updateSwervePoseEstimator() { // EXPERIMENTAL
         swervePoseEstimator.update(getGyroYaw(), getModulePositions());
         LimelightHelpers.SetRobotOrientation(Constants.Vision.limelightName, swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
@@ -197,7 +201,7 @@ public class Swerve extends SubsystemBase {
     public void periodic() {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         updateSwervePoseEstimator(); // EXPERIMENTAL
-        System.out.println(swervePoseEstimator.getEstimatedPosition().getX() + " " + swervePoseEstimator.getEstimatedPosition().getY() + " " + swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
+        // System.out.println(swervePoseEstimator.getEstimatedPosition().getX() + " " + swervePoseEstimator.getEstimatedPosition().getY() + " " + swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());

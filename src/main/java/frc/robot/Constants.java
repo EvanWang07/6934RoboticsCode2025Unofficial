@@ -67,21 +67,6 @@ public final class Constants {
         public static final double TXTolerance = 1; // Degrees
         public static final double TYTolerance = 1; // Degrees
         public static final double poseTolerance = 1; // Degrees
-
-        /* Important April Tag Locations */
-        public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);
-        public static final Pose2d redReefSix = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
-        public static final Pose2d redReefSeven = new Pose2d(Units.inchesToMeters(546.87), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
-        public static final Pose2d redReefEight = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));
-        public static final Pose2d redReefNine = new Pose2d(Units.inchesToMeters(497.77), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(120)));
-        public static final Pose2d redReefTen = new Pose2d(Units.inchesToMeters(481.39), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(180)));
-        public static final Pose2d redReefEleven = new Pose2d(Units.inchesToMeters(497.77), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(240)));
-        public static final Pose2d blueReefSeventeen = new Pose2d(Units.inchesToMeters(160.39), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(240)));
-        public static final Pose2d blueReefEighteen = new Pose2d(Units.inchesToMeters(144.00), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(180)));
-        public static final Pose2d blueReefNineteen = new Pose2d(Units.inchesToMeters(160.39), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(120)));
-        public static final Pose2d blueReefTwenty = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));
-        public static final Pose2d blueReefTwentyone = new Pose2d(Units.inchesToMeters(209.49), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
-        public static final Pose2d blueReefTwentytwo = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
     }
 
     public static final class Elevator {
@@ -144,7 +129,47 @@ public final class Constants {
     
         /* Beam Breaker Configs */
         public static final int beamBreakerChannel = 9;
-      }
+    }
+    
+    public static final class GameField {
+        /* Robot Space Offset (General) */
+        public static final double robotOffsetMeters = 0.863 / 2; // Half the robot side length WITH bumpers
+        public static final double additionalOffsetMeters = 0.025; // Additional distance from the wall
+        
+        public static final double totalRobotOffsetMeters = robotOffsetMeters + additionalOffsetMeters; // TOTAL offset from the wall
+
+        /* Robot Angle Offset (Reef) */
+        public static final double leftMovementFieldAngle = -90; // Robot angular direction of movement from forward when moving left (FACING THE REEF) (Degrees)
+        public static final double rightMovementFieldAngle = 90; // Robot angular direction of movement from forward when moving right (FACING THE REEF) (Degrees)
+
+        /* April Tag Locations (Reef) */
+        public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);
+        public static final Pose2d redReefTagSix = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
+        public static final Pose2d redReefTagSeven = new Pose2d(Units.inchesToMeters(546.87), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
+        public static final Pose2d redReefTagEight = new Pose2d(Units.inchesToMeters(530.49), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));
+        public static final Pose2d redReefTagNine = new Pose2d(Units.inchesToMeters(497.77), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(120)));
+        public static final Pose2d redReefTagTen = new Pose2d(Units.inchesToMeters(481.39), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(180)));
+        public static final Pose2d redReefTagEleven = new Pose2d(Units.inchesToMeters(497.77), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(240)));
+        public static final Pose2d blueReefTagSeventeen = new Pose2d(Units.inchesToMeters(160.39), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(240)));
+        public static final Pose2d blueReefTagEighteen = new Pose2d(Units.inchesToMeters(144.00), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(180)));
+        public static final Pose2d blueReefTagNineteen = new Pose2d(Units.inchesToMeters(160.39), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(120)));
+        public static final Pose2d blueReefTagTwenty = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(186.83), new Rotation2d(Units.degreesToRadians(60)));
+        public static final Pose2d blueReefTagTwentyone = new Pose2d(Units.inchesToMeters(209.49), Units.inchesToMeters(158.50), new Rotation2d(Units.degreesToRadians(0)));
+        public static final Pose2d blueReefTagTwentytwo = new Pose2d(Units.inchesToMeters(193.10), Units.inchesToMeters(130.17), new Rotation2d(Units.degreesToRadians(300)));
+
+        /* Goal Robot Locations (Reef) */
+        public static final Pose2d redReefRobotCenterSix = BasicOperations.findTranslatedPoseCenter(redReefTagSix, totalRobotOffsetMeters);
+        public static final Pose2d redReefRobotCenterSeven = BasicOperations.findTranslatedPoseCenter(redReefTagSeven, totalRobotOffsetMeters);
+        public static final Pose2d redReefRobotCenterEight = BasicOperations.findTranslatedPoseCenter(redReefTagEight, totalRobotOffsetMeters);
+        public static final Pose2d redReefRobotCenterNine = BasicOperations.findTranslatedPoseCenter(redReefTagNine, totalRobotOffsetMeters);
+        public static final Pose2d redReefRobotCenterTen = BasicOperations.findTranslatedPoseCenter(redReefTagTen, totalRobotOffsetMeters);
+        public static final Pose2d redReefRobotCenterEleven = BasicOperations.findTranslatedPoseCenter(redReefTagEleven, totalRobotOffsetMeters);
+        public static final Pose2d blueReefRobotCenterSeventeen = BasicOperations.findTranslatedPoseCenter(blueReefTagSeventeen, totalRobotOffsetMeters);
+        public static final Pose2d blueReefRobotCenterEighteen = BasicOperations.findTranslatedPoseCenter(blueReefTagEighteen, totalRobotOffsetMeters);
+        public static final Pose2d blueReefRobotCenterNineteen = BasicOperations.findTranslatedPoseCenter(blueReefTagNineteen, totalRobotOffsetMeters);
+        public static final Pose2d blueReefRobotCenterTwenty = BasicOperations.findTranslatedPoseCenter(blueReefTagTwenty, totalRobotOffsetMeters);
+        public static final Pose2d blueReefRobotCenterTwentyone = BasicOperations.findTranslatedPoseCenter(blueReefTagTwentyone, totalRobotOffsetMeters);
+    }
 
     public static final class Swerve {
         public static final int pigeonID = 1;

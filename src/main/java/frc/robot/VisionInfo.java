@@ -1,10 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants.Vision;
+import frc.robot.Constants.GameField;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
@@ -57,7 +60,7 @@ public final class VisionInfo {
         SmartDashboard.putNumber("TX: ", getTX(false));
         SmartDashboard.putNumber("TY: ", getTY(false));
         SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
-        SmartDashboard.putNumber("Camera Distance to Target: ", getDistanceCameraToTarget(Vision.reefAprilTagHeights));
+        SmartDashboard.putNumber("Camera Distance to Target: ", getDistanceCameraToTarget(GameField.reefAprilTagHeights));
     }
 
     public static double getDistanceCameraToTarget(double targetHeight) { // Gets the distance from the target to the physical limelight
@@ -128,72 +131,41 @@ public final class VisionInfo {
         }
     }
 
-    /*
-    public static double getRobotPositionX() { // Returns the robot's x coordinate relative to the field (blue origin)
-        double[] robotPose = LimelightHelpers.getBotPose_wpiBlue(Vision.limelightName);
-        return robotPose[0];
-    }
-
-    public static double getRobotPositionY() { // Returns the robot's x coordinate relative to the field (blue origin)
-        double[] robotPose = LimelightHelpers.getBotPose_wpiBlue(Vision.limelightName);
-        return robotPose[1];
-    }
-    */
-
-    /*
-    public static Pose2d getRobotPose() {
-        return LimelightHelpers.getBotPose2d_wpiBlue(Vision.limelightName);
-    }
-
-    public static double getRobotLocationX() { // Gets the x component of the robot's location relative to the field (blue origin) (UNUSED)
-        return getRobotPose().getX();
-    }
-
-    public static double getRobotLocationY() { // Gets the y component of the robot's location relative to the field (blue origin) (UNUSED)
-        return getRobotPose().getY();
-    }
-    */
-
     public static Pose2d getAprilTagFieldLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)
         if (targetID == 6) {
-            return Vision.redReefSix;
+            return GameField.redReefTagSix;
         } else if (targetID == 7) {
-            return Vision.redReefSeven;
+            return GameField.redReefTagSeven;
         } else if (targetID == 8) {
-            return Vision.redReefEight;
+            return GameField.redReefTagEight;
         } else if (targetID == 9) {
-            return Vision.redReefNine;
+            return GameField.redReefTagNine;
         } else if (targetID == 10) {
-            return Vision.redReefTen;
+            return GameField.redReefTagTen;
         } else if (targetID == 11) {
-            return Vision.redReefEleven;
+            return GameField.redReefTagEleven;
         } else if (targetID == 17) {
-            return Vision.blueReefSeventeen;
+            return GameField.blueReefTagSeventeen;
         } else if (targetID == 18) {
-            return Vision.blueReefEighteen;
+            return GameField.blueReefTagEighteen;
         } else if (targetID == 19) {
-            return Vision.blueReefNineteen;
+            return GameField.blueReefTagNineteen;
         } else if (targetID == 20) {
-            return Vision.blueReefTwenty;
+            return GameField.blueReefTagTwenty;
         } else if (targetID == 21) {
-            return Vision.blueReefTwentyone;
+            return GameField.blueReefTagTwentyone;
         } else if (targetID == 22) {
-            return Vision.blueReefTwentytwo;
+            return GameField.blueReefTagTwentytwo;
         } else {
             System.out.println("[WARNING] An invalid April Tag ID was given!");
             return new Pose2d();
         }
     }
 
-    /*
-    public static double getDistanceXExperimental() {
-        double translationDifference = getRobotPositionX() - getAprilTagFieldLocation(getTargetID()).getX();
-        return translationDifference;
+    public static Pose2d robotPoseToTargetError(Pose2d robotPose) {
+        Pose2d aprilTagPose = getAprilTagFieldLocation(getTargetID());
+        Rotation2d resultRotation = aprilTagPose.getRotation().minus(robotPose.getRotation());
+        Translation2d resultTranslation = aprilTagPose.getTranslation().minus(robotPose.getTranslation());
+        return new Pose2d(resultTranslation, resultRotation);
     }
-
-    public static double getDistanceYExperimental() {
-        double translationDifference = getRobotPositionY() - getAprilTagFieldLocation(getTargetID()).getY();
-        return translationDifference;
-    }
-    */
 }

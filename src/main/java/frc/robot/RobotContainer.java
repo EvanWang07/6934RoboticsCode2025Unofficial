@@ -24,6 +24,7 @@ import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.GameField;
 import frc.robot.Constants.QuickTuning;
 
 public class RobotContainer {
@@ -113,20 +114,20 @@ public class RobotContainer {
         moveToRightBranch.onTrue(Commands.runOnce(() -> {
             s_Swerve.setSpeedMultiplier(1);
 
-            Pose2d currentPose = s_Swerve.getPose();
-            Pose2d startPose = new Pose2d(currentPose.getTranslation(), new Rotation2d());
-            Pose2d endPose = new Pose2d(currentPose.getTranslation().plus(new Translation2d(0.06, -0.4)), new Rotation2d());
+            Pose2d currentPose = s_Swerve.getSwervePoseEstimation();
+            Pose2d startPose = new Pose2d(currentPose.getTranslation(), currentPose.getRotation());
+            Pose2d endPose = GameField.redReefRobotCenterEight;
 
             List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
 
             PathPlannerPath pathToRightBranch = new PathPlannerPath(
                 waypoints, 
                 new PathConstraints(
-                3, 4.0, 
+                1.5, 1.25, 
                 Units.degreesToRadians(540), Units.degreesToRadians(720)
                 ),
                 null, // Ideal starting state can be null for on-the-fly paths
-                new GoalEndState(0.0, currentPose.getRotation())
+                new GoalEndState(0.0, endPose.getRotation())
             );
 
             pathToRightBranch.preventFlipping = true;

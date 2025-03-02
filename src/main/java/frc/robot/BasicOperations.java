@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+
 public final class BasicOperations {
     public static double getSuccessRate(boolean[] attemptsList) {
         int attempts = 0;
@@ -39,5 +42,12 @@ public final class BasicOperations {
         }
         double average = total / numList.length;
         return average;
+    }
+
+    public static Pose2d findTranslatedPoseCenter(Pose2d targetPose, double offset) { // For REEF ONLY
+        double resultX = targetPose.getX() + (offset * Math.cos(targetPose.getRotation().getRadians()));
+        double resultY = targetPose.getY() + (offset * Math.sin(targetPose.getRotation().getRadians()));
+        double resultAngle = targetPose.getRotation().getDegrees() + 180;
+        return new Pose2d(resultX, resultY, Rotation2d.fromDegrees(resultAngle));
     }
 }
