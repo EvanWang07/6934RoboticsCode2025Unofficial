@@ -8,6 +8,7 @@ public final class CTREConfigs {
     public TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
     public TalonFXConfiguration elevatorConfig = new TalonFXConfiguration();
+    public TalonFXConfiguration climberConfig = new TalonFXConfiguration();
 
     public CTREConfigs(){
         /** Swerve CANCoder Configuration */
@@ -63,5 +64,9 @@ public final class CTREConfigs {
         /* Motor Inverts and Neutral Mode */
         elevatorConfig.MotorOutput.Inverted = Constants.Elevator.elevatorMotorInvert;
         elevatorConfig.MotorOutput.NeutralMode = Constants.Elevator.elevatorMotorNeutralMode;
+
+        /* Climb Motor Configuration */
+        climberConfig.MotorOutput.Inverted = Constants.ClimberConstants.climbMotorInvert;
+        climberConfig.MotorOutput.NeutralMode = Constants.ClimberConstants.climbMotorNeutralMode;
     }
 }

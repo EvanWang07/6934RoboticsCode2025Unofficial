@@ -130,6 +130,27 @@ public final class Constants {
         /* Beam Breaker Configs */
         public static final int beamBreakerChannel = 9;
     }
+
+    public static final class ClimberConstants {
+        /* Climber Mechanism Details */
+        public static final double climberGearRatio = 1;
+
+        /* Climber Motor Configs */
+        public static final int climbMotorID = 99; // TEMPORARY
+        public static final InvertedValue climbMotorInvert = InvertedValue.Clockwise_Positive;
+        public static final NeutralModeValue climbMotorNeutralMode = NeutralModeValue.Brake;
+
+        /* Climber Starting Location & Bounds */
+        public static final double climberStartingPosition = 0; // Starting position for the climb motor (Rotations)
+        public static final double minimumClimberPosition = 0; // In rotations
+        public static final double maxClimberPosition = 1; // In rotations
+
+        public static final double climberLowerBound = minimumClimberPosition * climberGearRatio;
+        public static final double climberUpperBound = maxClimberPosition * climberGearRatio;
+
+        /* Climbing */
+        public static final double maxClimberVoltage = 4;
+    }
     
     public static final class GameField {
         /* Robot Space Offset (General) */
