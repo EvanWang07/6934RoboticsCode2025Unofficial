@@ -26,6 +26,9 @@ public final class Constants {
         public static final double weaponStickDeadband = 0.1;
 
         public static final double driveSlowModeMultiplier = 0.1;
+
+        /* Robot Starting Position */
+        public static final Pose2d selectedStartingPose = GameField.topBlueBargeStartingPose;
     }
 
     public static final class Vision {
@@ -38,30 +41,12 @@ public final class Constants {
         public static final int targetDetectionListSize = 10; // Amount of trials the list holds
         public static final double averageTVThreshold = 0.7; // Required targetting success rate for automatic alignment
 
-        /* Storing Distance */
-        public static final int distanceListSize = 10; // Among of distance values the list holds
-
-        /* Finding Targets */
-        public static final double targetSearchOutput = 0.25;
-
         /* Vision Alignment PID Constants */
         public static final double TXkP = 0.15;
         public static final double TXkI = 0.0;
         public static final double TXkD = 0.0;
         public static final double TXMaxSpeed = 1.0;
         public static final double TXMaxAcceleration = 0.5;
-
-        public static final double TYkP = 0.25;
-        public static final double TYkI = 0.0;
-        public static final double TYkD = 0.0;
-        public static final double TYMaxSpeed = 1.0;
-        public static final double TYMaxAcceleration = 0.5;
-
-        public static final double posekP = 0.15;
-        public static final double posekI = 0.0;
-        public static final double posekD = 0.0;
-        public static final double poseMaxSpeed = 0.5;
-        public static final double poseMaxAcceleration = 0.5;
 
         /* Alignment Error Tolerances */
         public static final double TXTolerance = 1; // Degrees
@@ -155,11 +140,11 @@ public final class Constants {
     }
     
     public static final class GameField {
-        /* Robot Starting Poses (Pose Estimation) (EXPERIMENTAL) */
-        public static final Pose2d topBlueBargeAsBluePose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180));
-        public static final Pose2d bottomBlueBargeAsBluePose = new Pose2d(8, 4.8, Rotation2d.fromDegrees(180));
-        public static final Pose2d topRedBargeAsBluePose = new Pose2d(8, 4.25, Rotation2d.fromDegrees(180));
-        public static final Pose2d bottomRedBargeAsBluePose = new Pose2d(8, 0.49, Rotation2d.fromDegrees(180));
+        /* Robot Starting Poses (Pose Estimation) (USES BLUE ALLIANCE COORDINATES!!!) */
+        public static final Pose2d topBlueBargeStartingPose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180));
+        public static final Pose2d bottomBlueBargeStartingPose = new Pose2d(8, 4.8, Rotation2d.fromDegrees(180));
+        public static final Pose2d topRedBargeStartingPose = new Pose2d(8, 4.25, Rotation2d.fromDegrees(180));
+        public static final Pose2d bottomRedBargeStartingPose = new Pose2d(8, 0.49, Rotation2d.fromDegrees(180));
 
         /* Robot Space Offset (General) */
         public static final double robotOffsetMeters = 0.863 / 2; // Half the robot side length WITH bumpers
@@ -177,6 +162,10 @@ public final class Constants {
         /* Robot Angle Offset (Reef) */
         public static final double leftMovementFieldAngle = Units.degreesToRadians(-90); // Robot angular direction of movement from forward when moving left (FACING THE REEF)
         public static final double rightMovementFieldAngle = Units.degreesToRadians(90); // Robot angular direction of movement from forward when moving right (FACING THE REEF)
+
+        /* Field Dimensions (Reefscape) */
+        public static final double fieldSizeX = Units.feetToMeters(57.573);
+        public static double fieldSizeY = Units.feetToMeters(26.417);
 
         /* April Tag Locations (Reef) */
         public static final double reefAprilTagHeights = Units.inchesToMeters(12.13);

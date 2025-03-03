@@ -3,7 +3,6 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants.Vision;
@@ -11,7 +10,6 @@ import frc.robot.Constants.GameField;
 
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
-    private static double[] cameraToTargetDistances = new double[Vision.distanceListSize];
 
     public static int getTargetID() { // Gets the target ID
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
@@ -55,29 +53,13 @@ public final class VisionInfo {
         return (BasicOperations.getSuccessRate(targetValidResults) >= Vision.averageTVThreshold);
     }
 
-    public static void updateDashboardValues() { // Sends limelight values to SmartDashboard
+    public static void updateDashboardValues(double estimatedX, double estimatedY, double estimatedYaw) { // Sends limelight values to SmartDashboard
         SmartDashboard.putBoolean("Targetable Detected: ", willTarget());
         SmartDashboard.putNumber("TX: ", getTX(false));
         SmartDashboard.putNumber("TY: ", getTY(false));
-        SmartDashboard.putNumber("Target Pose (Robot-Relative): ", getPoseTheta());
-        SmartDashboard.putNumber("Camera Distance to Target: ", getDistanceCameraToTarget(GameField.reefAprilTagHeights));
-    }
-
-    public static double getDistanceCameraToTarget(double targetHeight) { // Gets the distance from the target to the physical limelight
-        double angleInRadians = Units.degreesToRadians(Vision.limelightAngle + getTY(false));
-        double distance = Math.abs((targetHeight - Vision.limelightHeight) / Math.tan(angleInRadians));
-        BasicOperations.insertDoubleToConfinedList(cameraToTargetDistances, distance);
-        return distance;
-    }
-
-    public static double getAverageDistanceCameraToTarget(double targetHeight) { // Averages the distance from the target to the physical limelight over several trials
-        return BasicOperations.findAverageArray(cameraToTargetDistances);
-    }
-
-    public static double getDistanceCrosshairToTarget(double targetHeight) { // Gets the distance from the target to the limelight's crosshair
-        double angleInRadians = Units.degreesToRadians(getTX(false));
-        double distance = getDistanceCameraToTarget(targetHeight) * Math.tan(angleInRadians);
-        return distance;
+        SmartDashboard.putNumber("Robot X-Coordinate (Blue Origin): ", estimatedX);
+        SmartDashboard.putNumber("Robot Y-Coordinate (Blue Origin): ", estimatedY);
+        SmartDashboard.putNumber("Robot Yaw (Blue Origin): ", estimatedYaw);
     }
 
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
@@ -93,42 +75,6 @@ public final class VisionInfo {
     public static boolean isZeroPose() { // Checks robot alignment with the target regarding yaw
         boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
         return isZeroPose;
-    }
-
-    public static double getRotationalCorrectionOutput() { // Gives an rotational output value to correct tx
-        if (isHorizontallyAligned()) {
-            return 0.0;
-        } else {
-            double correctionOutput = getTX(true) * Vision.TXkP;
-            return correctionOutput;
-        }
-    }
-
-    public static double getHorizontalCorrectionOutput() { // Gives a translational (left/right) output value to correct tx
-        if (isHorizontallyAligned()) {
-            return 0;
-        } else {
-            double correctionOutput = getTX(true) * Vision.TYkP;
-            return correctionOutput;
-        }
-    }
-
-    public static double getForwardCorrectionOutput() { // Gives a translational (forward/backward) output value to correct ty
-        if (isVerticallyAligned()) {
-            return 0;
-        } else {
-            double correctionOutput = getTY(true) * Vision.TYkP;
-            return correctionOutput;
-        }
-    }
-
-    public static double getPoseCorrectionOutput() { // Gives a rotational output value to correct the robot's yaw relative to the target
-        if (isZeroPose()) {
-            return 0;
-        } else {
-            double correctionOutput = getPoseTheta() * (1.0 / 20) * Vision.posekP;
-            return correctionOutput;
-        }
     }
 
     public static Pose2d getAprilTagLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)

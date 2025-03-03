@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import frc.robot.Constants.GameField;
 
 public final class BasicOperations {
     public static double getSuccessRate(boolean[] attemptsList) {
@@ -61,5 +62,12 @@ public final class BasicOperations {
         double resultX = translatedPoseCenter.getX() + (rightOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
         double resultY = translatedPoseCenter.getY() + (rightOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
         return new Pose2d(resultX, resultY, translatedPoseCenter.getRotation());
+    }
+
+    public static Pose2d transformBlueToRedAlliancePose(Pose2d blueAlliancePose) { // Flips the blue alliance coordinates rotationally; this applies ONLY FOR REEFSCAPE!!!
+        double resultX = GameField.fieldSizeX - blueAlliancePose.getX();
+        double resultY = GameField.fieldSizeY - blueAlliancePose.getY();
+        double resultRotation = blueAlliancePose.getRotation().getDegrees() - 180;
+        return new Pose2d(resultX, resultY, Rotation2d.fromDegrees(resultRotation));
     }
 }

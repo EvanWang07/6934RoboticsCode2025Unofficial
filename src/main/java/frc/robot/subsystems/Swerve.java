@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.VisionInfo;
+import frc.robot.BasicOperations;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -33,6 +34,7 @@ public class Swerve extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
     private double speedMultiplier;
+    private Pose2d startingPose;
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.Swerve.canivoreName);
@@ -40,6 +42,13 @@ public class Swerve extends SubsystemBase {
         gyro.setYaw(0);
 
         speedMultiplier = 1;
+
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+            startingPose = BasicOperations.transformBlueToRedAlliancePose(Constants.QuickTuning.selectedStartingPose);
+        } else {
+            startingPose = Constants.QuickTuning.selectedStartingPose;
+        }
 
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
@@ -51,7 +60,7 @@ public class Swerve extends SubsystemBase {
         Timer.delay(1);
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
         swervePoseEstimator = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions(), 
-                                                           Constants.GameField.topBlueBargeAsBluePose, VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), 
+                                                           startingPose, VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), 
                                                            VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30))); // EXPERIMENTAL
         System.out.println("Swerve subsystem loaded!");
     
@@ -70,7 +79,6 @@ public class Swerve extends SubsystemBase {
                     // This will flip the path being followed to the red side of the field.
                     // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
 
-                    var alliance = DriverStation.getAlliance();
                     if (alliance.isPresent()) {
                         return alliance.get() == DriverStation.Alliance.Red;
                     }
@@ -81,8 +89,7 @@ public class Swerve extends SubsystemBase {
         } catch (Exception e) {
             // Handle exception as needed
             e.printStackTrace();
-        }
-        
+        }    
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -202,8 +209,7 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         updateSwervePoseEstimator(); // EXPERIMENTAL
         
-        VisionInfo.updateDashboardValues(); // Puts relevant vision values into SmartDashboard
-        // System.out.println(swervePoseEstimator.getEstimatedPosition().getX() + " " + swervePoseEstimator.getEstimatedPosition().getY() + " " + swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
+        VisionInfo.updateDashboardValues(swervePoseEstimator.getEstimatedPosition().getX(), swervePoseEstimator.getEstimatedPosition().getY(), swervePoseEstimator.getEstimatedPosition().getRotation().getDegrees()); // Puts relevant vision values into SmartDashboard
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
