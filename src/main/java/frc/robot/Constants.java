@@ -141,8 +141,10 @@ public final class Constants {
         public static final NeutralModeValue climbMotorNeutralMode = NeutralModeValue.Brake;
 
         /* Climber Starting Location & Bounds */
-        public static final double climberStartingPosition = 0; // Starting position for the climb motor (Rotations)
-        public static final double minimumClimberPosition = 0; // In rotations
+        public static final double climberStartingPosition = 0; // Starting position for the climb motor (Rotations) 
+        // Keep in mind the way that mechanical has it, It will never go forward after it goes back due to a ratchet system.
+        // This is because after we hang, the robot (the motors) turns off, and the climb needs to stay instead of backtrack due to weight. - Lukas
+        public static final double minimumClimberPosition = 0; // In rotations 
         public static final double maxClimberPosition = 1; // In rotations
 
         public static final double climberLowerBound = minimumClimberPosition * climberGearRatio;

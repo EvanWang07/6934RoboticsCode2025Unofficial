@@ -36,6 +36,7 @@ public class RobotContainer {
 
     /* Weapon Controls */
     private final int elevatorAxis = XboxController.Axis.kLeftY.value;
+    private final int mailboxAxis = XboxController.Axis.kRightY.value;
 
     /* Driver Buttons */
     private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
@@ -56,6 +57,8 @@ public class RobotContainer {
     private final JoystickButton scoreLevelOne = new JoystickButton(weapons, XboxController.Button.kB.value);
     private final JoystickButton scoreLevelTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
     private final JoystickButton scoreLevelThree = new JoystickButton(weapons, XboxController.Button.kY.value);
+
+    
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -90,6 +93,13 @@ public class RobotContainer {
             new TeleopElevator(
                 e_Elevator,
                 () -> -weapons.getRawAxis(elevatorAxis)
+            )
+        );
+
+        m_Mailbox.setDefaultCommand(
+            new TeleopMailbox(
+                m_Mailbox,
+                () -> -weapons.getRawAxis(mailboxAxis)
             )
         );
 
