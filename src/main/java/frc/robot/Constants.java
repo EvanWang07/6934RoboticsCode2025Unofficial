@@ -155,6 +155,12 @@ public final class Constants {
     }
     
     public static final class GameField {
+        /* Robot Starting Poses (Pose Estimation) (EXPERIMENTAL) */
+        public static final Pose2d topBlueBargeAsBluePose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180));
+        public static final Pose2d bottomBlueBargeAsBluePose = new Pose2d(8, 4.8, Rotation2d.fromDegrees(180));
+        public static final Pose2d topRedBargeAsBluePose = new Pose2d(8, 4.25, Rotation2d.fromDegrees(180));
+        public static final Pose2d bottomRedBargeAsBluePose = new Pose2d(8, 0.49, Rotation2d.fromDegrees(180));
+
         /* Robot Space Offset (General) */
         public static final double robotOffsetMeters = 0.863 / 2; // Half the robot side length WITH bumpers
         public static final double additionalOffsetMeters = 0.025; // Additional distance from the wall
@@ -276,9 +282,6 @@ public final class Constants {
         public static final String canivoreName = "Second CANivor<3";
 
         public static final COTSTalonFXSwerveConstants chosenModule = COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
-
-        /* Robot Starting Poses (Pose Estimation) */
-        public static final Pose2d leftWallPose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180)); // EXPERIMENTAL
 
         /* Drivetrain Constants */
         public static final double robotSideLength = Units.inchesToMeters(28);

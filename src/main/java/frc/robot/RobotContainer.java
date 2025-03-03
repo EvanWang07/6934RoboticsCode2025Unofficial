@@ -58,8 +58,6 @@ public class RobotContainer {
     private final JoystickButton scoreLevelTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
     private final JoystickButton scoreLevelThree = new JoystickButton(weapons, XboxController.Button.kY.value);
 
-    
-
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final Elevator e_Elevator = new Elevator();
@@ -185,7 +183,7 @@ public class RobotContainer {
                 if (endPose != null) {
                     double originalSpeed = s_Swerve.getSpeedMultiplier();
                     s_Swerve.setSpeedMultiplier(1);
-                    
+
                     List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(startPose, endPose);
 
                     PathPlannerPath pathToRightGoal = new PathPlannerPath(

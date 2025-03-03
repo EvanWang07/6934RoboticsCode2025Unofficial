@@ -51,7 +51,7 @@ public class Swerve extends SubsystemBase {
         Timer.delay(1);
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
         swervePoseEstimator = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions(), 
-                                                           Constants.Swerve.leftWallPose, VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), 
+                                                           Constants.GameField.topBlueBargeAsBluePose, VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), 
                                                            VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30))); // EXPERIMENTAL
         System.out.println("Swerve subsystem loaded!");
     
