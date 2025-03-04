@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import frc.robot.Constants.GameField;
 
 public final class BasicOperations {
@@ -52,15 +53,23 @@ public final class BasicOperations {
         return new Pose2d(resultX, resultY, Rotation2d.fromDegrees(resultAngle));
     }
     
-    public static Pose2d findTranslatedPoseLeft(Pose2d translatedPoseCenter, double leftOffset) { // Use findTranslatedPoseCenter to find translatedPoseCenter
-        double resultX = translatedPoseCenter.getX() + (leftOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle));
-        double resultY = translatedPoseCenter.getY() + (leftOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle));
+    public static Pose2d findTranslatedPoseLeft(Pose2d translatedPoseCenter, double leftOffset, boolean accountForReefRotation) { // Use findTranslatedPoseCenter to find translatedPoseCenter
+        double additionalAngleOffset = 0;
+        if (accountForReefRotation) {
+            additionalAngleOffset = Units.degreesToRadians(180);
+        }
+        double resultX = translatedPoseCenter.getX() + (leftOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle + additionalAngleOffset));
+        double resultY = translatedPoseCenter.getY() + (leftOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.leftMovementFieldAngle + additionalAngleOffset));
         return new Pose2d(resultX, resultY, translatedPoseCenter.getRotation());
     }
 
-    public static Pose2d findTranslatedPoseRight(Pose2d translatedPoseCenter, double rightOffset) { // Use findTranslatedPoseCenter to find translatedPoseCenter
-        double resultX = translatedPoseCenter.getX() + (rightOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
-        double resultY = translatedPoseCenter.getY() + (rightOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle));
+    public static Pose2d findTranslatedPoseRight(Pose2d translatedPoseCenter, double rightOffset, boolean accountForReefRotation) { // Use findTranslatedPoseCenter to find translatedPoseCenter
+        double additionalAngleOffset = 0;
+        if (accountForReefRotation) {
+            additionalAngleOffset = Units.degreesToRadians(180);
+        }
+        double resultX = translatedPoseCenter.getX() + (rightOffset * Math.cos(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle + additionalAngleOffset));
+        double resultY = translatedPoseCenter.getY() + (rightOffset * Math.sin(translatedPoseCenter.getRotation().getRadians() + Constants.GameField.rightMovementFieldAngle + additionalAngleOffset));
         return new Pose2d(resultX, resultY, translatedPoseCenter.getRotation());
     }
 
