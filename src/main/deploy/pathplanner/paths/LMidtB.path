@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.148243094,
-        "y": 7.019353183
+        "x": 8.0,
+        "y": 4.8
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1482430939999997,
-        "y": 7.019353183
+        "x": 8.725979525181895,
+        "y": 4.62592996755223
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.800844969,
-        "y": 5.111780969
+        "x": 3.199457315,
+        "y": 5.7995
       },
       "prevControl": {
-        "x": 2.800844969,
-        "y": 5.111780969
+        "x": 3.9389999999999996,
+        "y": 6.209
+      },
+      "nextControl": {
+        "x": 2.5612663649872434,
+        "y": 5.44612054086814
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.199457315,
+        "y": 3.63982728
+      },
+      "prevControl": {
+        "x": 2.4472500000000004,
+        "y": 3.557
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +58,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "LCS to Reef",
+  "folder": "LMid to Reef",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -54.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
