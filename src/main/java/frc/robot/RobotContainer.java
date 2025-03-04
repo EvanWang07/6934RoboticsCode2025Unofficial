@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,6 +23,7 @@ import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.GameField;
 import frc.robot.Constants.QuickTuning;
 
 public class RobotContainer {
@@ -39,14 +41,15 @@ public class RobotContainer {
     private final int mailboxAxis = XboxController.Axis.kRightY.value;
 
     /* Driver Buttons */
-    private final JoystickButton speedUpRobot = new JoystickButton(driver, XboxController.Button.kStart.value);
-    private final JoystickButton slowDownRobot = new JoystickButton(driver, XboxController.Button.kBack.value);
+    private final JoystickButton useLeftStationAutoPosition = new JoystickButton(driver, XboxController.Button.kBack.value);
+    private final JoystickButton useRightStationAutoPosition = new JoystickButton(driver, XboxController.Button.kStart.value);
 
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton toggleSlowMode = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
-    private final JoystickButton useCenterAutoPosition = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton useRightAutoPosition = new JoystickButton(driver, XboxController.Button.kB.value);
-    private final JoystickButton useLeftAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton useCenterReefAutoPosition = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton useRightReefAutoPosition = new JoystickButton(driver, XboxController.Button.kB.value);
+    private final JoystickButton useLeftReefAutoPosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
 
     /* Weapon Buttons */
@@ -109,10 +112,76 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        speedUpRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(1)));
-        slowDownRobot.onTrue(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier)));
 
-        useLeftAutoPosition.onTrue(Commands.runOnce(() -> {
+        toggleSlowMode.onTrue(Commands.runOnce(() -> {
+            boolean isSlow = (s_Swerve.getSpeedMultiplier() == QuickTuning.driveSlowModeMultiplier);
+            if (isSlow) {
+                s_Swerve.setSpeedMultiplier(1);
+            } else {
+                s_Swerve.setSpeedMultiplier(QuickTuning.driveSlowModeMultiplier);
+            }
+        }));
+
+        useLeftStationAutoPosition.whileTrue(Commands.runOnce(() -> {
+            double originalSpeed = s_Swerve.getSpeedMultiplier();
+            s_Swerve.setSpeedMultiplier(1);
+
+            Pose2d pathfindTargetPose = GameField.robotNearLeftStation;
+            Pose2d plannedPathEndPose = GameField.blueStationRobotCenterThirteen;
+
+            PathConstraints pathfindingConstraints = new PathConstraints(2, 3, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
+
+            var alliance = DriverStation.getAlliance();
+            if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+                pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
+                plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
+            }
+
+            List<Waypoint> plannedPathWaypoints = PathPlannerPath.waypointsFromPoses(pathfindTargetPose, plannedPathEndPose);
+
+            PathPlannerPath pathToLeftStation = new PathPlannerPath(
+                plannedPathWaypoints, 
+                plannedPathConstraints,
+                null, // Ideal starting state can be null for on-the-fly paths
+                new GoalEndState(0.0, plannedPathEndPose.getRotation())
+            );
+
+            pathToLeftStation.preventFlipping = true;
+
+            AutoBuilder.pathfindThenFollowPath(pathToLeftStation, pathfindingConstraints).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+        }));
+        useRightStationAutoPosition.whileTrue(Commands.runOnce(() -> {
+            double originalSpeed = s_Swerve.getSpeedMultiplier();
+            s_Swerve.setSpeedMultiplier(1);
+
+            Pose2d pathfindTargetPose = GameField.robotNearRightStation;
+            Pose2d plannedPathEndPose = GameField.blueStationRobotCenterTwelve;
+
+            PathConstraints pathfindingConstraints = new PathConstraints(2, 3, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
+
+            var alliance = DriverStation.getAlliance();
+            if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+                pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
+                plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
+            }
+
+            List<Waypoint> plannedPathWaypoints = PathPlannerPath.waypointsFromPoses(pathfindTargetPose, plannedPathEndPose);
+
+            PathPlannerPath pathToRightStation = new PathPlannerPath(
+                plannedPathWaypoints, 
+                plannedPathConstraints,
+                null, // Ideal starting state can be null for on-the-fly paths
+                new GoalEndState(0.0, plannedPathEndPose.getRotation())
+            );
+
+            pathToRightStation.preventFlipping = true;
+
+            AutoBuilder.pathfindThenFollowPath(pathToRightStation, pathfindingConstraints).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+        }));
+
+        useLeftReefAutoPosition.onTrue(Commands.runOnce(() -> {
             if (VisionInfo.willTarget()) {
                 int detectedTagID = VisionInfo.getTargetID();
 
@@ -142,7 +211,7 @@ public class RobotContainer {
                 }
             }
         }));
-        useCenterAutoPosition.onTrue(Commands.runOnce(() -> {
+        useCenterReefAutoPosition.onTrue(Commands.runOnce(() -> {
             if (VisionInfo.willTarget()) {
                 int detectedTagID = VisionInfo.getTargetID();
 
@@ -172,7 +241,7 @@ public class RobotContainer {
                 }
             }
         }));
-        useRightAutoPosition.onTrue(Commands.runOnce(() -> {
+        useRightReefAutoPosition.onTrue(Commands.runOnce(() -> {
             if (VisionInfo.willTarget()) {
                 int detectedTagID = VisionInfo.getTargetID();
 

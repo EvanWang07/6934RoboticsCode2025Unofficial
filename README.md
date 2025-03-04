@@ -23,6 +23,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Moved the auto-position code to a dedicated command file <sup>2/24/25</sup>
 - Implemented MegaTag 2 for Limelight <sup>3/1/25</sup>
 - Revamped auto-position code to use on-the-fly path generation again <sup>3/1/25</sup>
+- Added an experimental pathfinding + on-the-fly path code for driving the robot to the coral station <sup>3/4/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
@@ -76,18 +77,21 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Robot-Centric Driving: *HOLD* Left Bumper + *MOVE* Left Joystick (x & y)  
 - Rotating: *MOVE* Right Joystick (x)  
 - Reset Gyro (Field-Centric Driving ONLY): *PRESS* Y-Button  
-- Toggle Slow Mode OFF: *PRESS* Start-Button  <br> 
-- Toggle Slow Mode ON: *PRESS* Back-Button  <br> 
-- Auto-Position (LEFT): *PRESS* X-Button  <br>
-- Auto-Position (CENTER): *PRESS* A-Button  <br>
-- Auto-Position (RIGHT): *PRESS* B-Button  <br>
+- Toggle Slow Mode: *PRESS* Right Button  <br> 
+- Auto-Position (LEFT REEF): *PRESS* X-Button  <br>
+- Auto-Position (CENTER REEF): *PRESS* A-Button  <br>
+- Auto-Position (RIGHT REEF): *PRESS* B-Button  <br>
+- Auto-Position (LEFT STATION): *HOLD* Back-Button  <br>
+- Auto-Position (RIGHT STATION): *HOLD* Start-Button  <br>
+
 ### Weapons Controller (**PORT 1**):
 - Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
+- Manually Operate End-Effector (Intake/Score): *MOVE* Right Joystick (y)
 - Automatically Lift/Lower Elevator to Bottom: *PRESS* A-Button
 - Automatically Lift/Lower Elevator & Score at Reef Level 1: *PRESS* B-Button (*REQUIRES* Coral)
 - Automatically Lift/Lower Elevator & Score at Reef Level 2: *PRESS* X-Button (*REQUIRES* Coral)
 - Automatically Lift/Lower Elevator & Score at Reef Level 3: *PRESS* Y-Button (*REQUIRES* Coral)
 - Intake Coral: *HOLD* Left Bumper
-- Score Coral: *HOLD* Right Bumper
+- Manually Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 3/2/25 by Evan Wang.
+[^1]: Last updated 3/4/25 by Evan Wang.
