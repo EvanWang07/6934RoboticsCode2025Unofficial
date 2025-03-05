@@ -247,15 +247,15 @@ public final class Constants {
         public static final Pose2d blueStationTagTwelve = new Pose2d(Units.inchesToMeters(33.51), Units.inchesToMeters(25.80), new Rotation2d(Units.degreesToRadians(54)));
         public static final Pose2d blueStationTagThirteen = new Pose2d(Units.inchesToMeters(33.51), Units.inchesToMeters(291.20), new Rotation2d(Units.degreesToRadians(306)));
 
-        /* Goal Robot PATHFIND Locations (Coral Station) (USES BLUE ALLIANCE COORDINATES!!!) */
-        public static final Pose2d robotNearLeftStation = BasicOperations.findTranslatedPoseCenter(blueStationTagThirteen, totalRobotOffsetMeters + 1, 0);
-        public static final Pose2d robotNearRightStation = BasicOperations.findTranslatedPoseCenter(blueStationTagTwelve, totalRobotOffsetMeters + 1, 0);
-
         /* Goal Robot Locations (CENTER Coral Station) */
         public static final Pose2d redStationRobotCenterOne = BasicOperations.findTranslatedPoseCenter(redStationTagOne, totalRobotOffsetMeters, 0);
         public static final Pose2d redStationRobotCenterTwo = BasicOperations.findTranslatedPoseCenter(redStationTagTwo, totalRobotOffsetMeters, 0);
         public static final Pose2d blueStationRobotCenterTwelve = BasicOperations.findTranslatedPoseCenter(blueStationTagTwelve, totalRobotOffsetMeters, 0);
         public static final Pose2d blueStationRobotCenterThirteen = BasicOperations.findTranslatedPoseCenter(blueStationTagThirteen, totalRobotOffsetMeters, 0);
+
+        /* Goal Robot PATHFIND Locations (Coral Station) (USES BLUE ALLIANCE COORDINATES!!!) */
+        public static final Pose2d robotNearLeftStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterThirteen, 1.5, 0);
+        public static final Pose2d robotNearRightStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterTwelve, 1.5, 0);
 
         /* Goal Robot Locations (LEFT Coral Station) */
         public static final Pose2d redStationRobotLeftOne = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterOne, leftStationOffsetMeters, false);

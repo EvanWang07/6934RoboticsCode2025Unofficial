@@ -137,46 +137,51 @@ public class RobotContainer {
             s_Swerve.setSpeedMultiplier(1);
 
             Pose2d pathfindTargetPose = GameField.robotNearLeftStation;
-            Pose2d plannedPathEndPose = GameField.blueStationRobotCenterThirteen;
+            // Pose2d plannedPathEndPose = GameField.blueStationRobotCenterThirteen;
 
-            PathConstraints pathfindingConstraints = new PathConstraints(2, 3, Units.degreesToRadians(540), Units.degreesToRadians(720));
-            PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            PathConstraints pathfindingConstraints = new PathConstraints(1.5, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            // PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
 
             var alliance = DriverStation.getAlliance();
             if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
                 pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
-                plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
+                // plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
             }
 
+            /*
             List<Waypoint> plannedPathWaypoints = PathPlannerPath.waypointsFromPoses(pathfindTargetPose, plannedPathEndPose);
 
+            
             PathPlannerPath pathToLeftStation = new PathPlannerPath(
                 plannedPathWaypoints, 
                 plannedPathConstraints,
                 null, // Ideal starting state can be null for on-the-fly paths
                 new GoalEndState(0.0, plannedPathEndPose.getRotation())
             );
+            
 
             pathToLeftStation.preventFlipping = true;
+            */
 
-            AutoBuilder.pathfindThenFollowPath(pathToLeftStation, pathfindingConstraints).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+            AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
         }));
         useRightStationAutoPosition.whileTrue(Commands.runOnce(() -> {
             double originalSpeed = s_Swerve.getSpeedMultiplier();
             s_Swerve.setSpeedMultiplier(1);
 
             Pose2d pathfindTargetPose = GameField.robotNearRightStation;
-            Pose2d plannedPathEndPose = GameField.blueStationRobotCenterTwelve;
+            // Pose2d plannedPathEndPose = GameField.blueStationRobotCenterTwelve;
 
-            PathConstraints pathfindingConstraints = new PathConstraints(2, 3, Units.degreesToRadians(540), Units.degreesToRadians(720));
-            PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            PathConstraints pathfindingConstraints = new PathConstraints(1.5, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
+            // PathConstraints plannedPathConstraints = new PathConstraints(1.5, 1.25, Units.degreesToRadians(540), Units.degreesToRadians(720));
 
             var alliance = DriverStation.getAlliance();
             if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
                 pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
-                plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
+                // plannedPathEndPose = BasicOperations.transformBlueToRedAlliancePose(plannedPathEndPose);
             }
 
+            /* 
             List<Waypoint> plannedPathWaypoints = PathPlannerPath.waypointsFromPoses(pathfindTargetPose, plannedPathEndPose);
 
             PathPlannerPath pathToRightStation = new PathPlannerPath(
@@ -187,8 +192,9 @@ public class RobotContainer {
             );
 
             pathToRightStation.preventFlipping = true;
+            */
 
-            AutoBuilder.pathfindThenFollowPath(pathToRightStation, pathfindingConstraints).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+            AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
         }));
 
         useLeftReefAutoPosition.onTrue(Commands.runOnce(() -> {

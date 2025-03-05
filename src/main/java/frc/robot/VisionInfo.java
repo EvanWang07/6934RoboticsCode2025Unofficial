@@ -54,12 +54,15 @@ public final class VisionInfo {
     }
 
     public static void updateDashboardValues(double estimatedX, double estimatedY, double estimatedYaw) { // Sends limelight values to SmartDashboard
-        SmartDashboard.putBoolean("Targetable Detected: ", willTarget());
-        SmartDashboard.putNumber("TX: ", getTX(false));
-        SmartDashboard.putNumber("TY: ", getTY(false));
-        SmartDashboard.putNumber("Robot X-Coordinate (Blue Origin): ", estimatedX);
-        SmartDashboard.putNumber("Robot Y-Coordinate (Blue Origin): ", estimatedY);
-        SmartDashboard.putNumber("Robot Yaw (Blue Origin): ", estimatedYaw);
+        SmartDashboard.putBoolean("Targetable Detected", willTarget());
+        SmartDashboard.putNumber("Robot X-Coordinate (Blue Origin)", estimatedX);
+        SmartDashboard.putNumber("Robot Y-Coordinate (Blue Origin)", estimatedY);
+        SmartDashboard.putNumber("Robot Yaw (Blue Origin)", estimatedYaw);
+        if (hasValidTargets()) {
+            SmartDashboard.putNumber("Target ID", getTargetID());
+        } else {
+            SmartDashboard.putNumber("Target ID", 0);
+        }
     }
 
     public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
