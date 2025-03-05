@@ -40,6 +40,8 @@ public class RobotContainer {
     private final int elevatorAxis = XboxController.Axis.kLeftY.value;
     private final int mailboxAxis = XboxController.Axis.kRightY.value;
 
+    private final int climberTrigger = XboxController.Axis.kLeftTrigger.value;
+
     /* Driver Buttons */
     private final JoystickButton useLeftStationAutoPosition = new JoystickButton(driver, XboxController.Button.kBack.value);
     private final JoystickButton useRightStationAutoPosition = new JoystickButton(driver, XboxController.Button.kStart.value);
@@ -65,6 +67,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     private final Elevator e_Elevator = new Elevator();
     private final Mailbox m_Mailbox = new Mailbox();
+    private final Climb c_Climb = new Climb();
 
     /* Robot Container */
     public RobotContainer() {
@@ -101,6 +104,13 @@ public class RobotContainer {
             new TeleopMailbox(
                 m_Mailbox,
                 () -> -weapons.getRawAxis(mailboxAxis)
+            )
+        );
+
+        c_Climb.setDefaultCommand(
+            new TeleopClimb(
+                c_Climb, 
+                () -> weapons.getRawAxis(climberTrigger)
             )
         );
 

@@ -27,13 +27,10 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
-- Robot end-effector motor sometimes loses control
-- Robot autonomous is UNTESTED with the new pose estimation methods
+- Robot pathfinding is inverted and possibly going into obstacles
 
 ## To-Do List:  
 - [ ] Implement auto-position into auto
-- [ ] Possibly use a tx-based PID to help make auto-position more accurate
-- [ ] Implement deep-climb
 - [ ] Clean up the overuse of unit conversions in the elevator PID code
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
@@ -77,16 +74,17 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Robot-Centric Driving: *HOLD* Left Bumper + *MOVE* Left Joystick (x & y)  
 - Rotating: *MOVE* Right Joystick (x)  
 - Reset Gyro (Field-Centric Driving ONLY): *PRESS* Y-Button  
-- Toggle Slow Mode: *PRESS* Right Button  <br> 
-- Auto-Position (LEFT REEF): *PRESS* X-Button  <br>
-- Auto-Position (CENTER REEF): *PRESS* A-Button  <br>
-- Auto-Position (RIGHT REEF): *PRESS* B-Button  <br>
-- Auto-Position (LEFT STATION): *HOLD* Back-Button  <br>
-- Auto-Position (RIGHT STATION): *HOLD* Start-Button  <br>
+- Toggle Slow Mode: *PRESS* Right Button
+- Auto-Position (LEFT REEF): *PRESS* X-Button
+- Auto-Position (CENTER REEF): *PRESS* A-Button
+- Auto-Position (RIGHT REEF): *PRESS* B-Button
+- Auto-Position (LEFT STATION): *HOLD* Back-Button
+- Auto-Position (RIGHT STATION): *HOLD* Start-Button
 
 ### Weapons Controller (**PORT 1**):
 - Manually Lift/Lower Elevator: *MOVE* Left Joystick (y)
 - Manually Operate End-Effector (Intake/Score): *MOVE* Right Joystick (y)
+- Climb: *MOVE* Left Trigger
 - Automatically Lift/Lower Elevator to Bottom: *PRESS* A-Button
 - Automatically Lift/Lower Elevator & Score at Reef Level 1: *PRESS* B-Button (*REQUIRES* Coral)
 - Automatically Lift/Lower Elevator & Score at Reef Level 2: *PRESS* X-Button (*REQUIRES* Coral)
