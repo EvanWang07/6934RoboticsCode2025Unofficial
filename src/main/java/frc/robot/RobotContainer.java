@@ -147,14 +147,8 @@ public class RobotContainer {
             }
 
             Command pathFindingCommand = AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed)));
-            BooleanSupplier continuePathfinding = () -> useLeftStationAutoPosition.getAsBoolean();
 
-            if (continuePathfinding.getAsBoolean()) {
-                pathFindingCommand.schedule();
-            } else {
-                pathFindingCommand.cancel();
-                s_Swerve.setSpeedMultiplier(originalSpeed);
-            }
+            pathFindingCommand.schedule();
         }));
         useRightStationAutoPosition.whileTrue(Commands.runOnce(() -> {
             double originalSpeed = s_Swerve.getSpeedMultiplier();
@@ -169,15 +163,9 @@ public class RobotContainer {
                 pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
             }
 
-            BooleanSupplier continuePathfinding = () -> useLeftStationAutoPosition.getAsBoolean();
             Command pathFindingCommand = AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed)));
-            
-            if (continuePathfinding.getAsBoolean()) {
-                pathFindingCommand.schedule();
-            } else {
-                pathFindingCommand.cancel();
-                s_Swerve.setSpeedMultiplier(originalSpeed);
-            }
+
+            pathFindingCommand.schedule();
         }));
 
         useLeftReefAutoPosition.onTrue(Commands.runOnce(() -> {
