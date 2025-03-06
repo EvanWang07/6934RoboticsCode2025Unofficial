@@ -118,7 +118,7 @@ public final class Constants {
 
     public static final class ClimberConstants {
         /* Climber Mechanism Details */
-        public static final double climberGearRatio = 1;
+        public static final double climberGearRatio = 225; // TODO: This is an estimate! Change this to a more accurate value
 
         /* Climber Motor Configs */
         public static final int climbMotorID = 11;

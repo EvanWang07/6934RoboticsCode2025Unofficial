@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class Climb extends SubsystemBase {
-    private TalonFX climbMotor = new TalonFX(Constants.ClimberConstants.climbMotorID, Constants.Swerve.canivoreName);
+    private TalonFX climbMotor = new TalonFX(Constants.ClimberConstants.climbMotorID);
 
     public Climb() {
         climbMotor.getConfigurator().apply(Robot.ctreConfigs.climberConfig);
