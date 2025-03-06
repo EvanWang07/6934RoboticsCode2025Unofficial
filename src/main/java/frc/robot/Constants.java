@@ -107,8 +107,8 @@ public final class Constants {
         public static final int MailboxMotorID = 62;
     
         /* Intake & Scoring */
-        public static final double intakeVoltage = 3;
-        public static final double scoringVoltage = 2.25;
+        public static final double intakeVoltage = 4;
+        public static final double scoringVoltage = 2.5;
     
         public static final double scoringLeewayTime = 0.65; // In seconds
     
@@ -122,7 +122,7 @@ public final class Constants {
 
         /* Climber Motor Configs */
         public static final int climbMotorID = 11;
-        public static final InvertedValue climbMotorInvert = InvertedValue.Clockwise_Positive;
+        public static final InvertedValue climbMotorInvert = InvertedValue.CounterClockwise_Positive;
         public static final NeutralModeValue climbMotorNeutralMode = NeutralModeValue.Brake;
 
         /* Climber Starting Location & Bounds */
@@ -136,7 +136,7 @@ public final class Constants {
         public static final double climberUpperBound = maxClimberPosition * climberGearRatio;
 
         /* Climbing */
-        public static final double maxClimberVoltage = 4;
+        public static final double maxClimberVoltage = 8;
     }
     
     public static final class GameField {

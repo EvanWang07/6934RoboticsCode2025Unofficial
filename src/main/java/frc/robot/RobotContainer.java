@@ -308,6 +308,14 @@ public class RobotContainer {
     /* Autonomous Code */
     public Command getAutonomousCommand() {
         s_Swerve.setSpeedMultiplier(1);
-        return new PathPlannerAuto("LWalltItLCStJ");
+        
+        var alliance = DriverStation.getAlliance();
+        Pose2d startingPose = Constants.QuickTuning.selectedStartingPose;
+        if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+            startingPose = BasicOperations.transformBlueToRedAlliancePose(Constants.QuickTuning.selectedStartingPose);
+        }
+        s_Swerve.setSwervePoseEstimate(startingPose);
+
+        return new PathPlannerAuto("Efficient LWalltItLCStJ");
     }
 }

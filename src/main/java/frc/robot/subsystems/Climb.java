@@ -16,11 +16,14 @@ public class Climb extends SubsystemBase {
     }
 
     public void setClimberSpeed(double newSpeed) {
-        if (checkClimberMovement(newSpeed)) {
+        /*if (checkClimberMovement(newSpeed)) {
             climbMotor.setVoltage(Constants.ClimberConstants.maxClimberVoltage * newSpeed);
         } else {
             brakeClimber();
         }
+            */
+        climbMotor.setVoltage(Constants.ClimberConstants.maxClimberVoltage * newSpeed);
+
     }
 
     public void brakeClimber() {
