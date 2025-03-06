@@ -4,11 +4,14 @@ import frc.robot.SwerveModule;
 import frc.robot.VisionInfo;
 import frc.robot.BasicOperations;
 import frc.robot.Constants;
+import frc.robot.Constants.GameField;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+
+import java.util.Set;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
@@ -23,10 +26,13 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.DeferredCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.path.PathConstraints;
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry; // Keep this for now
@@ -202,6 +208,34 @@ public class Swerve extends SubsystemBase {
 
     public Pose2d getSwervePoseEstimation() {
         return swervePoseEstimator.getEstimatedPosition();
+    }
+
+    public Command pathfindToLeftStation() {
+        setSpeedMultiplier(1);
+        Pose2d pathfindTargetPose = GameField.robotNearLeftStation;
+
+        PathConstraints pathfindingConstraints = new PathConstraints(1.25, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
+
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+            return new DeferredCommand(() -> AutoBuilder.pathfindToPose(BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose), pathfindingConstraints), Set.of(this));
+        } else {
+            return new DeferredCommand(() -> AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints), Set.of(this));
+        }
+    }
+
+    public Command pathfindToRightStation() {
+        setSpeedMultiplier(1);
+        Pose2d pathfindTargetPose = GameField.robotNearRightStation;
+
+        PathConstraints pathfindingConstraints = new PathConstraints(1.25, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
+
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+            return new DeferredCommand(() -> AutoBuilder.pathfindToPose(BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose), pathfindingConstraints), Set.of(this));
+        } else {
+            return new DeferredCommand(() -> AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints), Set.of(this));
+        }
     }
 
     @Override
