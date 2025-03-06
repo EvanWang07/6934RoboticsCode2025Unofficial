@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -24,7 +23,6 @@ import com.pathplanner.lib.path.Waypoint;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.Constants.GameField;
 import frc.robot.Constants.QuickTuning;
 
 public class RobotContainer {
@@ -133,40 +131,8 @@ public class RobotContainer {
             }
         }));
 
-        useLeftStationAutoPosition.whileTrue(Commands.runOnce(() -> {
-            double originalSpeed = s_Swerve.getSpeedMultiplier();
-            s_Swerve.setSpeedMultiplier(1);
-
-            Pose2d pathfindTargetPose = GameField.robotNearLeftStation;
-
-            PathConstraints pathfindingConstraints = new PathConstraints(1.25, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
-
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
-                pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
-            }
-
-            Command pathFindingCommand = AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed)));
-
-            pathFindingCommand.schedule();
-        }));
-        useRightStationAutoPosition.whileTrue(Commands.runOnce(() -> {
-            double originalSpeed = s_Swerve.getSpeedMultiplier();
-            s_Swerve.setSpeedMultiplier(1);
-
-            Pose2d pathfindTargetPose = GameField.robotNearRightStation;
-
-            PathConstraints pathfindingConstraints = new PathConstraints(1.25, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
-
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
-                pathfindTargetPose = BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose);
-            }
-
-            Command pathFindingCommand = AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints, 0).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed)));
-
-            pathFindingCommand.schedule();
-        }));
+        useLeftStationAutoPosition.whileTrue(s_Swerve.pathfindToLeftStation());
+        useRightStationAutoPosition.whileTrue(s_Swerve.pathfindToRightStation());
 
         useLeftReefAutoPosition.onTrue(Commands.runOnce(() -> {
             if (VisionInfo.willTarget()) {
