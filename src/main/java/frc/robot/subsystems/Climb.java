@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class Climb extends SubsystemBase {
-    private TalonFX climbMotor = new TalonFX(Constants.ClimberConstants.climbMotorID, Constants.Swerve.canivoreName);
+    private TalonFX climbMotor = new TalonFX(Constants.ClimberConstants.climbMotorID);
 
     public Climb() {
         climbMotor.getConfigurator().apply(Robot.ctreConfigs.climberConfig);
@@ -16,11 +16,14 @@ public class Climb extends SubsystemBase {
     }
 
     public void setClimberSpeed(double newSpeed) {
-        if (checkClimberMovement(newSpeed)) {
+        /*if (checkClimberMovement(newSpeed)) {
             climbMotor.setVoltage(Constants.ClimberConstants.maxClimberVoltage * newSpeed);
         } else {
             brakeClimber();
         }
+            */
+        climbMotor.setVoltage(Constants.ClimberConstants.maxClimberVoltage * newSpeed);
+
     }
 
     public void brakeClimber() {
