@@ -5,25 +5,51 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "LWalltJ"
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 3.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Elevator to L2"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Hold Elevator Steady"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LWalltA"
+                }
+              }
+            ]
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.25
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Elevator to L2"
-          }
-        },
-        {
-          "type": "race",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -42,30 +68,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Elevator to Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "JtIJAlgae"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -76,16 +78,41 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 0.25
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "IJAlgeatBackwards"
+                        "pathName": "AtLCS"
                       }
                     }
                   ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Elevator to Intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.45
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake Coral"
                 }
               },
               {
@@ -93,9 +120,9 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "Elevator to L3"
+                        "waitTime": 0.2
                       }
                     },
                     {
@@ -107,9 +134,15 @@
                             "data": {
                               "commands": [
                                 {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 1.0
+                                  }
+                                },
+                                {
                                   "type": "named",
                                   "data": {
-                                    "name": "Hold Elevator Steady"
+                                    "name": "Elevator to L2"
                                   }
                                 },
                                 {
@@ -122,28 +155,34 @@
                             }
                           },
                           {
-                            "type": "sequential",
+                            "type": "path",
                             "data": {
-                              "commands": [
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "Score Coral"
-                                  }
-                                },
-                                {
-                                  "type": "named",
-                                  "data": {
-                                    "name": "Score Coral"
-                                  }
-                                }
-                              ]
+                              "pathName": "LCStB"
                             }
                           }
                         ]
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score Coral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Hold Elevator Steady"
                 }
               }
             ]

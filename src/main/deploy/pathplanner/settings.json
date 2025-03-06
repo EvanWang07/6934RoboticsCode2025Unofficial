@@ -1,18 +1,14 @@
 {
-  "robotWidth": 0.863,
-  "robotLength": 0.863,
+  "robotWidth": 0.9,
+  "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "(Old)Barge to Reef Paths",
-    "(Old)Coral Station to Reef Paths",
-    "(Old)Ethan's Better Version",
-    "(Old)Reef to Coral Station Paths",
     "LCS to Reef",
     "LMid to Reef",
     "LWall to Reef",
-    "RWall to Reef",
     "RCS to Reef",
     "RMid to Reef",
+    "RWall to Reef",
     "Reef to LCS",
     "Reef to RCS",
     "Test Paths(StraightandCircle)"

@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 8.0,
-        "y": 4.8
+        "y": 0.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.12725,
-        "y": 4.4735
+        "x": 5.46975,
+        "y": 0.8757499999999998
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.779,
-        "y": 4.3
+        "x": 3.888833326,
+        "y": 2.879075013
       },
       "prevControl": {
-        "x": 6.533922236281624,
-        "y": 4.555484607164677
+        "x": 3.1395,
+        "y": 1.6654999999999998
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 59.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "RWall to Reef",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.052564102564103,
-        "y": 7.554615384615385
+        "x": 8.0,
+        "y": 0.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.772820512820513,
-        "y": 7.090192307692307
+        "x": 8.00475,
+        "y": 2.31875
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.552820512820513,
-        "y": 5.376987179487179
+        "x": 5.779206642,
+        "y": 4.401828804
       },
       "prevControl": {
-        "x": 4.337179487179486,
-        "y": 6.532884615384615
+        "x": 7.53675,
+        "y": 4.3077499999999995
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -60.57254359681015
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "(Old)Ethan's Better Version",
+  "folder": "RWall to Reef",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
