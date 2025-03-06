@@ -4,40 +4,24 @@
     {
       "anchor": {
         "x": 8.0,
-        "y": 3.25
+        "y": 0.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 9.0,
-        "y": 3.25
+        "x": 6.52775,
+        "y": 1.3384999999999998
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.199457315,
-        "y": 2.230999999999999
+        "x": 3.89025,
+        "y": 1.987249999999999
       },
       "prevControl": {
-        "x": 4.899592986250001,
-        "y": 2.133543179999999
-      },
-      "nextControl": {
-        "x": 1.49932164375,
-        "y": 2.3284568199999987
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 3.199457315,
-        "y": 3.63982728
-      },
-      "prevControl": {
-        "x": 2.199457315,
-        "y": 3.63982728
+        "x": 2.89025,
+        "y": 1.987249999999999
       },
       "nextControl": null,
       "isLocked": false,
@@ -61,10 +45,10 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "RMid to Reef",
+  "folder": "RWall to Reef",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
