@@ -17,10 +17,11 @@
   "autoFolders": [
     "(Old)Autos",
     "Experimental Autos",
+    "Competition Autos",
     "Test Autos"
   ],
-  "defaultMaxVel": 2.0,
-  "defaultMaxAccel": 2.0,
+  "defaultMaxVel": 2.1,
+  "defaultMaxAccel": 2.1,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.0,
