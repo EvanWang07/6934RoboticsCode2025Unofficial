@@ -5,13 +5,19 @@
     "data": {
       "commands": [
         {
-          "type": "deadline",
+          "type": "path",
+          "data": {
+            "pathName": "Mini LWalltIJ"
+          }
+        },
+        {
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "LWalltI"
+                  "name": "Drive to Left Branch"
                 }
               },
               {
@@ -43,26 +49,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Hold Elevator Steady"
+                  "name": "Score Coral"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Score Coral"
+                  "name": "Hold Elevator Steady"
                 }
               }
             ]
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "ItLCS"
+                  "name": "Pathfind to LCS"
                 }
               },
               {
@@ -88,19 +94,25 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Intake Coral"
           }
         },
         {
-          "type": "deadline",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Mini LCStIJ"
+                  "name": "Pathfind to IJ"
                 }
               },
               {
@@ -126,15 +138,47 @@
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "Drive to Right Branch And Score"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Drive to Right Branch"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Hold Elevator Steady"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score Coral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Hold Elevator Steady"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Experimental Autos",
   "choreoAuto": false
 }

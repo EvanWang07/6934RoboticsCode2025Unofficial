@@ -228,13 +228,26 @@ public class Swerve extends SubsystemBase {
         setSpeedMultiplier(1);
         Pose2d pathfindTargetPose = GameField.robotNearRightStation;
 
-        PathConstraints pathfindingConstraints = new PathConstraints(1.25, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
+        PathConstraints pathfindingConstraints = new PathConstraints(2.5, 2, Units.degreesToRadians(540), Units.degreesToRadians(720));
 
         var alliance = DriverStation.getAlliance();
         if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
             return new DeferredCommand(() -> AutoBuilder.pathfindToPose(BasicOperations.transformBlueToRedAlliancePose(pathfindTargetPose), pathfindingConstraints), Set.of(this));
         } else {
             return new DeferredCommand(() -> AutoBuilder.pathfindToPose(pathfindTargetPose, pathfindingConstraints), Set.of(this));
+        }
+    }
+
+    public Command pathfindToReefPosition(Pose2d targetBlueLocationInFront, double metersInFront) {
+        PathConstraints pathfindingConstraints = new PathConstraints(1.5, 1.5, Units.degreesToRadians(540), Units.degreesToRadians(720));
+
+        Pose2d targetPose = BasicOperations.findTranslatedPoseCenter(targetBlueLocationInFront, metersInFront, 180);
+        
+        var alliance = DriverStation.getAlliance();
+        if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
+            return AutoBuilder.pathfindToPose(BasicOperations.transformBlueToRedAlliancePose(targetPose), pathfindingConstraints);
+        } else {
+            return AutoBuilder.pathfindToPose(targetPose, pathfindingConstraints);
         }
     }
 

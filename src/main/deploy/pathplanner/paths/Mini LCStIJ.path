@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.0,
-        "y": 3.25
+        "x": 1.148,
+        "y": 7.019
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.981,
-        "y": 3.6642499999999996
+        "x": 1.9299320549660184,
+        "y": 6.403831686197927
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.779206642,
-        "y": 4.071628143
+        "x": 5.596282051282051,
+        "y": 5.77948717948718
       },
       "prevControl": {
-        "x": 6.77625,
-        "y": 3.9274999999999993
+        "x": 3.672985527609604,
+        "y": 6.846922068201289
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -118.73979529168803
   },
   "reversed": false,
-  "folder": "RMid to Reef",
+  "folder": "New Mini Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }

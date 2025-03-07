@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 8.0,
-        "y": 3.25
+        "y": 7.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.981,
-        "y": 3.6642499999999996
+        "x": 7.428608012627354,
+        "y": 7.022106568450019
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.779206642,
-        "y": 4.071628143
+        "x": 5.647884615384616,
+        "y": 5.77948717948718
       },
       "prevControl": {
-        "x": 6.77625,
-        "y": 3.9274999999999993
+        "x": 5.425926310422203,
+        "y": 6.003977427568396
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,10 +42,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "RMid to Reef",
+  "folder": "New Mini Paths",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

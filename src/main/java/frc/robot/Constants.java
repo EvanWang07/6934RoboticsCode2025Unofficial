@@ -80,7 +80,7 @@ public final class Constants {
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
         public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelOneHeightInRotations = 1.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelTwoHeightInRotations = 2.35; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelTwoHeightInRotations = 2.4; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelThreeHeightInRotations = 3.45; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
         /* Elevator Feedforward & PID Tuning Constants */
@@ -254,8 +254,8 @@ public final class Constants {
         public static final Pose2d blueStationRobotCenterThirteen = BasicOperations.findTranslatedPoseCenter(blueStationTagThirteen, totalRobotOffsetMeters, 0);
 
         /* Goal Robot PATHFIND Locations (Coral Station) (USES BLUE ALLIANCE COORDINATES!!!) */
-        public static final Pose2d robotNearLeftStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterThirteen, 1.5, 0);
-        public static final Pose2d robotNearRightStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterTwelve, 1.5, 0);
+        public static final Pose2d robotNearLeftStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterThirteen, 0, 0);
+        public static final Pose2d robotNearRightStation = BasicOperations.findTranslatedPoseCenter(blueStationRobotCenterTwelve, 0, 0);
 
         /* Goal Robot Locations (LEFT Coral Station) */
         public static final Pose2d redStationRobotLeftOne = BasicOperations.findTranslatedPoseLeft(redStationRobotCenterOne, leftStationOffsetMeters, false);
