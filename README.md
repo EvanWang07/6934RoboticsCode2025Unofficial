@@ -92,4 +92,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Manually Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 3/4/25 by Evan Wang.
+[^1]: Last updated 3/7/25 by Evan Wang.

@@ -297,7 +297,6 @@ public class RobotContainer {
                 new AutoElevator(e_Elevator, Constants.Elevator.levelOneHeightInRotations)
                 .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
                                                new Intake(m_Mailbox, false).withTimeout(2)))
-                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
                 .schedule();
             }
         }, m_Mailbox, e_Elevator));
@@ -306,7 +305,6 @@ public class RobotContainer {
                 new AutoElevator(e_Elevator, Constants.Elevator.levelTwoHeightInRotations)
                 .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
                                                new Intake(m_Mailbox, false).withTimeout(2)))
-                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
                 .schedule();
             }
         }, m_Mailbox, e_Elevator));
@@ -315,7 +313,6 @@ public class RobotContainer {
                 new AutoElevator(e_Elevator, Constants.Elevator.levelThreeHeightInRotations)
                 .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
                                                new Intake(m_Mailbox, false).withTimeout(2)))
-                .andThen(new AutoElevator(e_Elevator, Constants.Elevator.intakeHeightInRotations).withTimeout(3))
                 .schedule();
             }
         }, m_Mailbox, e_Elevator));
