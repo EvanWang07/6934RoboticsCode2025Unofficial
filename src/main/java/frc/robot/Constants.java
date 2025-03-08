@@ -91,8 +91,8 @@ public final class Constants {
         public static final double kI = 0; // Integral feedback constant (currently a placeholder value)
         public static final double kD = 0; // Derivative feedback constant (currently a placeholder value)
 
-        public static final double PIDMaxSpeed = 1.0; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
-        public static final double PIDMaxAcceleration = 1.0; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
+        public static final double PIDMaxSpeed = 1.2; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
+        public static final double PIDMaxAcceleration = 1.2; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
 
         public static final double PIDMaxSpeedInRotations = PIDMaxSpeed * elevatorMetersToRotations;
         public static final double PIDMaxAccelerationInRotations = PIDMaxAcceleration * elevatorMetersToRotations;

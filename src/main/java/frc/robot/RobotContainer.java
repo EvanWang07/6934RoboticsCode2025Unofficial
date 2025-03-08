@@ -213,7 +213,7 @@ public class RobotContainer {
                     PathPlannerPath pathToLeftGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.25, 
+                        1.5, 1.5, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -243,7 +243,7 @@ public class RobotContainer {
                     PathPlannerPath pathToCenterGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.25, 
+                        1.5, 1.5, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -273,7 +273,7 @@ public class RobotContainer {
                     PathPlannerPath pathToRightGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.25, 
+                        1.5, 1.5, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
