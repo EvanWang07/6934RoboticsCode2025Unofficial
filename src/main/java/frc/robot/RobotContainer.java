@@ -222,7 +222,7 @@ public class RobotContainer {
 
                     pathToLeftGoal.preventFlipping = true;
 
-                    AutoBuilder.followPath(pathToLeftGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+                    AutoBuilder.followPath(pathToLeftGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).withTimeout(7).schedule();
                 }
             }
         }));
@@ -252,7 +252,7 @@ public class RobotContainer {
 
                     pathToCenterGoal.preventFlipping = true;
 
-                    AutoBuilder.followPath(pathToCenterGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+                    AutoBuilder.followPath(pathToCenterGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).withTimeout(7).schedule();
                 }
             }
         }));
@@ -282,7 +282,7 @@ public class RobotContainer {
 
                     pathToRightGoal.preventFlipping = true;
 
-                    AutoBuilder.followPath(pathToRightGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).schedule();
+                    AutoBuilder.followPath(pathToRightGoal).andThen(new InstantCommand(() -> s_Swerve.setSpeedMultiplier(originalSpeed))).withTimeout(7).schedule();
                 }
             }
         }));

@@ -79,7 +79,7 @@ public final class Constants {
 
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
         public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
-        public static final double levelOneHeightInRotations = 1.6; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double levelOneHeightInRotations = 1.8; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelTwoHeightInRotations = 2.4; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelThreeHeightInRotations = 3.45; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
 
@@ -144,7 +144,7 @@ public final class Constants {
         public static final Pose2d topBlueBargeStartingPose = new Pose2d(8, 7.56, Rotation2d.fromDegrees(180));
         public static final Pose2d bottomBlueBargeStartingPose = new Pose2d(8, 4.8, Rotation2d.fromDegrees(180));
         public static final Pose2d topRedBargeStartingPose = new Pose2d(8, 4.25, Rotation2d.fromDegrees(180));
-        public static final Pose2d bottomRedBargeStartingPose = new Pose2d(8, 0.49, Rotation2d.fromDegrees(180));
+        public static final Pose2d bottomRedBargeStartingPose = new Pose2d(8, 0.5, Rotation2d.fromDegrees(180));
 
         /* Robot Space Offset (General) */
         public static final double robotOffsetMeters = 0.863 / 2; // Half the robot side length WITH bumpers
