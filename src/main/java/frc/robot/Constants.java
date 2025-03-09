@@ -28,7 +28,7 @@ public final class Constants {
         public static final double driveSlowModeMultiplier = 0.1;
 
         /* Robot Starting Position */
-        public static final Pose2d selectedStartingPose = GameField.bottomRedBargeStartingPose;
+        public static final Pose2d selectedStartingPose = GameField.topBlueBargeStartingPose;
     }
 
     public static final class Vision {

@@ -329,6 +329,6 @@ public class RobotContainer {
         }
         s_Swerve.setSwervePoseEstimate(startingPose);
 
-        return new PathPlannerAuto("Efficient RWalltFtRCStE");
+        return new PathPlannerAuto("Efficient LWalltItLCStJ");
     }
 }
