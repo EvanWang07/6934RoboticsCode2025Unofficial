@@ -95,7 +95,7 @@ public class RobotContainer {
                     PathPlannerPath pathToLeftGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.25, 
+                        1.75, 1.75, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -104,8 +104,8 @@ public class RobotContainer {
 
                     pathToLeftGoal.preventFlipping = true;
 
-                    new ParallelDeadlineGroup(AutoBuilder.followPath(pathToLeftGoal), 
-                                              new HoldElevatorSteady(e_Elevator).withTimeout(5))
+                    new ParallelDeadlineGroup(AutoBuilder.followPath(pathToLeftGoal).withTimeout(2.5), 
+                                              new HoldElevatorSteady(e_Elevator).withTimeout(2.5))
                                                 .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
                                                                                new Intake(m_Mailbox, false).withTimeout(2))).schedule();
                 }
@@ -125,7 +125,7 @@ public class RobotContainer {
                     PathPlannerPath pathToRightGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.25, 
+                        1.75, 1.75, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -134,8 +134,8 @@ public class RobotContainer {
 
                     pathToRightGoal.preventFlipping = true;
 
-                    new ParallelDeadlineGroup(AutoBuilder.followPath(pathToRightGoal), 
-                                              new HoldElevatorSteady(e_Elevator).withTimeout(5))
+                    new ParallelDeadlineGroup(AutoBuilder.followPath(pathToRightGoal).withTimeout(2.5), 
+                                              new HoldElevatorSteady(e_Elevator).withTimeout(2.5))
                                                 .andThen(new ParallelRaceGroup(new HoldElevatorSteady(e_Elevator).withTimeout(2), 
                                                                                new Intake(m_Mailbox, false).withTimeout(2))).schedule();
                 }
@@ -213,7 +213,7 @@ public class RobotContainer {
                     PathPlannerPath pathToLeftGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.5, 
+                        1.75, 1.75, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -243,7 +243,7 @@ public class RobotContainer {
                     PathPlannerPath pathToCenterGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.5, 
+                        1.75, 1.75, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths
@@ -273,7 +273,7 @@ public class RobotContainer {
                     PathPlannerPath pathToRightGoal = new PathPlannerPath(
                         waypoints, 
                         new PathConstraints(
-                        1.5, 1.5, 
+                        1.75, 1.75, 
                         Units.degreesToRadians(540), Units.degreesToRadians(720)
                         ),
                         null, // Ideal starting state can be null for on-the-fly paths

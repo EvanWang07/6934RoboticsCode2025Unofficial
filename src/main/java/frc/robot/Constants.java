@@ -78,7 +78,7 @@ public final class Constants {
         public static final NeutralModeValue elevatorMotorNeutralMode = NeutralModeValue.Brake;
 
         /* Target Elevator Heights (Robot Reaches L1, L2, and L3) (RELATIVE TO STARTING HEIGHT!!!) */
-        public static final double intakeHeightInRotations = 0.2; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
+        public static final double intakeHeightInRotations = 0.35; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelOneHeightInRotations = 1.8; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelTwoHeightInRotations = 2.4; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
         public static final double levelThreeHeightInRotations = 3.45; // Do NOT consider gear ratio here; ALREADY CONSIDERS CASCADE ELEVATOR ROTATION-TO-DISTANCE MULTIPLIER
@@ -87,12 +87,12 @@ public final class Constants {
         public static final double gravitationalOffsetVoltage = 0.27; // Offset feedforward voltage for gravity (currently a placeholder value)
         public static final double kS = 0; // Offset feedforward constant for static friction (currently a placeholder value)
         public static final double kV = 0; // Offset feedforward constant for kinetic friction (currently a placeholder value)
-        public static final double kP = 2.0; // Proportional feedback constant (currently a placeholder value)
+        public static final double kP = 3; // Proportional feedback constant (currently a placeholder value)
         public static final double kI = 0; // Integral feedback constant (currently a placeholder value)
         public static final double kD = 0; // Derivative feedback constant (currently a placeholder value)
 
-        public static final double PIDMaxSpeed = 1.2; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
-        public static final double PIDMaxAcceleration = 1.2; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
+        public static final double PIDMaxSpeed = 3.25; // Maximum speed the automatic elevator controller can move the elevator at (m / s)
+        public static final double PIDMaxAcceleration = 3.25; // Maximum acceleration the automatic elevator controller can move the elevator at (m / s^2)
 
         public static final double PIDMaxSpeedInRotations = PIDMaxSpeed * elevatorMetersToRotations;
         public static final double PIDMaxAccelerationInRotations = PIDMaxAcceleration * elevatorMetersToRotations;
@@ -107,7 +107,7 @@ public final class Constants {
         public static final int MailboxMotorID = 62;
     
         /* Intake & Scoring */
-        public static final double intakeVoltage = 4;
+        public static final double intakeVoltage = 3;
         public static final double scoringVoltage = 2.5;
     
         public static final double scoringLeewayTime = 0.65; // In seconds
