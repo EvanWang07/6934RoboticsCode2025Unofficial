@@ -24,12 +24,16 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Implemented MegaTag 2 for Limelight <sup>3/1/25</sup>
 - Revamped auto-position code to use on-the-fly path generation again <sup>3/1/25</sup>
 - Added an experimental pathfinding + on-the-fly path code for driving the robot to the coral station <sup>3/4/25</sup>
+- Changed pathfinding controls to involve holding, instead of pressing, the respective button <sup>3/6/25</sup>
+- Increased elevator PID, pathfinding, and on-the-fly path speeds <sup>3/9/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
-- Robot pathfinding is inverted and possibly going into obstacles
+- PID elevator sometimes does not respect its bounds and moves to the wrong position
 
 ## To-Do List:  
+- [ ] Write documentation for the code
+- [ ] Fix a PID elevator issue causing it to not respect its bounds and move to the wrong position in certain scenarios
 - [ ] Implement auto-position into auto
 - [ ] Clean up the overuse of unit conversions in the elevator PID code
 - [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
@@ -92,4 +96,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Manually Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 3/7/25 by Evan Wang.
+[^1]: Last updated 3/9/25 by Evan Wang & Lukas Evans.
