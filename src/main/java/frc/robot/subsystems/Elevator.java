@@ -51,6 +51,17 @@ public class Elevator extends SubsystemBase {
         }
     }
 
+    public double getElevatorSpeedInRotations(boolean physicalSpeed) { // Return value in ROTATIONS
+        double motorOneSpeed = elevatorMotorOne.getVelocity().getValueAsDouble();
+        double motorTwoSpeed = elevatorMotorTwo.getVelocity().getValueAsDouble();
+        double averageMotorSpeed = (motorOneSpeed + motorTwoSpeed) / 2;
+        if (physicalSpeed) {
+            return averageMotorSpeed / Constants.Elevator.elevatorGearRatio;
+        } else {
+            return averageMotorSpeed;
+        }
+    }
+
     public boolean checkElevatorMovement(double newSpeed) {
         if (getElevatorPosition(false) <= Constants.Elevator.elevatorLowerBound) {
             if (newSpeed >= 0) {
