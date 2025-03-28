@@ -9,7 +9,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Elevator;
 
 public class AutoElevator extends Command {
-    private Elevator e_Elevator = new Elevator();
+    private Elevator e_Elevator;
     private double angleSetPoint;
     ProfiledPIDController elevatorPIDController;
     // ElevatorFeedforward elevatorFeedForwardController;
