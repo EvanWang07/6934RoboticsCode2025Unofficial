@@ -26,17 +26,17 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added an experimental pathfinding + on-the-fly path code for driving the robot to the coral station <sup>3/4/25</sup>
 - Changed pathfinding controls to involve holding, instead of pressing, the respective button <sup>3/6/25</sup>
 - Increased elevator PID, pathfinding, and on-the-fly path speeds <sup>3/9/25</sup>
+- Added documentation for every method within VisionInfo.java and BasicOperations.java <sup>6/1/25</sup>
+- Removed unnecessary methods and variables relating to the climber code <sup>6/1/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
 - PID elevator sometimes does not respect its bounds and moves to the wrong position
 
 ## To-Do List:  
-- [ ] Write documentation for the code
+- [ ] Write documentation for the remainder of the code
 - [ ] Fix a PID elevator issue causing it to not respect its bounds and move to the wrong position in certain scenarios
-- [ ] Implement auto-position into auto
 - [ ] Clean up the overuse of unit conversions in the elevator PID code
-- [ ] \(Optional\) - Create new control bindings (Throttle-based and Southpaw) (Evan: This is unlikely to happen)
 
 ### Unused Code  
 - None for now. 
@@ -52,7 +52,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 
 ## Falcon Swerve Chassis Configs  
 > [!WARNING]
-> The Falcon swerve chassis is currently out of order. Please do not change the below values until it is deemed functional again. (Evan: Unlikely to happen in the near future)
+> The Falcon swerve chassis is currently out of order. Please do not change the below values until it is deemed functional again.
 
 | Name/Component | Offset (Degrees) |
 | :--- | :---: |
@@ -96,4 +96,4 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Manually Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 3/9/25 by Evan Wang & Lukas Evans.
+[^1]: Last updated 6/1/25 by Evan Wang.

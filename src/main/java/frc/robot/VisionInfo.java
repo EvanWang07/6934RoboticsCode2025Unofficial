@@ -11,32 +11,58 @@ import frc.robot.Constants.GameField;
 public final class VisionInfo {
     private static boolean[] targetValidResults = new boolean[Vision.targetDetectionListSize];
 
-    public static int getTargetID() { // Gets the target ID
+    /**
+     * Gets the ID of the closest AprilTag detected
+     * @return The ID of the closest AprilTag detected
+     */
+    public static int getTargetID() {
         return (int) LimelightHelpers.getFiducialID(Vision.limelightName);
     }
 
-    public static double getTX(boolean asOutput) { // Gets the horizontal angle error
+    /**
+     * Gets the motor output or angle horizontal crosshair-to-target error
+     * @param asOutput If the returned value should be given as a motor output (true) or as an angle (false) 
+     * @return The motor output [-1, 1] or angle (degrees) based on the horizontal crosshair-to-target error
+     */
+    public static double getTX(boolean asOutput) {
         if (asOutput) {
-            return (LimelightHelpers.getTX(Vision.limelightName) / 31);
+            return (LimelightHelpers.getTX(Vision.limelightName) / 41); // LL 3G: +/- 41 degrees is the maximum horizontal offset angle (the camera's FoV)
         } else {
             return LimelightHelpers.getTX(Vision.limelightName);
         }
     }
 
-    public static double getTY(boolean asOutput) { // Gets the vertical angle error
+    /**
+     * Gets the motor output or angle vertical crosshair-to-target error
+     * @param asOutput If the returned value should be given as a motor output (true) or as an angle (false) 
+     * @return The motor output [-1, 1] or angle (degrees) based on the vertical crosshair-to-target error
+     */
+    public static double getTY(boolean asOutput) {
         if (asOutput) {
-            return (LimelightHelpers.getTY(Vision.limelightName) / 31);
+            return (LimelightHelpers.getTY(Vision.limelightName) / 28.1); // LL 3G: +/- 28.1 degrees is the maximum vertical offset angle (the camera's FoV)
         } else { 
             return LimelightHelpers.getTY(Vision.limelightName);
         }
     }
 
-    public static double getPoseTheta() { // Gets the yaw of the limelight relative to the robot
+    /**
+     * Uses Mega Tag 1 to get the current 2D rotation (yaw) of the robot. Make sure to configure the camera position relative to the robot
+     * @deprecated The robot code uses Mega Tag 2 instead; see the Swerve.java subsystem for Mega Tag 2 implementation
+     * @return The 2D rotation (yaw) (degrees) of the robot relative to the target
+     * @see https://docs.limelightvision.io/docs/docs-limelight/pipeline-apriltag/apriltag-robot-localization
+     */
+    public static double getPoseTheta() {
         double[] robotPose = LimelightHelpers.getBotPose_TargetSpace(Vision.limelightName);
         return robotPose[4];
     }
 
-    public static double getTA(boolean asOutput) { // Gets the % of the camera frame the target takes up (NOT USED)
+    /**
+     * Gets the motor output or percentage of the camera frame the target takes up
+     * @deprecated The robot code does not utilize TA
+     * @param asOutput If the returned value should be given as a motor output (true) or as a percent (false) 
+     * @return The motor output [0, 1] or a percentage (%) based on the area of the camera frame the target takes up
+     */
+    public static double getTA(boolean asOutput) {
         if (asOutput) {
             return (LimelightHelpers.getTA(Vision.limelightName) / 100);
         } else {
@@ -44,16 +70,32 @@ public final class VisionInfo {
         }
     }
 
+    /**
+     * Checks if the camera currently detects a target
+     * @return True, if the camera currently detects a target; false, otherwise
+     */
     public static boolean hasValidTargets() { // Determines if there is a valid limelight target at the given time
         return LimelightHelpers.getTV(Vision.limelightName);
     }
 
-    public static boolean willTarget() { // Determines (by averaging TV values) if the robot will seek a target
+    /**
+     * Checks if the camera has detected a target at least at a minimum rate over the past few ticks.
+     * This reduces jittery-ness for code requiring that target detection over a period of time. Set the minimum rate (%) in 
+     * Constants.Vision.java
+     * @return True, if the camera has detected a target at least at a minimum rate over the past few ticks; false, otherwise
+     */
+    public static boolean willTarget() {
         BasicOperations.insertBooleanToConfinedList(targetValidResults, hasValidTargets());
         return (BasicOperations.getSuccessRate(targetValidResults) >= Vision.averageTVThreshold);
     }
 
-    public static void updateDashboardValues(double estimatedX, double estimatedY, double estimatedYaw) { // Sends limelight values to SmartDashboard
+    /**
+     * Sends inputted 2D pose values to the SmartDashboard. Useful for robot localization testing and debugging
+     * @param estimatedX The estimated x-coordinate (meters) of the robot relative to the blue origin of the competition field
+     * @param estimatedY The estimated y-coordinate (meters) of the robot relative to the blue origin of the competition field
+     * @param estimatedYaw The estimated 2D rotation (yaw) (degrees) of the robot relative to the blue origin of the competition field
+     */
+    public static void updateDashboardValues(double estimatedX, double estimatedY, double estimatedYaw) {
         SmartDashboard.putBoolean("Targetable Detected", willTarget());
         SmartDashboard.putNumber("Robot X-Coordinate (Blue Origin)", estimatedX);
         SmartDashboard.putNumber("Robot Y-Coordinate (Blue Origin)", estimatedY);
@@ -65,22 +107,46 @@ public final class VisionInfo {
         }
     }
 
-    public static boolean isHorizontallyAligned() { // Checks camera alignment with the target along the x-axis
+    /**
+     * Checks the camera's horizontal crosshair-to-target alignment. Set the angle tolerance (degrees) in Constants.Vision.java
+     * @deprecated Unused
+     * @return True, if the camera's crosshair is aligned (within tolerance) with the target; false, otherwise
+     */
+    public static boolean isHorizontallyAligned() {
         boolean aligned = Math.abs(getTX(false)) < Vision.TXTolerance;
         return aligned;
     }
 
-    public static boolean isVerticallyAligned() { // Checks camera alignment with the target along the y-axis
+    /**
+     * Checks the camera's vertical crosshair-to-target alignment. Set the angle tolerance (degrees) in Constants.Vision.java
+     * @deprecated Unused
+     * @return True, if the camera's crosshair is aligned (within tolerance) with the target; false, otherwise
+     */
+    public static boolean isVerticallyAligned() {
         boolean aligned = Math.abs(getTY(false)) < Vision.TYTolerance;
         return aligned;
     }
 
-    public static boolean isZeroPose() { // Checks robot alignment with the target regarding yaw
+    /**
+     * Checks if the robot's chassis is aligned (parallel) with the target. 
+     * Set the 2D rotation (yaw) tolerance (degrees) in Constants.Vision.java
+     * @deprecated Unused
+     * @return True, if the robot's chassis is aligned (within tolerance) with the target; false, otherwise
+     */
+    public static boolean isZeroPose() {
         boolean isZeroPose = Math.abs(getPoseTheta()) <= Vision.poseTolerance;
         return isZeroPose;
     }
 
-    public static Pose2d getAprilTagLocation(int targetID) { // Gets the pose of a valid april tag relative to the field (blue origin) (UNUSED)
+    /**
+     * Gets the 2D pose of a valid AprilTag relative to the blue origin of the competition field
+     * @deprecated Unused
+     * @param targetID The ID of the AprilTag
+     * @return A Pose2D object representing the 2D pose <x (meters), y (meters), yaw (degrees)> of the center of the AprilTag of the inputted
+     * ID relative to the blue origin of the competition field. Null, if there are no relevant AprilTags of the inputted ID. Note that 
+     * AprilTags of IDs 3-5 and 14-16 are not considered relevant
+     */
+    public static Pose2d getAprilTagLocation(int targetID) { 
         switch (targetID) {
             case 1:
                 return GameField.redStationTagOne;
@@ -120,6 +186,14 @@ public final class VisionInfo {
         }
     }
 
+    /**
+     * Gets the 2D pose error between an inputted pose and the detected AprilTag
+     * @deprecated Unused
+     * @param robotPose The current 2D pose of the robot relative to the blue origin of the competition field
+     * @return A Pose2D object representing the 2D pose error <x (meters), y (meters), yaw (degrees)> between the center of the 
+     * detected AprilTag and the robot. Positive rotation is relative to the blue origin of the competition field. 
+     * Null, if a null value is found upon checking the AprilTag's 2D pose. Note that AprilTags of IDs 3-5 and 14-16 will give null Pose2D values
+     */
     public static Pose2d robotPoseToTargetError(Pose2d robotPose) {
         Pose2d aprilTagPose = getAprilTagLocation(getTargetID());
         if (aprilTagPose != null) {
@@ -131,7 +205,16 @@ public final class VisionInfo {
         }
     }
 
-    public static Pose2d getRobotCenterGoal(int targetID) { // Gets the CENTER target robot pose of a valid april tag relative to the field (blue origin)
+    /**
+     * Gets the goal center robot 2D pose relative to the blue origin of the competition field. These values are 
+     * for positioning the robot directly in front of an AprilTag; note that the goal 2D rotation of the robot is toward the target if 
+     * the AprilTag is a part of the reef and away from the target if a part of the coral station
+     * @param targetID The ID of the AprilTag
+     * @return A Pose2D object representing the goal center robot 2D pose <x (meters), y (meters), yaw (degrees)> for an AprilTag 
+     * target of the inputted ID relative to the blue origin of the competition field. Null, if there are no relevant AprilTags of the 
+     * inputted ID. Note that AprilTags of IDs 3-5 and 14-16 are not considered relevant
+     */
+    public static Pose2d getRobotCenterGoal(int targetID) {
         switch (targetID) {
             case 1:
                 return GameField.redStationRobotCenterOne;
@@ -171,7 +254,16 @@ public final class VisionInfo {
         }
     }
 
-    public static Pose2d getRobotLeftGoal(int targetID) { // Gets the LEFT target robot pose of a valid april tag relative to the field (blue origin)
+    /**
+     * Gets the goal left robot 2D pose relative to the blue origin of the competition field. These values are 
+     * for positioning the robot in front and to the left of an AprilTag; note that the goal 2D rotation of the robot is toward the target if 
+     * the AprilTag is a part of the reef and away from the target if a part of the coral station
+     * @param targetID The ID of the AprilTag
+     * @return A Pose2D object representing the goal left robot 2D pose <x (meters), y (meters), yaw (degrees)> for an AprilTag 
+     * target of the inputted ID relative to the blue origin of the competition field. Null, if there are no relevant AprilTags of the 
+     * inputted ID. Note that AprilTags of IDs 3-5 and 14-16 are not considered relevant
+     */
+    public static Pose2d getRobotLeftGoal(int targetID) { 
         switch (targetID) {
             case 1:
                 return GameField.redStationRobotLeftOne;
@@ -211,7 +303,16 @@ public final class VisionInfo {
         }
     }
 
-    public static Pose2d getRobotRightGoal(int targetID) { // Gets the RIGHT target robot pose of a valid april tag relative to the field (blue origin)
+    /**
+     * Gets the goal right robot 2D pose relative to the blue origin of the competition field. These values are 
+     * for positioning the robot in front and to the right of an AprilTag; note that the goal 2D rotation of the robot is toward the target if 
+     * the AprilTag is a part of the reef and away from the target if a part of the coral station
+     * @param targetID The ID of the AprilTag
+     * @return A Pose2D object representing the goal right robot 2D pose <x (meters), y (meters), yaw (degrees)> for an AprilTag 
+     * target of the inputted ID relative to the blue origin of the competition field. Null, if there are no relevant AprilTags of the 
+     * inputted ID. Note that AprilTags of IDs 3-5 and 14-16 are not considered relevant
+     */
+    public static Pose2d getRobotRightGoal(int targetID) {
         switch (targetID) {
             case 1:
                 return GameField.redStationRobotRightOne;

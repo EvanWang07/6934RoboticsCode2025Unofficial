@@ -21,7 +21,7 @@ public class Mailbox extends SubsystemBase {
     }
 
     public void setMailboxSpeed(double voltage) {
-        intakeNeoVortex.setVoltage(voltage);
+        intakeNeoVortex.setVoltage(-voltage);
     }
 
     public void brakeMailbox() {
