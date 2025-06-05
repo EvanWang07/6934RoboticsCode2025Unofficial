@@ -36,7 +36,7 @@ import com.pathplanner.lib.path.PathConstraints;
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry; // Keep this for now
-    public SwerveDrivePoseEstimator swervePoseEstimator; // EXPERIMENTAL
+    public SwerveDrivePoseEstimator swervePoseEstimator;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
     private double speedMultiplier;
@@ -47,8 +47,9 @@ public class Swerve extends SubsystemBase {
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
 
-        speedMultiplier = 1;
+        speedMultiplier = 1; // Speed multiplier defaults to 1
 
+        /* Check alliance color and transform (flip) the inputted starting 2D pose if needed */
         var alliance = DriverStation.getAlliance();
         if (alliance.isPresent() && (alliance.get() == DriverStation.Alliance.Red)) {
             startingPose = BasicOperations.transformBlueToRedAlliancePose(Constants.QuickTuning.selectedStartingPose);
@@ -56,24 +57,26 @@ public class Swerve extends SubsystemBase {
             startingPose = Constants.QuickTuning.selectedStartingPose;
         }
 
-        mSwerveMods = new SwerveModule[] {
+        mSwerveMods = new SwerveModule[] { // Create the SwerveModule objects based on inputted constants
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
             new SwerveModule(1, Constants.Swerve.Mod1.constants),
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
+        /* Delay by 1 second and then create instantiate the swerve odometery and swerve pose estimator */
         Timer.delay(1);
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
         swervePoseEstimator = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions(), 
                                                            startingPose, VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)), 
-                                                           VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30))); // EXPERIMENTAL
+                                                           VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30)));
         System.out.println("Swerve subsystem loaded!");
     
+        /* Configure the PathPlanner AutoBuilder using the swerve pose estimator and various swerve methods */
         try {
             RobotConfig config = RobotConfig.fromGUISettings();
             
-            AutoBuilder.configure( // EXPERIMENTAL SWERVE POSE ESTIMATION METHODS ADDED!!!
+            AutoBuilder.configure(
                 this::getSwervePoseEstimation, // Robot pose supplier
                 this::setSwervePoseEstimate, // Method to reset odometry (will be called if your auto has a starting pose)
                 this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
@@ -128,7 +131,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void driveRobotRelative(ChassisSpeeds speeds) { // For PathPlanner
-        this.drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond, false, false);
+        this.drive(new Translation2d(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond, false, false); // isOpenLoop should be false for ALL autonomous driving operations
     }
 
     /* Used by SwerveControllerCommand in Auto */

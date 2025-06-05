@@ -28,6 +28,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Increased elevator PID, pathfinding, and on-the-fly path speeds <sup>3/9/25</sup>
 - Added documentation for every method within VisionInfo.java and BasicOperations.java <sup>6/1/25</sup>
 - Removed unnecessary methods and variables relating to the climber code <sup>6/1/25</sup>
+- Added documentation for every method within SwerveModule.java and some explanations in Swerve.java <sup>6/4/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
