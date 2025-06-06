@@ -117,5 +117,5 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 ### Other:
 - ADDITIONAL CAN CAPACITY - CANivore
 
-[^1]: Last updated 6/6/25 by Dere Chang.
+[^1]: Last updated 6/6/25 by Derek Chang.
 
