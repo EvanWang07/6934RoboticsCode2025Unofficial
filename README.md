@@ -29,6 +29,7 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Added documentation for every method within VisionInfo.java and BasicOperations.java <sup>6/1/25</sup>
 - Removed unnecessary methods and variables relating to the climber code <sup>6/1/25</sup>
 - Added documentation for every method within SwerveModule.java and some explanations in Swerve.java <sup>6/4/25</sup>
+- Added documentation for basic hardware info <sup>6/6/25</sup>
 
 ## Issues and Potential Errors:   
 - Robot auto-position is still slightly off
@@ -97,4 +98,24 @@ The current[^1] 2024-2025 robotics code for FRC team 6934.
 - Intake Coral: *HOLD* Left Bumper
 - Manually Score Coral: *HOLD* Right Bumper
 
-[^1]: Last updated 6/1/25 by Evan Wang.
+## General Hardware Information
+![image_2025-06-06_143659713](https://github.com/user-attachments/assets/4d4adca3-e970-4c08-bf01-6268d5ed9d7c)
+### Swerve Specifications:
+- MODEL: SDS MK4i Swerve w/ L2 gearing
+- AZIMUTH/ANGLE MOTORS: Kraken X60
+- DRIVE MOTORS: Kraken X60
+- ABSOLUTE ENCODERS: CTRE CANcoders
+- GYROSCOPE: Pigeon 2.0
+### Elevator:
+- MODEL: WCP GreyT Cascade Elevator (Two-stage)
+- MOTORS: Kraken X60 x2
+### Mailbox:
+- MOTOR: NEO Vortex
+- CORAL DETECTION: IR Beambreak sensor
+### Vision System:
+- CAMERA: Limelight 3G
+### Other:
+- ADDITIONAL CAN CAPACITY - CANivore
+
+[^1]: Last updated 6/6/25 by Dere Chang.
+
